@@ -17,7 +17,7 @@ const ProfessionTitleName = ({}) => {
                 after:bottom-30
                 after:w-full 
                 after:h-8 
-                after:bg-[url('/src/assets/scribble_underline.png')] 
+                after:bg-[url('/scribble_underline.png')] 
                 after:bg-contain 
                 after:bg-no-repeat"
         >
@@ -34,7 +34,7 @@ const ProfessionTitleName = ({}) => {
     
     after:w-30
     after:h-30
-    after:bg-[url('/src/assets/arrow.png')] 
+    after:bg-[url('/arrow.png')] 
     after:bg-contain
     after:bg-no-repeat 
     after:mix-blend-multiply
