@@ -15,17 +15,17 @@ function LandingPage() {
       <main className="ml-28 mr-28">
         <section className="relative mt-80">
           <img
-            src="/src/assets/scribble_graphite_big_color.png"
+            src="/scribble_graphite_big_color.png"
             alt="Scribble with graphite pencil"
-            className=" absolute -right-20 -top-100 mix-blend-multiply opacity-80 rotate-70"
+            className=" w-[24rem] absolute -right-20 -top-100 mix-blend-multiply opacity-80 rotate-70"
           />
 
           <IntroductionSection />
         </section>
         <img
-          src="/src/assets/cup_with_coffee.png"
+          src="/cup_with_coffee.png"
           alt="Cup with coffee"
-          className="place-self-end mr-50 -rotate-26 w-100"
+          className="place-self-end mr-50 -rotate-26 w-[20rem]"
         />
         <UXStrategySection />
         <ExperienceSection/>
