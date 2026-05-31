@@ -7,7 +7,7 @@ const UXStrategySection = () => {
         <img
           src="/ux_strategy_text.png"
           alt="UX Strategy"
-          className="w-90 -rotate-40"
+          className="w-[20rem] -rotate-40"
         />
         <p className="text-lg leading-9  ">
           An{" "}
@@ -29,7 +29,7 @@ const UXStrategySection = () => {
           and ready to explore the unknown.
         </p>
       </section>
-      <img src="/strategy_graph.png" alt="" className="place-self-end-safe realtive mt-20"/>
+      <img src="/strategy_graph.png" alt="" className="w-[50rem] place-self-end-safe relative mt-20"/>
     </>
   );
 };

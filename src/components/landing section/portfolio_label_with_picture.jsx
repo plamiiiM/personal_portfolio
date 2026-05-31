@@ -8,19 +8,19 @@ const PortfolioLabelWithPicture = ({}) => {
           <img
             src="/scribble_graphite_small_color.png"
             alt="Graphite scribble"
-            className=" mix-blend-multiply w-2xl"
+            className=" mix-blend-multiply w-[36rem]"
           />
         </div>
         <img
           src="/portfolio_label.png"
           alt="Portfolio label"
-          className="relative w-md h-auto object-contain mix-blend-multiply left-5"
+          className="relative w-[22rem] h-auto object-contain mix-blend-multiply left-5"
         />
       </div>
       <img
         src="/picture_of_me_graphite_color.png"
         alt="Portfolio picture"
-        className="w-3xl overflow-hidden object-cover opacity-100 mix-blend-multiply"
+        className="w-[42rem] overflow-hidden object-cover opacity-100 mix-blend-multiply"
       />
     </div>
   );
