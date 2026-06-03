@@ -1,9 +1,9 @@
 import BackgroundTexture from "../components/global/portfolio_background_texture";
-import PortfolioWithScribble from "../components/landing section/portfolio_label_with_picture";
-import ProfessionTitleName from "../components/landing section/profession_title_name";
-import IntroductionSection from "../components/introduction section/introduction_section";
-import UXStrategySection from "../components/ux strategy section/ux_strategy_section";
-import ExperienceSection from "../components/experience section/experience_section";
+import PortfolioWithScribble from "../components/landing_section/portfolio_label_with_picture";
+import ProfessionTitleName from "../components/landing_section/profession_title_name";
+import IntroductionSection from "../components/introduction_section/introduction_section";
+import UXStrategySection from "../components/ux_strategy_section/ux_strategy_section";
+import ExperienceSection from "../components/experience_section/experience_section";
 
 function LandingPage() {
   return (
@@ -28,7 +28,7 @@ function LandingPage() {
           className="place-self-end mr-50 -rotate-26 w-[20rem]"
         />
         <UXStrategySection />
-        <ExperienceSection/>
+        <ExperienceSection />
       </main>
     </BackgroundTexture>
   );
