@@ -3,15 +3,13 @@ import ExperienceCard from "./experience_card_component";
 
 const TimelineExperience = () => {
   return (
-    <div className="min-h-screen flex justify-start">
-      <div className="relative w-full max-w-2xl">
-        <div className="absolute left-3 top-4 bottom-0 flex flex-col">
-          <div className="h-112 w-1 rounded-full bg-blue-500"></div>
-          <div className="h-20 border-l-2 border-black border-dotted"></div>
+    <div className="flex justify-start h-screen w-full">
+      <div className="absolute w-full">
+        <div className="absolute left-4.5 top-4 bottom-0 flex flex-col">
+          <div className="h-full w-1 rounded-full bg-black"></div>
         </div>
 
-        <div className="relative pl-12 pt-15 flex flex-col gap-y-20">
-
+        <div className="pl-12 pt-15 flex flex-col gap-y-20 overflow-y-auto h-[70vh] no-scrollbar">
           <ExperienceCard
             year="2026"
             role="ICT & Media Design"
