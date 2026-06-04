@@ -4,6 +4,7 @@ import ProfessionTitleName from "../components/landing_section/profession_title_
 import IntroductionSection from "../components/introduction_section/introduction_section";
 import UXStrategySection from "../components/ux_strategy_section/ux_strategy_section";
 import ExperienceSection from "../components/experience_section/experience_section";
+import SelectedWorkSection from "../components/selected_work_section/selected_work_section";
 
 function LandingPage() {
   return (
@@ -12,7 +13,7 @@ function LandingPage() {
         <PortfolioWithScribble />
         <ProfessionTitleName />
       </header>
-      <main className="ml-28 mr-28">
+      <main className="ml-28 ">
         <section className="relative mt-80">
           <img
             src="/scribble_graphite_big_color.png"
@@ -29,6 +30,7 @@ function LandingPage() {
         />
         <UXStrategySection />
         <ExperienceSection />
+        <SelectedWorkSection />
       </main>
     </BackgroundTexture>
   );

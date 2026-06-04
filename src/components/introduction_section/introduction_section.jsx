@@ -19,13 +19,13 @@ const IntroductionSection = () => {
       <div className="flex flex-row gap-6 text-base font-bold">
         <Button.Primary
           onClick={() =>
-            window.open("www.linkedin.com/in/plamena-mincheva-302a58294")
+            window.open("https://www.linkedin.com/in/plamena-mincheva-302a58294/")
           }
         >
           LINKEDIN
         </Button.Primary>
 
-        <Button.Secondary onClick={() => window.open("")}>
+        <Button.Secondary onClick={() => window.open("/Plamena Mincheva- UI-UX designer and developer.pdf")}>
           RESUME
         </Button.Secondary>
       </div>
