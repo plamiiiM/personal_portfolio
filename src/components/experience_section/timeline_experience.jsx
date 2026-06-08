@@ -27,7 +27,7 @@ const TimelineExperience = () => {
             positionEmployer="COO"
             imageOfEmployer="/chris_photo.jpeg"
             recommendation="Plamena is....."
-            showRecommendation={true}
+            showRecommendation={false}
           />
         </div>
       </div>
