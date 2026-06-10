@@ -17,11 +17,11 @@ const SelectedWorkSection = () => {
           className="relative w-[20rem] max-w-md -right-4"
         />
       </section>
-      <main className="flex flex-col justify-start items-center gap-y-80 mt-30 mr-28">
+      <main className="flex flex-col justify-start items-center gap-y-70 mt-30 mr-28">
         <CaseStudyDescriptionComponent
           projectCollage="/smartnet_collage_bigger.png"
           titleOfProject="SmartNet App"
-          description="The SmartNet app is a project I worked on during my internship at Spinnov. Responsible for the UX/UI design of the app, I created wireframes and prototypes to enhance the user experience."
+          description="ifhbchbvjbx"
           filters={[
             "Journey Mapping",
             "User Personas",
@@ -33,7 +33,7 @@ const SelectedWorkSection = () => {
           caseStudyLink="https://example.com/smartnet-case-study"
         />
         <CaseStudyDescriptionComponent
-          projectCollage="/equine_integration_collage.png"
+          projectCollage="/equine_integration_collage_2.png"
           titleOfProject="Equine Integration"
           description="This project focused on integrating equine-themed elements into a digital platform, enhancing user engagement and satisfaction."
           filters={[

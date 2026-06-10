@@ -3,7 +3,7 @@ import TimelineExperience from "./timeline_experience";
 
 const ExperienceSection = () => {
     return (
-        <section>
+        <section className="mt-40">
             <img className="w-[20rem] -rotate-40" src="/experience_text.png" alt="Experience" />
             <TimelineExperience />
         </section>

@@ -26,7 +26,7 @@ const TimelineExperience = () => {
             nameEmployer="Chris Heger"
             positionEmployer="COO"
             imageOfEmployer="/chris_photo.jpeg"
-            recommendation="Plamena is....."
+            recommendation="Plamena did her internship with us (Spinnov) as an UI/UX designer and front-end software developer. She worked very structured and with great discipline, open to feedback, good tempo in her work and not afraid to take on different design challenges. She worked well in our project team and functioned as a full team member despite being an intern."
             showRecommendation={true}
           />
         </div>
