@@ -4,7 +4,7 @@ import CaseStudyDescriptionComponent from "./case_study_description_component";
 
 const SelectedWorkSection = () => {
   return (
-    <>
+    <section className="mb-40">
       <section className="flex flex-row items-center justify-between">
         <img
           src="/selected_work_text.png"
@@ -45,7 +45,7 @@ const SelectedWorkSection = () => {
           caseStudyLink="https://example.com/equine-integration-case-study"
         />
       </main>
-    </>
+    </section>
   );
 };
 
