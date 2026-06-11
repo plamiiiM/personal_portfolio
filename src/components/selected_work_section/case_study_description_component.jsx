@@ -23,7 +23,7 @@ const CaseStudyDescriptionComponent = ({
       />
       <div className="flex flex-col justify-start items-start gap-y-18 w-lg">
         <div className="flex flex-col justify-start items-start gap-y-10">
-          <h3 className="font-[PlamenasHandwriting] text-[3rem] leading-9 bg-white p-3 -rotate-5">
+          <h3 className="font-[PlamenasHandwriting] text-[3rem] leading-8 bg-white p-3 -rotate-5">
             {titleOfProject ? titleOfProject : "Project Name"}
           </h3>
           <p className="font-[poppins] text-left inline-block text-[1rem] leading-8 w-[25rem]">

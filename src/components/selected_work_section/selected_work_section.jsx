@@ -21,26 +21,28 @@ const SelectedWorkSection = () => {
         <CaseStudyDescriptionComponent
           projectCollage="/smartnet_collage_bigger.png"
           titleOfProject="SmartNet App"
-          description="ifhbchbvjbx"
+          description="I designed the end-to-end user experience for SmartNet, bridging the gap between physical football training and digital performance tracking. Through user research and gamification design, I translated complex hardware data into interactive games and actionable player profiles."
           filters={[
+            "UX/UI Design",
+            "Gamification",
+            "Prototyping",
+            "Design System",
             "Journey Mapping",
             "User Personas",
-            "Wireframing",
-            "Prototyping",
-            "User Testing",
-            "UI Design",
           ]}
           caseStudyLink="https://example.com/smartnet-case-study"
         />
         <CaseStudyDescriptionComponent
           projectCollage="/equine_integration_collage_2.png"
           titleOfProject="Equine Integration"
-          description="This project focused on integrating equine-themed elements into a digital platform, enhancing user engagement and satisfaction."
+          // description="To solve a drop in user engagement, I designed and developed five new data-driven features for the Equine Integration app in 2.5 months. I researched equestrian habits to introduce interactive training summaries, progress comparisons, and rewards that encourage device usage. The final delivery upgraded the user experience seamlessly with fully implemented Flutter code."
+          description="I redesigned and programmed a major UX upgrade for Equine Integration, turning complex horse tracking metrics into an engaging, gamified training platform. Through data analysis and user interviews, I created five approved features—including training insights, performance comparisons, and habit-building achievements. "
           filters={[
-            "Journey Mapping",
-            "User Personas",
-            "Wireframing",
+            "Redesign",
+            "UX Strategy",
             "Prototyping",
+            "Flutter Development",
+            "Data-Driven Design",
           ]}
           caseStudyLink="https://example.com/equine-integration-case-study"
         />

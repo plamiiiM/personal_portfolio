@@ -13,7 +13,7 @@ function LandingPage() {
         <PortfolioWithScribble />
         <ProfessionTitleName />
       </header>
-      <main className="ml-28 flex flex-col gap-y-20">
+      <main className="ml-28 flex flex-col gap-y-30">
         <section className="relative mt-80">
           <img
             src="/scribble_graphite_big_color.png"
@@ -24,11 +24,6 @@ function LandingPage() {
           <IntroductionSection />
         </section>
         <SelectedWorkSection />
-        {/* <img
-          src="/cup_with_coffee.png"
-          alt="Cup with coffee"
-          className="place-self-end mr-50 -rotate-26 w-[20rem]"
-        /> */}
         <UXStrategySection />
         <ExperienceSection />
       </main>
