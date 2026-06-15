@@ -5,6 +5,7 @@ import IntroductionSection from "../components/introduction_section/introduction
 import UXStrategySection from "../components/ux_strategy_section/ux_strategy_section";
 import ExperienceSection from "../components/experience_section/experience_section";
 import SelectedWorkSection from "../components/selected_work_section/selected_work_section";
+import SkillsetSection from "../components/skillset_section/skillset_section";
 
 function LandingPage() {
   return (
@@ -26,6 +27,7 @@ function LandingPage() {
         <SelectedWorkSection />
         <UXStrategySection />
         <ExperienceSection />
+        <SkillsetSection />
       </main>
     </BackgroundTexture>
   );

@@ -8,18 +8,18 @@ const IntroductionSection = () => {
         <h2 className="text-4xl ">
           Plamena is a <b>curious designer</b>
         </h2>
-        <p className="text-lg leading-9 letter-spacing-wide flex flex-col gap-y-5">
-          <p>
-            Currently obtaining a Bachelor in ICT and Media Design at Fontys
-            UAS.
-          </p>
+        <div className="text-lg leading-9 letter-spacing-wide flex flex-col gap-y-5">
           <p>
             An eager junior designer with lots of on-hands practice in
             different real-life projects. Working with real businesses, during my
             studies I've helped several companies in the Eindhoven region better
             their designs and improve quality.
           </p>
-        </p>
+          <p>
+            Currently obtaining a Bachelor in ICT and Media Design at Fontys
+            UAS.
+          </p>
+        </div>
       </div>
       <div className="flex flex-row gap-6 text-base font-bold">
         <Button.Primary
