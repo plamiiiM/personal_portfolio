@@ -16,23 +16,10 @@ const UXStrategySection = () => {
           className="w-[20rem] -rotate-40"
         />
         <p className="text-[1.125rem] leading-9  ">
-          An{" "}
-          <span className="bg-(--brown) text-(--textOnDark) px-0.5">
-            ambitious
-          </span>{" "}
-          junior{" "}
-          <span className="bg-(--brown) text-(--textOnDark) px-0.5">
-            UX/UI designer{" "}
-          </span>
-          that will help you{" "}
-          <span className="bg-(--brown) text-(--textOnDark) px-0.5">
-            design better
-          </span>{" "}
-          for your business.{" "}
-          <span className="bg-(--brown) text-(--textOnDark) px-0.5">
-            Keen eye on details
-          </span>{" "}
-          and ready to explore the unknown.
+          Focused on producing quality {""} <span className="bg-(--brown) text-(--textOnDark) px-0.5">human-centered designs</span>{" "}
+          with a curious mindset of exploring every idea. Managing to produce
+          beauty within the business constraint, making both managers and users
+          satisfied.
         </p>
       </section>
       <img
