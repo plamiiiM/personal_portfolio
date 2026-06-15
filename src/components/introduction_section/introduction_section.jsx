@@ -3,17 +3,17 @@ import Button from "../global/buttons";
 
 const IntroductionSection = () => {
   return (
-    <section className="flex flex-col justify-start items-start gap-y-14 font-[poppins] w-2xl letter-spacing-wide tracking-wide mb-10">
+    <section className="flex flex-col justify-start items-start gap-y-14 font-[poppins] w-2xl tracking-wide mb-10">
       <div className="flex flex-col gap-y-14">
         <h2 className="text-4xl ">
-          Plamena is a <b>curious designer</b>
+          Plamena is a <strong>curious designer</strong>
         </h2>
-        <div className="text-lg leading-9 letter-spacing-wide flex flex-col gap-y-5">
+        <div className="text-lg leading-9 tracking-wide flex flex-col gap-y-5">
           <p>
-            An eager junior designer with lots of on-hands practice in
-            different real-life projects. Working with real businesses, during my
-            studies I've helped several companies in the Eindhoven region better
-            their designs and improve quality.
+            An eager junior designer with lots of on-hands practice in different
+            real-life projects. Working with real businesses, during my studies
+            I've helped several companies in the Eindhoven region better their
+            designs and improve quality.
           </p>
           <p>
             Currently obtaining a Bachelor in ICT and Media Design at Fontys
@@ -28,6 +28,8 @@ const IntroductionSection = () => {
               "https://www.linkedin.com/in/plamena-mincheva-302a58294/",
             )
           }
+          target="_blank"
+          rel="noopener noreferrer"
         >
           LINKEDIN
         </Button.Primary>
@@ -36,6 +38,8 @@ const IntroductionSection = () => {
           onClick={() =>
             window.open("/Plamena Mincheva- UI-UX designer and developer.pdf")
           }
+          target="_blank"
+          rel="noopener noreferrer"
         >
           RESUME
         </Button.Secondary>
