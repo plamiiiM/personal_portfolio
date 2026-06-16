@@ -3,7 +3,7 @@ import ExperienceCard from "./experience_card_component";
 
 const TimelineExperience = () => {
   return (
-    <div className="flex justify-start h-screen w-full">
+    <div className="flex justify-start h-[80vh] w-full">
       <div className="absolute w-full">
         <div className="absolute left-4.5 top-4 bottom-0 flex flex-col">
           <div className="h-full w-1 rounded-full bg-black"></div>

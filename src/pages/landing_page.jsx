@@ -6,6 +6,7 @@ import UXStrategySection from "../components/ux_strategy_section/ux_strategy_sec
 import ExperienceSection from "../components/experience_section/experience_section";
 import SelectedWorkSection from "../components/selected_work_section/selected_work_section";
 import SkillsetSection from "../components/skillset_section/skillset_section";
+import FooterSection from "../components/footer_section/footer_section";
 
 function LandingPage() {
   return (
@@ -28,6 +29,7 @@ function LandingPage() {
         <UXStrategySection />
         <ExperienceSection />
         <SkillsetSection />
+        <FooterSection/>
       </main>
     </BackgroundTexture>
   );
