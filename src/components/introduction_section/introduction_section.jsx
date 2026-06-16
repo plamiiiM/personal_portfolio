@@ -10,14 +10,23 @@ const IntroductionSection = () => {
         </h2>
         <div className="text-lg leading-9 tracking-wide flex flex-col gap-y-5">
           <p>
-            An eager junior designer with lots of on-hands practice in different
-            real-life projects. Working with real businesses, during my studies
-            I've helped several companies in the Eindhoven region better their
-            designs and improve quality.
+            An eager {""}{" "}
+            <span className="bg-(--brown) text-(--textOnDark) px-0.5">
+              junior designer
+            </span>
+            {""} with lots of {""}
+            <span className="bg-(--brown) text-(--textOnDark) px-0.5">
+              hands-on practice
+            </span>{" "}
+            in different real-life projects. Working with real businesses,
+            during my studies I've helped several companies in the Eindhoven
+            region better their designs and improve quality.
           </p>
           <p>
-            Currently obtaining a Bachelor in ICT and Media Design at Fontys
-            UAS.
+            Currently obtaining a Bachelor in {""}
+            <span className="bg-(--brown) text-(--textOnDark) px-0.5">
+              ICT & Media Design at Fontys UAS.
+            </span>{" "}
           </p>
         </div>
       </div>
