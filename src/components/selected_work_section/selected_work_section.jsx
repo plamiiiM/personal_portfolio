@@ -17,7 +17,7 @@ const SelectedWorkSection = () => {
           className="relative w-[20rem] max-w-md -right-4"
         />
       </section>
-      <main className="flex flex-col justify-start items-center gap-y-70 mt-30 mr-28">
+      <main className="flex flex-col justify-start items-start gap-y-70 mt-30 mr-28">
         <CaseStudyDescriptionComponent
           projectCollage="/smartnet_collage_bigger.png"
           titleOfProject="SmartNet App"

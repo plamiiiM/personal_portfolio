@@ -2,7 +2,6 @@ import React from "react";
 import FiltersComponent from "./filters_component";
 import Button from "../global/buttons";
 
-
 const CaseStudyDescriptionComponent = ({
   projectCollage,
   titleOfProject,
@@ -11,13 +10,13 @@ const CaseStudyDescriptionComponent = ({
   filters = [],
 }) => {
   return (
-    <div className="flex flex-row items-center justify-start gap-x-45">
+    <div className="flex flex-row justify-around w-full ">
       <img
-        className="w-[25rem] max-w-md object-cover "
+        className="w-[52rem] max-w-md object-contain "
         src={projectCollage ? projectCollage : "/fallback_thumbnail_cases.png"}
         alt={`Collection of visual assets and wireframes for`}
         onError={(e) => {
-          e.target.onerror = null; 
+          e.target.onerror = null;
           e.target.src = "/fallback_thumbnail_cases.png";
         }}
       />
@@ -32,8 +31,8 @@ const CaseStudyDescriptionComponent = ({
           <FiltersComponent filters={filters} />
         </div>
 
-        <Button.Secondary onClick={() => window.open(caseStudyLink, "_blank")}>
-          View Case Study
+        <Button.Secondary as="a" href={caseStudyLink, "_self"}>
+          VIEW CASE STUDY
         </Button.Secondary>
       </div>
     </div>
