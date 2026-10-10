@@ -12,6 +12,7 @@
   --red: #e31d1d;
   --brown: #2d2924;
   --darkBrown: #221d1d;
+  --pencilLine: #322626;
   --textOnDark: #e0d9d1;
   --btnBgDark: #221d1d;
   --btnStrokeDark: #b1a598;
@@ -33,6 +34,12 @@ html {
   scrollbar-width: none;
   &::-webkit-scrollbar {
     display: none;
+  }
+
+  /* Nav links land below the fixed navbar */
+  scroll-padding-top: 7rem;
+  @media (prefers-reduced-motion: no-preference) {
+    scroll-behavior: smooth;
   }
 }
 

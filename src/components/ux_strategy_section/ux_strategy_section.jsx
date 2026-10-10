@@ -2,7 +2,7 @@ import React from "react";
 
 const UXStrategySection = () => {
   return (
-    <section className="relative">
+    <section id="strategy" className="relative">
       <img
         src="/cup_with_coffee.png"
         alt="Cup with coffee"
