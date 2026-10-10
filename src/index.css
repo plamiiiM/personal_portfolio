@@ -28,6 +28,14 @@
   --font-plamenas: "PlamenasHandwriting";
 }
 
+/*SCROLLBAR - native page scrollbar is hidden, PencilScrollbar draws its own*/
+html {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 .no-scrollbar {
   scrollbar-width: none;
   &::-webkit-scrollbar {
