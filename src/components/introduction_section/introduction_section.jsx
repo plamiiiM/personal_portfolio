@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "../global/buttons";
+import MarkedWord from "../global/marked_word_component";
 
 const IntroductionSection = () => {
   return (
@@ -10,23 +11,17 @@ const IntroductionSection = () => {
         </h2>
         <div className="text-lg leading-9 tracking-wide flex flex-col gap-y-5">
           <p>
-            An eager {""}{" "}
-            <span className="bg-(--brown) text-(--textOnDark) px-0.5">
-              junior designer
-            </span>
-            {""} with lots of {""}
-            <span className="bg-(--brown) text-(--textOnDark) px-0.5">
-              hands-on practice
-            </span>{" "}
-            in different real-life projects. Working with real businesses,
+            An eager <MarkedWord isHighlighted>junior designer</MarkedWord> with
+            lots of <MarkedWord isHighlighted>hands-on practice</MarkedWord> in
+            different real-life projects. Working with real businesses,
             during my studies I've helped several companies in the Eindhoven
             region better their designs and improve quality.
           </p>
           <p>
-            Currently obtaining a Bachelor in {""}
-            <span className="bg-(--brown) text-(--textOnDark) px-0.5">
+            Currently obtaining a Bachelor in{" "}
+            <MarkedWord isHighlighted>
               ICT & Media Design at Fontys UAS.
-            </span>{" "}
+            </MarkedWord>
           </p>
         </div>
       </div>
