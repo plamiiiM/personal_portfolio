@@ -12,6 +12,7 @@
   --red: #e31d1d;
   --brown: #2d2924;
   --darkBrown: #221d1d;
+  --pencilLine: #322626;
   --textOnDark: #e0d9d1;
   --btnBgDark: #221d1d;
   --btnStrokeDark: #b1a598;
@@ -26,6 +27,21 @@
   --font-zodiak: "Zodiak", serif;
   --font-poppins: "Poppins", sans-serif;
   --font-plamenas: "PlamenasHandwriting";
+}
+
+/*SCROLLBAR - native page scrollbar is hidden, PencilScrollbar draws its own*/
+html {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Gap above a section when opening a #link directly (the nav hides on the way down).
+     Nav link clicks are handled in navbar.jsx */
+  scroll-padding-top: 1.5rem;
+  @media (prefers-reduced-motion: no-preference) {
+    scroll-behavior: smooth;
+  }
 }
 
 .no-scrollbar {

@@ -6,7 +6,7 @@ import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
 
 const FooterSection = () => {
   return (
-    <footer className="relative mt-[10rem] flex flex-row items-center justify-between">
+    <footer id="contact" className="relative mt-[10rem] flex flex-row items-center justify-between">
       <img src="/footer_line.png" alt="" className="absolute top-0 -left-30 " />
       <div className="flex flex-col gap-y-6">
         <div className="font-[poppins] text-[1.75rem]">

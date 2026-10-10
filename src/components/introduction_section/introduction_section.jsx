@@ -50,7 +50,7 @@ const IntroductionSection = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          RESUME
+          CV
         </Button.Secondary>
       </div>
     </section>

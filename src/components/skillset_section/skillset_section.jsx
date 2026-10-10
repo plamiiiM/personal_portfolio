@@ -3,7 +3,7 @@ import SkillsCard from "./skills_card";
 
 const SkillsetSection = () => {
   return (
-    <section className="flex flex-col justify-center items-center gap-y-5 mr-28">
+    <section id="skills" className="flex flex-col justify-center items-center gap-y-5 mr-28">
       <img
         src="/skillset_text.png"
         alt="The heading of the section- Skillset"
