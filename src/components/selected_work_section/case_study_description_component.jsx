@@ -31,7 +31,7 @@ const CaseStudyDescriptionComponent = ({
           <FiltersComponent filters={filters} />
         </div>
 
-        <Button.Secondary as="a" href={caseStudyLink, "_self"}>
+        <Button.Secondary as="a" href={caseStudyLink}>
           VIEW CASE STUDY
         </Button.Secondary>
       </div>
