@@ -3,7 +3,6 @@ import Button from "./buttons";
 
 const NAV_LINKS = [
   { label: "Work", href: "#work" },
-  { label: "Strategy", href: "#strategy" },
   { label: "Experience", href: "#experience" },
   { label: "Skills", href: "#skills" },
   { label: "Contact", href: "#contact" },
