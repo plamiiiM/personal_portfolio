@@ -61,19 +61,19 @@ const Navbar = () => {
   return (
     <>
       <nav
-        className={`fixed top-0 inset-x-0 z-40 h-24 px-28 flex items-center justify-between isolate bg-(--bg)
+        className={`fixed top-0 inset-x-0 z-40 h-24 px-28 flex items-center justify-between isolate overflow-hidden bg-(--bg)
                     transition-transform duration-300 motion-reduce:transition-none has-focus-visible:translate-y-0 ${
                       hidden ? "-translate-y-full" : "translate-y-0"
                     }`}
       >
         <div
-          className="absolute inset-0 -z-10 pointer-events-none
-                     bg-[url('/white_texture_paper.webp')] bg-cover bg-center bg-fixed
+          className="absolute top-0 left-0 w-screen h-screen -z-10 pointer-events-none
+                     bg-[url('/white_texture_paper.webp')] bg-cover bg-center
                      opacity-75 mix-blend-multiply"
           aria-hidden="true"
         />
         <div
-          className="absolute inset-0 -z-10 pointer-events-none bg-fixed
+          className="absolute top-0 left-0 w-screen h-screen -z-10 pointer-events-none
                      bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.5)_0%,transparent_30%)]"
           aria-hidden="true"
         />
