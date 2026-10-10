@@ -61,28 +61,28 @@ const Navbar = () => {
   return (
     <>
       <nav
-        className={`fixed top-0 inset-x-0 z-40 h-24 px-28 flex items-center justify-between isolate overflow-hidden bg-(--bg)
+        className={`fixed top-0 inset-x-0 z-40 h-24 px-28 flex items-center justify-between isolate
                     transition-transform duration-300 motion-reduce:transition-none has-focus-visible:translate-y-0 ${
                       hidden ? "-translate-y-full" : "translate-y-0"
                     }`}
       >
-        <div
-          className="absolute top-0 left-0 w-screen h-screen -z-10 pointer-events-none
-                     bg-[url('/white_texture_paper.webp')] bg-cover bg-center
-                     opacity-75 mix-blend-multiply"
-          aria-hidden="true"
-        />
-        <div
-          className="absolute top-0 left-0 w-screen h-screen -z-10 pointer-events-none
-                     bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.5)_0%,transparent_30%)]"
-          aria-hidden="true"
-        />
+        <div className="absolute inset-0 -z-10 overflow-hidden bg-(--bg) pointer-events-none" aria-hidden="true">
+          <div
+            className="absolute top-0 left-0 w-screen h-screen
+                       bg-[url('/white_texture_paper.webp')] bg-cover bg-center
+                       opacity-75 mix-blend-multiply"
+          />
+          <div
+            className="absolute top-0 left-0 w-screen h-screen
+                       bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.5)_0%,transparent_30%)]"
+          />
+        </div>
 
         <a href="#" aria-label="Back to top">
-          <img src="/nav_logo.png" alt="Plamena Mincheva logo" className="h-16 w-auto mix-blend-multiply" />
+          <img src="/icon_portfolio.svg" alt="Plamena Mincheva logo" className="h-16 w-auto mix-blend-multiply" />
         </a>
 
-        <div className="flex items-center gap-x-14">
+        <div className="self-stretch flex items-center gap-x-14">
           <ul className="flex items-center gap-x-10 font-[poppins] text-[1rem] tracking-wide text-(--brown)">
             {NAV_LINKS.map(({ label, href }) => (
               <li key={href}>
@@ -105,6 +105,9 @@ const Navbar = () => {
           >
             CV
           </Button.Secondary>
+
+          {/* Hangs from the top edge like a bookmark ribbon */}
+          <img src="/nav_bookmark.png" alt="" aria-hidden="true" className="self-start w-9 h-22.5" />
         </div>
 
         <svg
