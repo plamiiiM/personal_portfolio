@@ -36,8 +36,9 @@ html {
     display: none;
   }
 
-  /* Nav links land below the fixed navbar */
-  scroll-padding-top: 7rem;
+  /* Gap above a section when opening a #link directly (the nav hides on the way down).
+     Nav link clicks are handled in navbar.jsx */
+  scroll-padding-top: 1.5rem;
   @media (prefers-reduced-motion: no-preference) {
     scroll-behavior: smooth;
   }

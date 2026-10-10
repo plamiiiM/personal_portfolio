@@ -4,12 +4,13 @@ import CaseStudyDescriptionComponent from "./case_study_description_component";
 
 const SelectedWorkSection = () => {
   return (
-    <section id="work" className="mb-40">
+    <section className="mb-40">
       <section className="flex flex-row items-center justify-between">
         <img
+          id="work"
           src="/selected_work_text.png"
           alt="Selected Work"
-          className="w-[20rem] max-w-md -rotate-40 mt-40"
+          className="w-[20rem] max-w-md -rotate-40 mt-40 -scroll-mt-16"
         />
         <img
           src="/elephant.png"
