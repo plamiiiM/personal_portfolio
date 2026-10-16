@@ -106,7 +106,7 @@ const Navbar = () => {
           </Button.Secondary>
 
           {/* Hangs from the top edge like a bookmark ribbon */}
-          <img src="/nav_bookmark.png" alt="" aria-hidden="true" className="self-start w-9 h-22.5" />
+          {/* <img src="/nav_bookmark.png" alt="" aria-hidden="true" className="self-start w-9 h-22.5" /> */}
         </div>
 
         <svg
