@@ -29,7 +29,7 @@
   --font-plamenas: "PlamenasHandwriting";
 }
 
-/*SCROLLBAR - native page scrollbar is hidden, PencilScrollbar draws its own*/
+/*SCROLLBAR - native page scrollbar is hidden, FadingLineScrollbar draws its own*/
 html {
   scrollbar-width: none;
   &::-webkit-scrollbar {
