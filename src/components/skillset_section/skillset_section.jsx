@@ -1,6 +1,5 @@
 import React from "react";
 import Layer from "./layer";
-import StickyNote from "./sticky_note";
 import { rem } from "./layout";
 import { SKILL_CLUSTERS } from "./skills_data";
 
@@ -27,12 +26,16 @@ const SkillsetSection = () => {
               <Layer key={index} layer={layer} as="h3" />
             ))}
             <ul>
-              {cluster.notes.map((note, index) => (
-                <StickyNote
+              {cluster.notes.map((note) => (
+                <li
                   key={note.label}
-                  note={note}
-                  tilt={index % 2 ? "right" : "left"}
-                />
+                  className="absolute"
+                  style={{ left: rem(note.x), top: rem(note.y) }}
+                >
+                  {note.layers.map((layer, index) => (
+                    <Layer key={index} layer={layer} />
+                  ))}
+                </li>
               ))}
             </ul>
           </div>

@@ -1,21 +1,24 @@
 import React from "react";
 import { place, rem } from "./layout";
 
-// One piece of a sticky note or cluster title: an image (paper, shadow, pen stroke), tape or text.
-const Layer = ({ layer, as = "p", className = "" }) => {
-  const style = { ...place(layer), opacity: layer.opacity };
+// Text style shared by every sticky note; the cluster titles set their own in skills_data.js.
+const NOTE_TEXT = { font: "plamenas", fontSize: 31 };
+
+// One piece of a sticky note or cluster title: an image (paper, shadow, pen stroke) or text.
+const Layer = ({ layer, as = "p" }) => {
+  const style = place(layer);
 
   if (layer.type === "text") {
     const Text = as;
+    const { font, weight, fontSize } = { ...NOTE_TEXT, ...layer };
     return (
       <Text
-        className={`absolute flex items-center justify-center text-center whitespace-pre leading-[normal] tracking-[0.07em] ${className}`}
+        className="absolute flex items-center justify-center text-center whitespace-pre leading-[normal] tracking-[0.07em]"
         style={{
           ...style,
-          fontFamily: `var(--font-${layer.font})`,
-          fontWeight: layer.weight,
-          fontSize: rem(layer.fontSize),
-          color: layer.color,
+          fontFamily: `var(--font-${font})`,
+          fontWeight: weight,
+          fontSize: rem(fontSize),
         }}
       >
         {layer.text}
@@ -23,15 +26,11 @@ const Layer = ({ layer, as = "p", className = "" }) => {
     );
   }
 
-  if (layer.type === "tape") {
-    return <div className={`absolute bg-(--tape) ${className}`} style={style} />;
-  }
-
   return (
     <img
       src={`/skillset/${layer.src}`}
       alt=""
-      className={`absolute max-w-none object-cover ${className}`}
+      className="absolute max-w-none object-cover"
       style={style}
     />
   );
