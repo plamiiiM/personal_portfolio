@@ -8,9 +8,12 @@ const CaseStudyDescriptionComponent = ({
   description,
   caseStudyLink,
   filters = [],
+  isReversed = false,
 }) => {
   return (
-    <div className="flex flex-row justify-around w-full ">
+    <div
+      className={`flex ${isReversed ? "flex-row-reverse" : "flex-row"} justify-center gap-x-32 w-full`}
+    >
       <img
         className="w-[52rem] max-w-md object-contain "
         src={projectCollage ? projectCollage : "/fallback_thumbnail_cases.png"}
@@ -20,7 +23,7 @@ const CaseStudyDescriptionComponent = ({
           e.target.src = "/fallback_thumbnail_cases.png";
         }}
       />
-      <div className="flex flex-col justify-start items-start gap-y-18 w-lg">
+      <div className="flex flex-col justify-start items-start gap-y-18 w-100">
         <div className="flex flex-col justify-start items-start gap-y-10">
           <h3 className="font-[PlamenasHandwriting] text-[3rem] leading-8 bg-white p-3 -rotate-5">
             {titleOfProject ? titleOfProject : "Project Name"}

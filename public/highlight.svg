@@ -1,6 +1,5 @@
-<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="156" height="25" viewBox="0 0 156 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g id="highlight">
-<path id="Rectangle 4240" d="M2.88147 2.69231C2.88147 2.69231 37.1001 0 80.5527 0C124.005 0 156 1.66667 156 1.66667L154.298 17.5C154.298 17.5 82.2545 9 0 17.5L2.88147 2.69231Z" fill="#E31D1D" fill-opacity="0.43"/>
-<path id="Rectangle 4241" d="M22.1236 25H153.731L155.433 13C155.433 13 107.215 10 87.36 10C67.5055 10 20.4218 13 20.4218 13L22.1236 25Z" fill="#E31D1D" fill-opacity="0.41"/>
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="282" height="21" viewBox="0 0 282 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="highlight" opacity="0.6">
+<path id="Rectangle 4240" d="M5.20882 2.69925C5.20882 2.69925 67.0656 0 145.614 0C224.163 0 282 1.67097 282 1.67097L278.924 21C278.924 21 145.614 17.2742 0 21L5.20882 2.69925Z" fill="#E31D1D" fill-opacity="0.43"/>
 </g>
 </svg>
