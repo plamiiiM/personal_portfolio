@@ -49,6 +49,7 @@ const SelectedWorkSection = () => {
           projectCollage="/equine_integration_collage_2.png"
           titleOfProject="Equine Integration"
           isReversed
+          collageClassName="h-122"
           // description="To solve a drop in user engagement, I designed and developed five new data-driven features for the Equine Integration app in 2.5 months. I researched equestrian habits to introduce interactive training summaries, progress comparisons, and rewards that encourage device usage. The final delivery upgraded the user experience seamlessly with fully implemented Flutter code."
           description={
             <>
