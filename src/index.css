@@ -44,11 +44,18 @@ html {
   }
 }
 
-.no-scrollbar {
-  scrollbar-width: none;
-  &::-webkit-scrollbar {
-    display: none;
-  }
+/* Registered as lengths so they can be animated.
+   --nav-offset: height of the nav while it's showing, 0 while it's hidden (set in navbar.jsx), so pinned content can slide along with it
+   --scrolled: how far the page has scrolled past the experience section, eased so its entries glide instead of jumping */
+@property --nav-offset {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0px;
+}
+@property --scrolled {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0px;
 }
 
 /* :root {
