@@ -1,6 +1,6 @@
 const BackgroundTexture = ({ children }) => {
   return (
-    <div className="relative min-h-screen w-full bg-(--bg) overflow-x-hidden">
+    <div className="relative min-h-screen w-full bg-(--bg) overflow-x-clip">
       <div
         className="fixed inset-0 pointer-events-none z-0
                    bg-[url('/white_texture_paper.webp')] bg-cover bg-center
@@ -14,7 +14,7 @@ const BackgroundTexture = ({ children }) => {
         aria-hidden="true"
       />
 
-      <main className="relative z-2 w-full min-h-screen overflow-hidden">{children}</main>
+      <main className="relative z-2 w-full min-h-screen overflow-clip">{children}</main>
     </div>
   );
 };
