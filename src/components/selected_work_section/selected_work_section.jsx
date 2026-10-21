@@ -47,7 +47,7 @@ const SelectedWorkSection = () => {
           caseStudyLink="https://example.com/smartnet-case-study"
         />
         <CaseStudyDescriptionComponent
-          projectCollage="/equine_integration_collage_2.png"
+          projectCollage="/equine_integration_collage_3.png"
           titleOfProject="Equine Integration"
           isReversed
           collageClassName="h-122"
