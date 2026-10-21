@@ -5,7 +5,7 @@ import { SKILL_CLUSTERS } from "./skills_data";
 
 const SkillsetSection = () => {
   return (
-    <section className="flex flex-col items-center mr-28">
+    <section id="skills" className="flex flex-col items-center mr-28">
       <div className="relative w-85 h-40 overflow-hidden">
         <img
           src="/skillset_text.png"
