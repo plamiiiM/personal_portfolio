@@ -13,13 +13,13 @@ const SelectedWorkSection = () => {
           alt="Selected Work"
           className="w-[20rem] max-w-md -rotate-40 mt-40 -scroll-mt-16"
         />
-        {/* The drawing's ear ends in a cut edge on the right, at the far right of the page, so it fades out into the paper
-            when there's paper beside it (--side-room from ScaleToFit), not at the edge of the screen */}
+        {/* The drawing's ear ends in a cut edge on the right (94.6% - 97.8% across), at the far right of the page,
+            so it's faded out before the cut when there's paper beside it (--side-room from ScaleToFit), not at the edge of the screen */}
         <img
           src="/elephant.png"
           alt="Elephant"
           className="relative w-[20rem] max-w-md -right-4"
-          style={{ maskImage: "linear-gradient(to right, black calc(99.5% - 11.5% * var(--side-room, 1)), transparent 99.5%)" }}
+          style={{ maskImage: "linear-gradient(to right, black calc(99.5% - 19.5% * var(--side-room, 1)), transparent calc(99.5% - 4.5% * var(--side-room, 1)))" }}
         />
       </section>
       <main className="flex flex-col justify-start items-start gap-y-70 mt-30 mr-28">
