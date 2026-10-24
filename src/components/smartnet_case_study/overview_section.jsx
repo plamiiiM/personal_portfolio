@@ -47,11 +47,11 @@ const OverviewSection = () => {
       <section className="mt-23.25 flex items-start justify-between">
         <div className="ml-33 mt-43 w-121.75">
           <SectionTitle>The challenge</SectionTitle>
-          <Paragraph isPretty className="mt-3 w-119">
+          {/* <Paragraph isPretty className="mt-3 w-119">
             Translate real-world football drills and device tracking metrics into gamified exercises that help players
             and coaches track their accuracy progress and long-term improvement.
-          </Paragraph>
-          <Paragraph isPretty className="mt-11">
+          </Paragraph> */}
+          <Paragraph isPretty>
             Bring{" "}
             <MarkedWord isHighlighted isThin>
               real pitch drills
