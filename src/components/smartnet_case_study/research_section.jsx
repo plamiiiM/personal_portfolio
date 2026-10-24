@@ -1,5 +1,6 @@
 import React from "react";
 import Collage from "../case_study/collage";
+import MarkedWord from "../global/marked_word_component";
 import { Paragraph, SectionLabel, SectionTitle, SubsectionTitle } from "../case_study/typography";
 
 const ResearchSection = () => {
@@ -94,9 +95,10 @@ const ResearchSection = () => {
         <div className="ml-33 mt-17.75 w-125.25">
           <SectionTitle>Data Feedback</SectionTitle>
           <Paragraph className="mt-3">
-            By researching coach workflows, I <strong>identified their needs</strong> and designed a UI that displays
-            only the stats that matter to them. This gives coaches <strong>immediate, clear insights</strong> into{" "}
-            <strong>player performance</strong> without unnecessary distraction.
+            By researching coach workflows, I <MarkedWord isHighlighted>identified their needs</MarkedWord> and
+            designed a UI that displays only the stats that matter to them. This gives coaches{" "}
+            <MarkedWord isHighlighted>immediate, clear insights</MarkedWord> into{" "}
+            <MarkedWord isHighlighted>player performance</MarkedWord> without unnecessary distraction.
           </Paragraph>
         </div>
         <Collage
@@ -164,7 +166,7 @@ const ResearchSection = () => {
         <div className="mr-32.25 mt-51.25 w-104.5">
           <Paragraph>
             To maintain player motivation and avoid toxic friction within teams, I designed{" "}
-            <strong>role-based dashboards</strong>.
+            <MarkedWord isHighlighted>role-based dashboards</MarkedWord>.
           </Paragraph>
           <SubsectionTitle className="mt-12.5">Player UIs</SubsectionTitle>
           <Paragraph className="mt-3">
