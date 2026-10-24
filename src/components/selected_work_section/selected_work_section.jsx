@@ -44,7 +44,7 @@ const SelectedWorkSection = () => {
           //   "Journey Mapping",
           //   "User Personas",
           // ]}
-          caseStudyLink="https://example.com/smartnet-case-study"
+          caseStudyLink="/smartnet"
         />
         <CaseStudyDescriptionComponent
           projectCollage="/equine_integration_collage_3.png"

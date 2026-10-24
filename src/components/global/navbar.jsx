@@ -62,6 +62,17 @@ const Navbar = () => {
     document.documentElement.style.setProperty("--nav-offset", hidden ? "0px" : `${NAV_HEIGHT}px`);
   }, [hidden]);
 
+  // Arriving from another page with a #section: the browser can't jump to it on its own because the section
+  // only exists once React has rendered it, so jump once the page (and its images) have loaded
+  useEffect(() => {
+    const target = document.getElementById(window.location.hash.slice(1));
+    if (!target) return;
+    const jump = () => target.scrollIntoView();
+    if (document.readyState === "complete") jump();
+    else window.addEventListener("load", jump, { once: true });
+    return () => window.removeEventListener("load", jump);
+  }, []);
+
   return (
     <>
       <nav
@@ -82,7 +93,9 @@ const Navbar = () => {
           />
         </div>
 
-        <a href="#" aria-label="Back to top">
+        {/* The links point at the landing page, so they also work from other pages.
+            When the section is on the current page, scrollToSection takes over instead */}
+        <a href="/#" aria-label="Home">
           <img src="/icon_portfolio.svg" alt="Plamena Mincheva logo" className="h-16 w-auto mix-blend-multiply" />
         </a>
 
@@ -91,7 +104,7 @@ const Navbar = () => {
             {NAV_LINKS.map(({ label, href }) => (
               <li key={href}>
                 <a
-                  href={href}
+                  href={`/${href}`}
                   onClick={(e) => scrollToSection(e, href)}
                   className="relative py-1 after:content-[''] after:absolute after:left-0 after:bottom-0
                              after:w-full after:h-px after:bg-(--pencilLine)

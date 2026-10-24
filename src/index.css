@@ -14,6 +14,7 @@
   --darkBrown: #221d1d;
   --pencilLine: #322626;
   --textOnDark: #e0d9d1;
+  --textOnLight: #121111;
   --btnBgDark: #221d1d;
   --btnStrokeDark: #b1a598;
   --btnTextOnDark: #cfc7be;
@@ -56,6 +57,31 @@ html {
   syntax: "<length>";
   inherits: true;
   initial-value: 0px;
+}
+
+/* Hand-drawn circles that draw themselves in once they scroll into view (MarkedWord isDrawn):
+   a conic mask sweeps once around from the right, where the pencil stroke starts */
+@property --draw-sweep {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+@keyframes draw-circle {
+  from {
+    --draw-sweep: 0deg;
+  }
+  to {
+    --draw-sweep: 360deg;
+  }
+}
+.drawn-circle {
+  mask-image: conic-gradient(from 90deg, #000 var(--draw-sweep), transparent 0);
+  &.in-view {
+    animation: draw-circle 0.9s linear 0.12s both;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    mask-image: none;
+  }
 }
 
 /* :root {
