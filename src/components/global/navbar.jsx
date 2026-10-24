@@ -17,9 +17,10 @@ const scrollToSection = (e, href) => {
   const target = document.querySelector(href);
   if (!target) return;
   e.preventDefault();
-  // Honour scroll-margin-top so a target can fine-tune where it lands (e.g. -scroll-mt-16)
-  const top =
-    target.getBoundingClientRect().top + window.scrollY - parseFloat(getComputedStyle(target).scrollMarginTop);
+  // Honour scroll-margin-top so a target can fine-tune where it lands (e.g. -scroll-mt-16).
+  // It's in page px, so it's zoomed like the page (ScaleToFit) to match getBoundingClientRect's screen px
+  const scrollMargin = parseFloat(getComputedStyle(target).scrollMarginTop) * (target.currentCSSZoom ?? 1);
+  const top = target.getBoundingClientRect().top + window.scrollY - scrollMargin;
   const goingDown = top - LANDING_GAP > window.scrollY;
   window.scrollTo({ top: top - (goingDown ? LANDING_GAP : NAV_HEIGHT + LANDING_GAP) });
   history.pushState(null, "", href);
@@ -76,7 +77,7 @@ const Navbar = () => {
   return (
     <>
       <nav
-        className={`fixed top-0 inset-x-0 z-40 h-24 px-28 flex items-center justify-between isolate
+        className={`fixed top-0 inset-x-0 z-40 h-24 px-4 sm:px-10 lg:px-28 flex items-center justify-between isolate
                     transition-transform duration-300 motion-reduce:transition-none has-focus-visible:translate-y-0 ${
                       hidden ? "-translate-y-full" : "translate-y-0"
                     }`}
@@ -95,12 +96,12 @@ const Navbar = () => {
 
         {/* The links point at the landing page, so they also work from other pages.
             When the section is on the current page, scrollToSection takes over instead */}
-        <a href="/#" aria-label="Home">
-          <img src="/icon_portfolio.svg" alt="Plamena Mincheva logo" className="h-16 w-auto mix-blend-multiply" />
+        <a href="/#" aria-label="Home" className="shrink-0">
+          <img src="/icon_portfolio.svg" alt="Plamena Mincheva logo" className="h-12 sm:h-16 w-auto mix-blend-multiply" />
         </a>
 
-        <div className="self-stretch flex items-center gap-x-14">
-          <ul className="flex items-center gap-x-10 font-[poppins] text-[1rem] tracking-wide text-(--brown)">
+        <div className="self-stretch flex items-center gap-x-8 lg:gap-x-14">
+          <ul className="flex items-center gap-x-3 sm:gap-x-10 font-[poppins] text-[0.8125rem] sm:text-[1rem] tracking-wide text-(--brown)">
             {NAV_LINKS.map(({ label, href }) => (
               <li key={href}>
                 <a
@@ -117,11 +118,14 @@ const Navbar = () => {
             ))}
           </ul>
 
-          <Button.Secondary
-            onClick={() => window.open("/Plamena Mincheva- UI-UX designer and developer.pdf")}
-          >
-            CV
-          </Button.Secondary>
+          {/* No room for it next to the links on phones */}
+          <div className="hidden sm:block">
+            <Button.Secondary
+              onClick={() => window.open("/Plamena Mincheva- UI-UX designer and developer.pdf")}
+            >
+              CV
+            </Button.Secondary>
+          </div>
 
           {/* Hangs from the top edge like a bookmark ribbon */}
           {/* <img src="/nav_bookmark.png" alt="" aria-hidden="true" className="self-start w-9 h-22.5" /> */}

@@ -8,7 +8,9 @@ const fitZoom = (width) => {
 };
 
 // Lays its content out at the design width (Figma px) and zooms it down as a whole on narrower screens,
-// so the composition looks the same on every screen. Wider screens show it at full size, centred
+// so the composition looks the same on every screen. Wider screens show it at full size, centred.
+// Lengths inside are zoomed too, viewport units and the nav's --nav-offset included: divide those by var(--zoom)
+// to keep them true to the screen
 const ScaleToFit = ({ width, children }) => {
   const [zoom, setZoom] = useState(() => fitZoom(width));
 
@@ -19,7 +21,7 @@ const ScaleToFit = ({ width, children }) => {
   }, [width]);
 
   return (
-    <div className="mx-auto" style={{ width: rem(width), zoom }}>
+    <div className="mx-auto" style={{ width: rem(width), zoom, "--zoom": zoom }}>
       {children}
     </div>
   );
