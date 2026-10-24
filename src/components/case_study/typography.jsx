@@ -7,6 +7,11 @@ export const SectionLabel = ({ children, className = "" }) => (
   <p className={`font-[PlamenasHandwriting] text-[1.5rem] tracking-[0.03em] uppercase ${className}`}>{children}</p>
 );
 
+// Statement heading on its own between sections
+export const LargeTitle = ({ children, className = "" }) => (
+  <h2 className={`font-[poppins] font-bold text-[3rem] tracking-[0.03em] ${className}`}>{children}</h2>
+);
+
 export const SectionTitle = ({ children, className = "" }) => (
   <h2 className={`font-[poppins] font-bold text-[2.25rem] tracking-[0.03em] ${className}`}>{children}</h2>
 );

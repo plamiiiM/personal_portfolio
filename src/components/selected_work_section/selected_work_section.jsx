@@ -74,7 +74,7 @@ const SelectedWorkSection = () => {
           //   "Flutter Development",
           //   "Data-Driven Design",
           // ]}
-          caseStudyLink="https://example.com/equine-integration-case-study"
+          caseStudyLink="/equine-integration"
         />
       </main>
     </section>

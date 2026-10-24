@@ -1,26 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
+import useInView from "./use_in_view";
 
-// `isThin` makes the highlight a narrower marker stroke.
+// `isThin` makes the highlight a narrower marker stroke, `highlight` swaps its placement: { className } that sizes it on the words.
 // `circle` swaps the pencil circle for another hand-drawn one: { src, className } where the className sizes it around the word.
 // `isDrawn` makes the circle draw itself in once it scrolls into view (see .drawn-circle in index.css)
-const MarkedWord = ({ isHighlighted, isThin, isCircled, circle, isDrawn, children }) => {
-  const circleRef = useRef(null);
-  const [isInView, setIsInView] = useState(false);
-
-  useEffect(() => {
-    if (!isDrawn || !circleRef.current) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting) return;
-        setIsInView(true);
-        observer.disconnect();
-      },
-      // Wait until the word is clear of the bottom edge, so the drawing is actually seen
-      { rootMargin: "0px 0px -15% 0px" }
-    );
-    observer.observe(circleRef.current);
-    return () => observer.disconnect();
-  }, [isDrawn]);
+const MarkedWord = ({ isHighlighted, isThin, highlight, isCircled, circle, isDrawn, children }) => {
+  const [circleRef, isInView] = useInView({ isEnabled: isDrawn });
 
   return (
     <span className="relative inline-block whitespace-nowrap">
@@ -28,8 +13,11 @@ const MarkedWord = ({ isHighlighted, isThin, isCircled, circle, isDrawn, childre
         <img
           src="/highlight.svg"
           alt=""
-          className={`absolute -left-[0.1em] w-[calc(100%+0.2em)] max-w-none ${
-            isThin ? "top-[calc(50%-0.3em)] h-[0.72em]" : "top-[calc(50%-0.47em)] h-[1.17em]"
+          className={`absolute max-w-none ${
+            highlight?.className ??
+            `-left-[0.1em] w-[calc(100%+0.2em)] ${
+              isThin ? "top-[calc(50%-0.3em)] h-[0.72em]" : "top-[calc(50%-0.47em)] h-[1.17em]"
+            }`
           }`}
         />
       )}

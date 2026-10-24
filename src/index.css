@@ -84,6 +84,188 @@ html {
   }
 }
 
+/* Rows that slide in from the side and fade in once their container is .in-view (the Equine "four questions").
+   Each row sets --reveal-from-x (where it slides from), --reveal-fade and --reveal-slide (durations) and --reveal-delay */
+@keyframes reveal-fade {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes reveal-slide {
+  from {
+    translate: var(--reveal-from-x, 0px) 0;
+  }
+}
+.reveal {
+  opacity: 0;
+  .in-view & {
+    opacity: 1;
+    animation:
+      reveal-fade var(--reveal-fade) ease-out var(--reveal-delay) both,
+      reveal-slide var(--reveal-slide) ease-out var(--reveal-delay) both;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    opacity: 1;
+    animation: none !important;
+  }
+}
+
+/* Equine puzzle: two hands bring the puzzle pieces together, sparks and a halo burst where they click.
+   Values and timings are from the Figma motion; the hands' x and y tracks have their own keyframes, so they
+   animate registered numbers (Figma px) that make up the translate. --hand-dir mirrors the right hand */
+@property --hand-x {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0;
+}
+@property --hand-y {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0;
+}
+@keyframes hand-x {
+  0% {
+    --hand-x: -710;
+    animation-timing-function: ease-out;
+  }
+  57.143% {
+    --hand-x: -62;
+    animation-timing-function: ease-in-out;
+  }
+  70.857% {
+    --hand-x: -42;
+    animation-timing-function: ease-in;
+  }
+  82.143% {
+    --hand-x: 3;
+    animation-timing-function: ease-out;
+  }
+  88.095% {
+    --hand-x: -12;
+    animation-timing-function: ease-in-out;
+  }
+  100% {
+    --hand-x: 0;
+  }
+}
+@keyframes hand-y {
+  0% {
+    --hand-y: 28;
+    animation-timing-function: ease-out;
+  }
+  61.29% {
+    --hand-y: -4;
+    animation-timing-function: ease-in-out;
+  }
+  83.871% {
+    --hand-y: 0;
+    animation-timing-function: ease-out;
+  }
+  89.247% {
+    --hand-y: 3;
+    animation-timing-function: ease-in-out;
+  }
+  100% {
+    --hand-y: 0;
+  }
+}
+.puzzle-hand {
+  --hand-x: -710;
+  --hand-y: 28;
+  translate: calc(var(--hand-x) * var(--hand-dir, 1) * 0.0625rem) calc(var(--hand-y) * 0.0625rem);
+  .in-view & {
+    animation:
+      hand-x 1.68s 0.18s both,
+      hand-y 1.86s both;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    --hand-x: 0;
+    --hand-y: 0;
+    animation: none !important;
+  }
+}
+
+/* Each spark flies from (--x0, --y0) to (--x1, --y1), in Figma px, starting at --spark-delay */
+@keyframes spark-move {
+  from {
+    translate: calc(var(--x0) * 0.0625rem) calc(var(--y0) * 0.0625rem);
+  }
+  to {
+    translate: calc(var(--x1) * 0.0625rem) calc(var(--y1) * 0.0625rem);
+  }
+}
+@keyframes spark-scale {
+  0% {
+    scale: 0.55;
+    animation-timing-function: ease-out;
+  }
+  19.231% {
+    scale: 1;
+    animation-timing-function: ease-out;
+  }
+  100% {
+    scale: 0.35;
+  }
+}
+@keyframes spark-fade {
+  0% {
+    opacity: 0;
+    animation-timing-function: ease-out;
+  }
+  8.769% {
+    opacity: 1;
+  }
+  38.462% {
+    opacity: 1;
+    animation-timing-function: ease-out;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.puzzle-spark {
+  opacity: 0;
+  .in-view & {
+    animation:
+      spark-move 0.48s ease-out var(--spark-delay) both,
+      spark-scale 0.52s var(--spark-delay) both,
+      spark-fade 0.52s var(--spark-delay) both;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    animation: none !important;
+  }
+}
+
+@keyframes halo-grow {
+  to {
+    scale: 2.6389; /* 72px -> 190px */
+  }
+}
+@keyframes halo-fade {
+  0% {
+    opacity: 0;
+    animation-timing-function: ease-out;
+  }
+  9.524% {
+    opacity: 0.55;
+    animation-timing-function: ease-out;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.puzzle-halo {
+  opacity: 0;
+  .in-view & {
+    animation:
+      halo-grow 0.42s ease-out 1.5504s both,
+      halo-fade 0.42s 1.5504s both;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    animation: none !important;
+  }
+}
+
 /* :root {
   --text: #6b6375;
   --text-h: #08060d;
