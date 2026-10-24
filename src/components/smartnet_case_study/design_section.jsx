@@ -218,8 +218,6 @@ const DesignSection = () => {
           },
           { src: "/smartnet/illustrations_arrow_right.webp", x: 687.2, y: 381.6, w: 171.5, h: 167.5 },
           { src: "/smartnet/illustrations_arrow_left.webp", x: 148, y: 463.7, w: 168.5, h: 172.5 },
-          // Frosted panel at the page edge that blurs the end of the zones illustration
-          { x: 1200, y: 262.7, w: 209, h: 420, className: "bg-[rgba(244,244,244,0.2)] backdrop-blur-[3.55px]" },
         ]}
       />
     </section>

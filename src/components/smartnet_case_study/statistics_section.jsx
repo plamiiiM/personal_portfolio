@@ -23,6 +23,16 @@ const StatisticsSection = () => {
           height={456}
           items={[
             { src: "/smartnet/statistics_sketch.webp", alt: "Notebook sketches of the statistics overview and history screens" },
+            // Frosted panel over the notebook's second page (from the spine on), which isn't about this section.
+            // It's masked with the sketch itself, so it frosts the page right up to its edges but not the background
+            {
+              x: 590.5,
+              y: 5,
+              w: 560,
+              h: 450.5,
+              className:
+                "bg-[rgba(244,244,244,0.2)] backdrop-blur-[3.55px] [mask-image:url(/smartnet/statistics_sketch.webp)] [mask-position:right_top] [mask-size:74.8125rem_28.5rem] [mask-repeat:no-repeat]",
+            },
           ]}
         />
       </div>
