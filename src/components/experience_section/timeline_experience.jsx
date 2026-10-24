@@ -1,9 +1,13 @@
 import React, { useEffect, useRef } from "react";
 import ExperienceCard from "./experience_card_component";
 
+// The page is zoomed to fit the screen (ScaleToFit), which zooms the nav offset and the window height along with it,
+// so they're divided by var(--zoom) to stay true to the nav and the window
+const NAV_OFFSET = "calc(var(--nav-offset) / var(--zoom, 1))";
+
 // How far the entries have moved up the window: 0 when the frame pins below the nav, --overflow once the last one is in view.
 // It's worked out in CSS so it stays in step with the frame while --nav-offset slides
-const TRAVELLED = "clamp(0px, var(--scrolled) + var(--nav-offset), var(--overflow))";
+const TRAVELLED = `clamp(0px, var(--scrolled) + ${NAV_OFFSET}, var(--overflow))`;
 
 // Melts the entries into the paper over 80px, only at the edges that still have entries behind them
 const FADE_MASK =
@@ -20,8 +24,13 @@ const TimelineExperience = () => {
   useEffect(() => {
     const track = trackRef.current;
 
-    // Rounded so the text never sits on a half pixel and blurs
-    const onScroll = () => track.style.setProperty("--scrolled", `${Math.round(-track.getBoundingClientRect().top)}px`);
+    // getBoundingClientRect is in screen px, while lengths in here get zoomed, so it's turned back into page px.
+    // Rounded on screen so the text never sits on a half pixel and blurs
+    const onScroll = () =>
+      track.style.setProperty(
+        "--scrolled",
+        `${Math.round(-track.getBoundingClientRect().top) / (track.currentCSSZoom ?? 1)}px`,
+      );
 
     // The page gets exactly as much extra height as the entries overflow by, so adding more just makes it hold longer
     // (and if they all fit, it never pins). ResizeObserver also fires once on observe, which does the initial measure
@@ -46,7 +55,8 @@ const TimelineExperience = () => {
       {/* Sticks just below the nav and slides with it (same timing as the nav's own slide) */}
       <div
         ref={frameRef}
-        className="sticky top-(--nav-offset) max-h-svh flex flex-col transition-[--nav-offset] duration-300 motion-reduce:transition-none"
+        className="sticky max-h-[calc(100svh/var(--zoom,1))] flex flex-col transition-[--nav-offset] duration-300 motion-reduce:transition-none"
+        style={{ top: NAV_OFFSET }}
       >
         {/* The image has ~76px of empty space above the lettering; pull it up so the word sits 24px below the nav */}
         <img className="w-[20rem] -rotate-40 -mt-13" src="/experience_text.png" alt="Experience" />

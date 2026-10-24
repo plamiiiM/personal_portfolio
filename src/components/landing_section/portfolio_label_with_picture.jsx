@@ -1,5 +1,18 @@
 import React from "react";
 
+// Softens just the outer rim of the photo's paper so it blends into the background.
+// The paper starts 3.3% in from each side of the image. The left side is the far left of the page,
+// so it only fades when there's paper beside it (--side-room from ScaleToFit), not at the edge of the screen
+const PHOTO_FADE = {
+  maskImage:
+    "linear-gradient(to right, transparent 3.3%, black calc(3.3% + 4.2% * var(--side-room, 1)), black 92.5%, transparent 96.7%), linear-gradient(to bottom, transparent, black 5%, black 94%, transparent)",
+  maskComposite: "intersect",
+};
+
+// The graphite band is cut off straight on the left, at the far left of the page, so that end fades out
+// when there's paper beside it
+const SCRIBBLE_FADE = { maskImage: "linear-gradient(to right, transparent, black calc(9% * var(--side-room, 1)))" };
+
 const PortfolioLabelWithPicture = ({}) => {
   return (
     <div className="flex flex-col justify-center ">
@@ -9,6 +22,7 @@ const PortfolioLabelWithPicture = ({}) => {
             src="/scribble_graphite_small_color.png"
             alt="Graphite scribble"
             className=" mix-blend-multiply w-[36rem]"
+            style={SCRIBBLE_FADE}
           />
         </div>
         <img
@@ -21,6 +35,7 @@ const PortfolioLabelWithPicture = ({}) => {
         src="/picture_of_me_graphite_color.png"
         alt="Portfolio picture"
         className="w-[42rem] overflow-hidden object-cover opacity-100 mix-blend-multiply"
+        style={PHOTO_FADE}
       />
     </div>
   );

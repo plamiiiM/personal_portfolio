@@ -1,0 +1,45 @@
+import React from "react";
+
+// Building blocks of the case study headers. Each page places them itself, as their designs space them differently
+
+// Paper name tag, pinned at an angle like the project titles on the landing page
+export const NameTag = ({ children, className = "" }) => (
+  <h1
+    className={`w-fit -rotate-7 bg-[#faf8f8] p-[16.87px] font-[PlamenasHandwriting] text-[5.0625rem] tracking-[0.03em]
+                shadow-[0_1.69px_1.69px_rgba(0,0,0,0.3),0_3.38px_5.06px_rgba(0,0,0,0.15)] ${className}`}
+  >
+    {children}
+  </h1>
+);
+
+export const Tagline = ({ title, role, className = "" }) => (
+  <div className={`flex max-w-239.5 flex-col gap-y-6 font-[poppins] ${className}`}>
+    <p className="text-[2.5rem] font-semibold tracking-[0.03em]">{title}</p>
+    <p className="text-[1.25rem] tracking-[0.03em] text-(--red)">{role}</p>
+  </div>
+);
+
+// Time period, platform and so on: [{ term, details }]
+export const ProjectDetails = ({ items, className = "" }) => (
+  <dl className={`flex w-111.25 flex-col gap-y-11.25 font-[poppins] ${className}`}>
+    {items.map(({ term, details }) => (
+      <div key={term} className="flex flex-col gap-y-2">
+        <dt className="text-[1.25rem] tracking-[0.03em] text-(--red)">{term}</dt>
+        <dd className="text-[1.125rem] tracking-[0.03em]">{details}</dd>
+      </div>
+    ))}
+  </dl>
+);
+
+// Skills underlined in pencil. The underlines are placed by hand in the designs, so an item can nudge its
+// label or line, and a longer label can bring a longer line: { label, labelClassName, lineClassName, lineSrc }
+export const ExpertiseList = ({ items }) => (
+  <ul className="flex flex-wrap gap-5 text-[1rem] tracking-[0.03em]">
+    {items.map(({ label, labelClassName = "", lineClassName = "mt-[25.84px]", lineSrc = "/case_study/filter_underline.svg" }) => (
+      <li key={label} className="grid">
+        <span className={`col-start-1 row-start-1 whitespace-nowrap ${labelClassName}`}>{label}</span>
+        <img src={lineSrc} alt="" className={`col-start-1 row-start-1 self-start ${lineClassName}`} />
+      </li>
+    ))}
+  </ul>
+);

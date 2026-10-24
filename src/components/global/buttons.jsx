@@ -1,13 +1,15 @@
 import React from "react";
 
-const Button = ({ children, className = "", ...props }) => {
+// Pass as="a" (with an href) for a link styled as a button
+const Button = ({ as = "button", children, className = "", ...props }) => {
+  const Tag = as;
   return (
-    <button
+    <Tag
       className={` font-[poppins] font-bold text-[1rem] uppercase px-6 py-2 leading-8 tracking-wide transition-all active:scale-95 ${className}`}
       {...props}
     >
       {children}
-    </button>
+    </Tag>
   );
 };
 

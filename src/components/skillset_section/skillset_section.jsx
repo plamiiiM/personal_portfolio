@@ -1,6 +1,6 @@
 import React from "react";
 import Layer from "./layer";
-import { rem } from "./layout";
+import { rem } from "../global/layout";
 import { SKILL_CLUSTERS } from "./skills_data";
 
 const SkillsetSection = () => {

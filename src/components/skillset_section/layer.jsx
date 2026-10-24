@@ -1,5 +1,5 @@
 import React from "react";
-import { place, rem } from "./layout";
+import { place, rem } from "../global/layout";
 
 // Text style shared by every sticky note; the cluster titles set their own in skills_data.js.
 const NOTE_TEXT = { font: "plamenas", fontSize: 31 };
