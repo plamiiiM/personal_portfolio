@@ -30,13 +30,7 @@ const LayerGroup = ({ layers, as }) => {
 const SkillsetSection = () => {
   return (
     <section id="skills" className="flex flex-col items-center lg:mr-28">
-      <div className="relative w-64 h-30 lg:w-85 lg:h-40 overflow-hidden">
-        <img
-          src="/skillset_text.png"
-          alt="The heading of the section- Skillset"
-          className="absolute left-0 top-[-26.3%] w-[113.5%] max-w-none"
-        />
-      </div>
+      <img src="/skillset_text.png" alt="The heading of the section- Skillset" className="w-25.75 lg:w-42.75 -rotate-4 self-start" />
 
       {/* Each cluster is laid out on the 1530px-wide Figma frame, centred on the section. */}
       <div className="hidden lg:flex flex-col items-center gap-y-60 mt-24">

@@ -11,7 +11,7 @@ const SelectedWorkSection = () => {
           id="work"
           src="/selected_work_text.png"
           alt="Selected Work"
-          className="w-40 lg:w-[20rem] max-w-md -rotate-40 mt-10 lg:mt-40 -scroll-mt-8 lg:-scroll-mt-16"
+          className="w-37 lg:w-62 -rotate-4 mt-10 lg:mt-40"
         />
         {/* The drawing's ear ends in a cut edge on the right (94.6% - 97.8% across), at the far right of the page,
             so it's faded out before the cut when there's paper beside it (--side-room from ScaleToFit), not at the edge of the screen */}

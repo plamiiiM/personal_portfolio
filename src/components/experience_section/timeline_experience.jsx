@@ -59,8 +59,8 @@ const TimelineExperience = () => {
         className="sticky in-data-[scaling=zoom]:max-h-[calc(100svh/var(--zoom))] flex flex-col transition-[--nav-offset] duration-300 motion-reduce:transition-none"
         style={{ top: NAV_OFFSET }}
       >
-        {/* The image has ~76px of empty space above the lettering; pull it up so the word sits 24px below the nav */}
-        <img className="w-48 lg:w-[20rem] -rotate-40 -mt-8 lg:-mt-13" src="/experience_text.png" alt="Experience" />
+        {/* The word sits 24px below the nav */}
+        <img className="w-43.5 lg:w-72.5 -rotate-4 mt-6 mb-11 lg:mb-18" src="/experience_text.png" alt="Experience" />
 
         <div
           ref={windowRef}
