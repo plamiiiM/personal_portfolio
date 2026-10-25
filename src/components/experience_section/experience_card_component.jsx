@@ -1,5 +1,6 @@
 import React from "react";
 
+// What happened at one stop on the experience trail. The trail draws the stop's marker beside the year
 export function ExperienceCardComponent({
   year,
   date,
@@ -14,11 +15,8 @@ export function ExperienceCardComponent({
   showRecommendation = false,
 }) {
   return (
-    <div className="flex flex-col font-poppins text-[1rem] leading-8 z-10">
-      <div className="flex flex-row items-center gap-4 mb-6 -ml-10">
-        <div className="left-0 top-15 w-6 h-6 bg-(--red) rounded-full " />
-        <h2 className="">{year ? `${year}` : "Year"}</h2>
-      </div>
+    <div className="flex flex-col font-poppins text-[1rem] lg:text-[1.125rem] leading-8">
+      <h3 className="text-[1.25rem] font-semibold mb-3">{year ? `${year}` : "Year"}</h3>
       <p>
         {sentence ? `${sentence}` : "You did..."}{" "}
         <span className="text-(--red) font-bold">{role || "Role"}</span> {at}{" "}
@@ -28,7 +26,7 @@ export function ExperienceCardComponent({
       <p className="italic font-light mb-6">({date ? `${date}` : "Date"})</p>
 
       {showRecommendation && (
-        <div className="border border-black rounded-2xl p-4 lg:p-6 lg:w-[50rem] relative">
+        <div className="border border-black rounded-2xl p-4 lg:p-6 lg:w-184 relative">
           <div className="flex items-center gap-4 mb-6">
             <div className="w-16 rounded-full ">
               <img

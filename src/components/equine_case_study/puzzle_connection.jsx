@@ -1,5 +1,5 @@
 import React from "react";
-import useInView from "../global/use_in_view";
+import useInView, { inViewClassName } from "../global/use_in_view";
 import FitToWidth from "../global/fit_to_width";
 import { place, rem } from "../global/layout";
 import useLanguage from "../global/use_language";
@@ -47,17 +47,17 @@ const HANDS = [
   },
 ];
 
-// Two hands slide in and click their puzzle pieces together once it scrolls into view (see .puzzle-* in index.css).
+// Two hands slide in and click their puzzle pieces together once all of it is on the screen (see .puzzle-* in index.css).
 // On phones it's centred and shrunk to the column
 const PuzzleConnection = ({ className = "" }) => {
-  const [ref, isInView] = useInView();
+  const [ref, isInView, isInstant] = useInView({ isWhole: true });
   const { t } = useLanguage();
 
   return (
     <FitToWidth className={`max-lg:mx-auto ${className}`}>
       <div
         ref={ref}
-        className={`relative ${isInView ? "in-view" : ""}`}
+        className={`relative ${inViewClassName(isInView, isInstant)}`}
         style={{ width: rem(1000), height: rem(505) }}
       >
         {HANDS.map(({ src, alt, box, picture, dir }) => (

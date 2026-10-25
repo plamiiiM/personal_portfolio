@@ -1,10 +1,12 @@
 import React from "react";
 import Collage from "../case_study/collage";
+import { noteShadow } from "../case_study/note_shadow";
 import MarkedWord from "../global/marked_word_component";
 import { Paragraph, SectionTitle, SubsectionTitle } from "../case_study/typography";
 import { noteText } from "./sticky_note";
 import SideBySide from "../case_study/side_by_side";
 import useLanguage from "../global/use_language";
+import InView from "../global/in_view";
 
 // A thin marker stroke under the lower half of the large statement's lines
 const STATEMENT_HIGHLIGHT = { className: "-left-[0.2em] w-[calc(100%+0.3em)] top-[calc(50%-0.22em)] h-[0.58em]" };
@@ -17,20 +19,29 @@ const FeaturesSection = () => {
       <SideBySide>
         <div className="lg:ml-30.75 lg:mt-3.25">
           <SectionTitle>{t({ en: "Rest Days", bg: "Дни за почивка" })}</SectionTitle>
-          <p className="mt-6 lg:-ml-0.5 lg:mt-15.75 lg:w-192.75 font-poppins text-[1.5rem] lg:text-[2.25rem] font-light italic tracking-[0.03em]">
-            <MarkedWord isHighlighted highlight={STATEMENT_HIGHLIGHT}>
+          {/* The statement and the line under it ease in like the paragraphs (see typography) */}
+          <InView
+            as="p"
+            isWhole
+            className="soft-in mt-6 lg:-ml-0.5 lg:mt-15.75 lg:w-192.75 font-poppins text-[1.5rem] lg:text-[2.25rem] font-light italic tracking-[0.03em]"
+          >
+            <MarkedWord isHighlighted isDrawn highlight={STATEMENT_HIGHLIGHT}>
               {t({ en: "A horse’s progress depends on rest as", bg: "За напредъка на коня почивката" })}
             </MarkedWord>{" "}
-            <MarkedWord isHighlighted highlight={STATEMENT_HIGHLIGHT}>
+            <MarkedWord isHighlighted isDrawn highlight={STATEMENT_HIGHLIGHT}>
               {t({ en: "much as on training.", bg: "е важна колкото тренировките." })}
             </MarkedWord>
-          </p>
-          <p className="mt-3 lg:-ml-0.5 lg:mt-2.75 lg:w-109 font-poppins text-[1rem] lg:text-[1.125rem] italic tracking-[0.03em]">
+          </InView>
+          <InView
+            as="p"
+            isWhole
+            className="soft-in mt-3 lg:-ml-0.5 lg:mt-2.75 lg:w-109 font-poppins text-[1rem] lg:text-[1.125rem] italic tracking-[0.03em]"
+          >
             {t({
               en: "The app only showed what the horse did, never what it didn’t do.",
               bg: "Приложението показваше само какво е правил конят, но никога какво не е правил.",
             })}
-          </p>
+          </InView>
         </div>
         <Collage
           className="lg:mr-29"
@@ -123,15 +134,15 @@ const FeaturesSection = () => {
             {t({
               en: (
                 <>
-                  So, I designed an <MarkedWord isHighlighted>automated rest day</MarkedWord> view that helps riders and
-                  trainers <MarkedWord isHighlighted>prevent overtraining,</MarkedWord> with editing and annotations to
+                  So, I designed an <MarkedWord isHighlighted isDrawn>automated rest day</MarkedWord> view that helps riders and
+                  trainers <MarkedWord isHighlighted isDrawn>prevent overtraining,</MarkedWord> with editing and annotations to
                   keep the data accurate when the device fails.
                 </>
               ),
               bg: (
                 <>
-                  Затова проектирах <MarkedWord isHighlighted>автоматичен изглед на дните за почивка</MarkedWord>, който
-                  помага на ездачите и треньорите да <MarkedWord isHighlighted>предотвратят претренирането,</MarkedWord>{" "}
+                  Затова проектирах <MarkedWord isHighlighted isDrawn>автоматичен изглед на дните за почивка</MarkedWord>, който
+                  помага на ездачите и треньорите да <MarkedWord isHighlighted isDrawn>предотвратят претренирането,</MarkedWord>{" "}
                   с възможност за редакция и бележки, за да остават данните точни, когато устройството откаже.
                 </>
               ),
@@ -147,18 +158,18 @@ const FeaturesSection = () => {
             {t({
               en: (
                 <>
-                  I designed a <MarkedWord isHighlighted>goal-based achievements</MarkedWord> feature that rewards riders
+                  I designed a <MarkedWord isHighlighted isDrawn>goal-based achievements</MarkedWord> feature that rewards riders
                   for recording training and improving fitness, with wording and trainings that{" "}
-                  <MarkedWord isHighlighted>protect the</MarkedWord>{" "}
-                  <MarkedWord isHighlighted>horse from overtraining.</MarkedWord>
+                  <MarkedWord isHighlighted isDrawn>protect the</MarkedWord>{" "}
+                  <MarkedWord isHighlighted isDrawn>horse from overtraining.</MarkedWord>
                 </>
               ),
               bg: (
                 <>
-                  Проектирах <MarkedWord isHighlighted>постижения, базирани на цели</MarkedWord>, които награждават
+                  Проектирах <MarkedWord isHighlighted isDrawn>постижения, базирани на цели</MarkedWord>, които награждават
                   ездачите за записаните тренировки и подобрената форма, с формулировки и тренировки, които{" "}
-                  <MarkedWord isHighlighted>пазят коня</MarkedWord>{" "}
-                  <MarkedWord isHighlighted>от претрениране.</MarkedWord>
+                  <MarkedWord isHighlighted isDrawn>пазят коня</MarkedWord>{" "}
+                  <MarkedWord isHighlighted isDrawn>от претрениране.</MarkedWord>
                 </>
               ),
             })}
@@ -170,9 +181,10 @@ const FeaturesSection = () => {
           height={588.75}
           items={[
             { src: "/equine/achievements_phone.webp", x: 105.71, y: 0, w: 256, h: 517.98 },
-            { src: "/equine/achievements_card_shadow.webp", x: 49.9, y: 184.09, w: 351.51, h: 153.86 },
-            { src: "/equine/sticky_yellow_small.webp", x: 0, y: 340.04, w: 240.38, h: 248.71 },
+            noteShadow({ note: "question", x: 0, y: 340.04, w: 240.38, h: 248.71 }),
+            { note: "question", src: "/equine/sticky_yellow_small.webp", x: 0, y: 340.04, w: 240.38, h: 248.71 },
             noteText({
+              note: "question",
               text: t({
                 en: "How can I make recording training feel rewarding instead of like a chore?",
                 bg: "Как записването на тренировки да носи удовлетворение, а не да е задължение?",
@@ -184,7 +196,10 @@ const FeaturesSection = () => {
               h: 116,
               rotate: 4.27,
             }),
+            // The card lifted off the phone comes in with its shadow (they don't overlap the note)
+            { group: "card", src: "/equine/achievements_card_shadow.webp", x: 49.9, y: 184.09, w: 351.51, h: 153.86 },
             {
+              group: "card",
               src: "/equine/achievements_card.webp",
               alt: t({
                 en: "Achievements card with 5 to go and 2 of 7 done, lifted off the horse’s status screen",
@@ -232,7 +247,7 @@ const FeaturesSection = () => {
               <>
                 A set of exercises based on the horse’s current workload and metrics are introduced. A horse that is
                 deconditioned gets light, controlled exercises, such as a short trot at a steady pace, so{" "}
-                <MarkedWord isHighlighted>improvement comes through play</MarkedWord> and feeds back into better
+                <MarkedWord isHighlighted isDrawn>improvement comes through play</MarkedWord> and feeds back into better
                 training.
               </>
             ),
@@ -240,14 +255,14 @@ const FeaturesSection = () => {
               <>
                 Въведох набор от упражнения според текущото натоварване и показателите на коня. Кон в слаба форма
                 получава леки, контролирани упражнения, например кратък тръс с равномерно темпо, така че{" "}
-                <MarkedWord isHighlighted>подобрението идва чрез игра</MarkedWord> и води до по-добри тренировки.
+                <MarkedWord isHighlighted isDrawn>подобрението идва чрез игра</MarkedWord> и води до по-добри тренировки.
               </>
             ),
           })}
         </Paragraph>
       </SideBySide>
 
-      <blockquote className="mx-auto mt-20 lg:mt-63.25 lg:w-272.75 text-center font-poppins">
+      <InView as="blockquote" isWhole className="soft-in mx-auto mt-20 lg:mt-63.25 lg:w-272.75 text-center font-poppins">
         <p className="text-[1.375rem] lg:text-[2rem] font-semibold italic tracking-[0.03em]">
           {t({
             en: "“Riders don’t need a reminder to record. They need a reason.”",
@@ -260,7 +275,7 @@ const FeaturesSection = () => {
             bg: "Постиженията превръщат всеки запис в крачка към нещо",
           })}
         </p>
-      </blockquote>
+      </InView>
 
       <SideBySide className="mt-20 lg:mt-53">
         <div className="lg:ml-33.25 lg:w-148.75">
@@ -269,7 +284,7 @@ const FeaturesSection = () => {
             {t({
               en: (
                 <>
-                  The word <MarkedWord isHighlighted>“Challenge”</MarkedWord> carries a{" "}
+                  The word <MarkedWord isHighlighted isDrawn>“Challenge”</MarkedWord> carries a{" "}
                   <MarkedWord
                     isCircled
                     isDrawn
@@ -285,7 +300,7 @@ const FeaturesSection = () => {
               ),
               bg: (
                 <>
-                  Думата <MarkedWord isHighlighted>„Предизвикателство“</MarkedWord> носи{" "}
+                  Думата <MarkedWord isHighlighted isDrawn>„Предизвикателство“</MarkedWord> носи{" "}
                   <MarkedWord
                     isCircled
                     isDrawn
@@ -305,7 +320,7 @@ const FeaturesSection = () => {
             {t({
               en: (
                 <>
-                  <MarkedWord isHighlighted>“Achievement”</MarkedWord> frames the goal as{" "}
+                  <MarkedWord isHighlighted isDrawn>“Achievement”</MarkedWord> frames the goal as{" "}
                   <MarkedWord
                     isCircled
                     isDrawn
@@ -322,7 +337,7 @@ const FeaturesSection = () => {
               ),
               bg: (
                 <>
-                  <MarkedWord isHighlighted>„Постижение“</MarkedWord> представя целта като{" "}
+                  <MarkedWord isHighlighted isDrawn>„Постижение“</MarkedWord> представя целта като{" "}
                   <MarkedWord
                     isCircled
                     isDrawn
@@ -391,9 +406,10 @@ const FeaturesSection = () => {
               w: 238.95,
               h: 260.41,
             },
-            { src: "/equine/sticky_blue_small_shadow.webp", x: 75.5, y: 166.59, w: 349.25, h: 336.38 },
-            { src: "/equine/sticky_blue_small.webp", x: 99, y: 169, w: 302.07, h: 313.24 },
+            noteShadow({ note: "question", x: 99, y: 169, w: 302.07, h: 313.24 }),
+            { note: "question", src: "/equine/sticky_blue_small.webp", x: 99, y: 169, w: 302.07, h: 313.24 },
             noteText({
+              note: "question",
               text: t({
                 en: "How can a rider understand the horse’s condition at a glance, without reading metrics?",
                 bg: "Как ездачът да разбере състоянието на коня с един поглед, без да чете показатели?",
@@ -445,14 +461,14 @@ const FeaturesSection = () => {
               en: (
                 <>
                   It’s part of the gamification plan, but also makes the{" "}
-                  <MarkedWord isHighlighted>metrics easier to read</MarkedWord> and supports the achievements, since
+                  <MarkedWord isHighlighted isDrawn>metrics easier to read</MarkedWord> and supports the achievements, since
                   progress can show in how the avatar looks.
                 </>
               ),
               bg: (
                 <>
                   Той е част от плана за геймификация, но и прави{" "}
-                  <MarkedWord isHighlighted>показателите по-лесни за разчитане</MarkedWord> и подкрепя постиженията,
+                  <MarkedWord isHighlighted isDrawn>показателите по-лесни за разчитане</MarkedWord> и подкрепя постиженията,
                   защото напредъкът може да се вижда във външния вид на аватара.
                 </>
               ),
@@ -462,7 +478,7 @@ const FeaturesSection = () => {
             {t({
               en: (
                 <>
-                  This <MarkedWord isHighlighted>cartoon avatar</MarkedWord> gives the horse{" "}
+                  This <MarkedWord isHighlighted isDrawn>cartoon avatar</MarkedWord> gives the horse{" "}
                   <MarkedWord
                     isCircled
                     isDrawn
@@ -479,7 +495,7 @@ const FeaturesSection = () => {
               ),
               bg: (
                 <>
-                  Този <MarkedWord isHighlighted>анимационен аватар</MarkedWord> дава на коня{" "}
+                  Този <MarkedWord isHighlighted isDrawn>анимационен аватар</MarkedWord> дава на коня{" "}
                   <MarkedWord
                     isCircled
                     isDrawn

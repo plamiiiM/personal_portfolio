@@ -30,6 +30,7 @@ const StatisticsSection = () => {
           phone={{ width: 590.5, height: 456, shifts: [[0, 0], null] }}
           items={[
             {
+              group: "notebook",
               src: "/smartnet/statistics_sketch.webp",
               alt: t({
                 en: "Notebook sketches of the statistics overview and history screens",
@@ -37,8 +38,10 @@ const StatisticsSection = () => {
               }),
             },
             // Frosted panel over the notebook's second page (from the spine on), which isn't about this section.
-            // It's masked with the sketch itself, so it frosts the page right up to its edges but not the background
+            // It's masked with the sketch itself, so it frosts the page right up to its edges but not the background.
+            // It comes in with the notebook, so it frosts the page while that fades in too
             {
+              group: "notebook",
               x: 590.5,
               y: 5,
               w: 560,

@@ -1,5 +1,6 @@
 import React from "react";
 import Collage from "../case_study/collage";
+import { noteShadow } from "../case_study/note_shadow";
 import MarkedWord from "../global/marked_word_component";
 import { Paragraph, SectionLabel, SectionTitle, SubsectionTitle } from "../case_study/typography";
 import SideBySide from "../case_study/side_by_side";
@@ -30,6 +31,7 @@ const ResearchSection = () => {
               h: 245.5,
             },
             {
+              group: "drills",
               src: "/smartnet/research_drills.webp",
               alt: t({
                 en: "Research notes on the Accuracy Ladder and Sprint and Shoot drills, with a sticky note asking how to turn football training drills into fun exercises using gamification",
@@ -40,26 +42,27 @@ const ResearchSection = () => {
               w: 792,
               h: 564,
             },
-            // The drills' sticky note has its question written on in English, so in Bulgarian the same blank note
-            // is laid exactly over it, with the question written on that
-            ...t({
-              en: [],
-              bg: [
-                { src: "/smartnet/sticky_note.webp", x: 348, y: 258.6, w: 250.5, h: 259 },
-                {
-                  x: 378,
-                  y: 331,
-                  w: 180,
-                  h: 150,
-                  rotate: -6.4,
-                  content: (
-                    <p className="text-center font-plamenas text-[1.3125rem] leading-[1.3] tracking-[0.03em]">
-                      Как да превърнем футболните упражнения в забавни игри чрез геймификация?
-                    </p>
-                  ),
-                },
-              ],
-            }),
+            // The drills' sticky note is part of the picture, without a shadow and written on in English, so the same
+            // blank note is laid exactly over it with its shadow, and the question written on in either language.
+            // It comes in with the drills, so the note in the picture never shows
+            noteShadow({ group: "drills", x: 348, y: 258.6, w: 250.5, h: 259 }),
+            { group: "drills", src: "/smartnet/sticky_note.webp", x: 348, y: 258.6, w: 250.5, h: 259 },
+            {
+              group: "drills",
+              x: 378,
+              y: 331,
+              w: 180,
+              h: 150,
+              rotate: -6.4,
+              content: (
+                <p className="text-center font-plamenas text-[1.3125rem] leading-[1.3] tracking-[0.03em]">
+                  {t({
+                    en: "How to turn football training drills, into fun exercises using gamification?",
+                    bg: "Как да превърнем футболните упражнения в забавни игри чрез геймификация?",
+                  })}
+                </p>
+              ),
+            },
           ]}
         />
         <Paragraph className="lg:mr-17.25 lg:mt-31.25 lg:w-125.25">
@@ -138,18 +141,18 @@ const ResearchSection = () => {
             {t({
               en: (
                 <>
-                  By researching coach workflows, I <MarkedWord isHighlighted>identified their needs</MarkedWord> and
+                  By researching coach workflows, I <MarkedWord isHighlighted isDrawn>identified their needs</MarkedWord> and
                   designed a UI that displays only the stats that matter to them. This gives coaches{" "}
-                  <MarkedWord isHighlighted>immediate, clear insights</MarkedWord> into{" "}
-                  <MarkedWord isHighlighted>player performance</MarkedWord> without unnecessary distraction.
+                  <MarkedWord isHighlighted isDrawn>immediate, clear insights</MarkedWord> into{" "}
+                  <MarkedWord isHighlighted isDrawn>player performance</MarkedWord> without unnecessary distraction.
                 </>
               ),
               bg: (
                 <>
-                  Като проучих как работят треньорите, <MarkedWord isHighlighted>открих нуждите им</MarkedWord> и
+                  Като проучих как работят треньорите, <MarkedWord isHighlighted isDrawn>открих нуждите им</MarkedWord> и
                   проектирах интерфейс, който показва само статистиките, важни за тях. Така треньорите получават{" "}
-                  <MarkedWord isHighlighted>моментална и ясна представа</MarkedWord> за{" "}
-                  <MarkedWord isHighlighted>представянето на играчите</MarkedWord> без излишни разсейвания.
+                  <MarkedWord isHighlighted isDrawn>моментална и ясна представа</MarkedWord> за{" "}
+                  <MarkedWord isHighlighted isDrawn>представянето на играчите</MarkedWord> без излишни разсейвания.
                 </>
               ),
             })}
@@ -171,8 +174,10 @@ const ResearchSection = () => {
               w: 590,
               h: 453,
             },
-            { src: "/smartnet/sticky_note.webp", x: 285, y: 366, w: 248.5, h: 257 },
+            noteShadow({ note: "question", x: 285, y: 366, w: 248.5, h: 257 }),
+            { note: "question", src: "/smartnet/sticky_note.webp", x: 285, y: 366, w: 248.5, h: 257 },
             {
+              note: "question",
               x: 317.7,
               y: 452.9,
               w: 180.3,
@@ -235,13 +240,13 @@ const ResearchSection = () => {
               en: (
                 <>
                   To maintain player motivation and avoid toxic friction within teams, I designed{" "}
-                  <MarkedWord isHighlighted>role-based dashboards</MarkedWord>.
+                  <MarkedWord isHighlighted isDrawn>role-based dashboards</MarkedWord>.
                 </>
               ),
               bg: (
                 <>
                   За да запазя мотивацията на играчите и да избегна токсичното напрежение в отборите, проектирах{" "}
-                  <MarkedWord isHighlighted>табла според ролята</MarkedWord>.
+                  <MarkedWord isHighlighted isDrawn>табла според ролята</MarkedWord>.
                 </>
               ),
             })}

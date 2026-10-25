@@ -14,6 +14,8 @@ const PHOTO_FADE = {
 // when there's paper beside it
 const SCRIBBLE_FADE = { maskImage: "linear-gradient(to right, transparent, black calc(9% * var(--side-room, 1)))" };
 
+// Once the header is .in-view the photo comes up on the paper, then the scribble and the label are drawn in over it.
+// Each picture moves on its own, as a group would lose its multiply blend with the paper while it fades
 const PortfolioLabelWithPicture = () => {
   const { t } = useLanguage();
 
@@ -24,20 +26,20 @@ const PortfolioLabelWithPicture = () => {
           <img
             src="/scribble_graphite_small_color.png"
             alt={t({ en: "Graphite scribble", bg: "Графитна драсканица" })}
-            className=" mix-blend-multiply w-[36rem]"
+            className="sketch delay-200 mix-blend-multiply w-[36rem]"
             style={SCRIBBLE_FADE}
           />
         </div>
         <img
           src="/portfolio_label.png"
           alt={t({ en: "Portfolio label", bg: "Надпис „Портфолио“" })}
-          className="relative w-[22rem] h-auto object-contain mix-blend-multiply left-5"
+          className="sketch delay-500 relative w-[22rem] h-auto object-contain mix-blend-multiply left-5"
         />
       </div>
       <img
         src="/picture_of_me_graphite_color.png"
         alt={t({ en: "Portfolio picture", bg: "Портретна снимка" })}
-        className="w-[42rem] overflow-hidden object-cover opacity-100 mix-blend-multiply"
+        className="fade-in w-[42rem] overflow-hidden object-cover opacity-100 mix-blend-multiply"
         style={PHOTO_FADE}
       />
     </div>

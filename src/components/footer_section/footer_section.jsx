@@ -4,6 +4,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import useLanguage from "../global/use_language";
+import InView from "../global/in_view";
+
+// The red marker stroke is drawn across the words once they scroll into view: a copy of them on the stroke is
+// uncovered over the plain ones (.drawn-highlight), laid in the same spot so the two line up exactly
+const HighlightedWords = ({ children }) => (
+  <span className="inline-grid">
+    <span className="col-start-1 row-start-1 px-1">{children}</span>
+    <InView as="span" className="drawn-highlight col-start-1 row-start-1 px-1 bg-(--red) text-(--textOnDark)" aria-hidden="true">
+      {children}
+    </InView>
+  </span>
+);
 
 // On phones it's a centred sign-off: the whole pencil line shrunk to the column, then the text, the links and the
 // fish one under another
@@ -20,12 +32,12 @@ const FooterSection = () => {
             {t({
               en: (
                 <>
-                  Say <span className="bg-(--red) text-(--textOnDark) px-1">Hi :)</span> and reach out!
+                  Reach out and say <HighlightedWords>Hi :)</HighlightedWords>
                 </>
               ),
               bg: (
                 <>
-                  Кажете <span className="bg-(--red) text-(--textOnDark) px-1">здрасти :)</span> и ми пишете!
+                  Пишете ми и кажете <HighlightedWords>здрасти :)</HighlightedWords>
                 </>
               ),
             })}

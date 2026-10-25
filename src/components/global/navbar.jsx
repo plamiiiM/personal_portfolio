@@ -3,6 +3,7 @@ import { flushSync } from "react-dom";
 import Button from "./buttons";
 import usePhoneLayout from "./use_phone_layout";
 import useLanguage, { LANGUAGES, setLanguage } from "./use_language";
+import CV from "./cv";
 
 const NAV_LINKS = [
   { label: { en: "Work", bg: "Проекти" }, href: "#work" },
@@ -77,8 +78,6 @@ const Paper = ({ top = "top-0" }) => (
   </div>
 );
 
-const openCv = () => window.open("/Plamena Mincheva- UI-UX designer and developer.pdf");
-
 // EN / BG, with the links' pencil underline under the language that's showing
 const LanguageSwitch = () => {
   const { language, t } = useLanguage();
@@ -122,6 +121,8 @@ const Navbar = () => {
   const { t } = useLanguage();
   const navRef = useRef(null);
   const menuButtonRef = useRef(null);
+
+  const openCv = () => window.open(t(CV));
 
   // Wider screens have the links in the nav itself, so the menu never shows there
   const isMenuShowing = isMenuOpen && isPhoneLayout;
@@ -172,7 +173,7 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Lets pinned content (like the experience section) sit just below the nav while it's showing
+  // Lets pinned content sit just below the nav while it's showing
   useEffect(() => {
     document.documentElement.style.setProperty("--nav-offset", isHidden ? "0px" : `${NAV_HEIGHT}px`);
   }, [isHidden]);
@@ -200,17 +201,19 @@ const Navbar = () => {
         <Paper />
 
         {/* The links point at the landing page, so they also work from other pages.
-            When the section is on the current page, scrollToSection takes over instead */}
+            When the section is on the current page, scrollToSection takes over instead.
+            The logo and then the links come down into place as the page opens (.nav-enter): the logo itself rather than
+            its link, as a link fading around it would keep it from blending into the paper until it's done */}
         <a href="/#" aria-label={t({ en: "Home", bg: "Начало" })} className="shrink-0">
           <img
             src="/icon_portfolio.svg"
             alt={t({ en: "Plamena Mincheva logo", bg: "Лого на Пламена Минчева" })}
-            className="h-12 sm:h-16 w-auto mix-blend-multiply"
+            className="nav-enter h-12 sm:h-16 w-auto mix-blend-multiply"
           />
         </a>
 
         {/* The language switch stays in the bar in both layouts: after the CV on wider screens, by the menu button on phones */}
-        <div className="self-stretch flex items-center gap-x-3 lg:gap-x-10">
+        <div className="nav-enter [--enter-delay:0.25s] self-stretch flex items-center gap-x-3 lg:gap-x-10">
           <div className="self-stretch hidden lg:flex items-center gap-x-14">
             <ul className="flex items-center gap-x-10 font-poppins text-[1rem] tracking-wide text-(--brown)">
               {NAV_LINKS.map(({ label, href }) => (
