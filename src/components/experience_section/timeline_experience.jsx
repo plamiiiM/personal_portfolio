@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import ExperienceCard from "./experience_card_component";
 
-// The page is zoomed to fit the screen (ScaleToFit), which zooms the nav offset and the window height along with it,
+// The page is shrunk to fit the screen (ScaleToFit), which shrinks the nav offset and the window height along with it,
 // so they're divided by var(--zoom) to stay true to the nav and the window
 const NAV_OFFSET = "calc(var(--nav-offset) / var(--zoom, 1))";
 
@@ -24,13 +24,12 @@ const TimelineExperience = () => {
   useEffect(() => {
     const track = trackRef.current;
 
-    // getBoundingClientRect is in screen px, while lengths in here get zoomed, so it's turned back into page px.
+    // getBoundingClientRect is in screen px, while lengths in here get shrunk, so it's turned back into page px.
     // Rounded on screen so the text never sits on a half pixel and blurs
-    const onScroll = () =>
-      track.style.setProperty(
-        "--scrolled",
-        `${Math.round(-track.getBoundingClientRect().top) / (track.currentCSSZoom ?? 1)}px`,
-      );
+    const onScroll = () => {
+      const zoom = parseFloat(getComputedStyle(track).getPropertyValue("--zoom")) || 1;
+      track.style.setProperty("--scrolled", `${Math.round(-track.getBoundingClientRect().top) / zoom}px`);
+    };
 
     // The page gets exactly as much extra height as the entries overflow by, so adding more just makes it hold longer
     // (and if they all fit, it never pins). ResizeObserver also fires once on observe, which does the initial measure
@@ -52,14 +51,16 @@ const TimelineExperience = () => {
   return (
     // Eases --scrolled, so each scroll restarts a glide from wherever the entries are (ease-out, so it never stalls)
     <div ref={trackRef} className="transition-[--scrolled] duration-500 ease-out motion-reduce:transition-none">
-      {/* Sticks just below the nav and slides with it (same timing as the nav's own slide) */}
+      {/* Sticks just below the nav and slides with it (same timing as the nav's own slide).
+          It only holds the entries in a screen-high window where the page is zoomed (ScaleToFit): sticky can't pin
+          inside a transform, and the phone layout just lists them, so everywhere else the window shows every entry */}
       <div
         ref={frameRef}
-        className="sticky max-h-[calc(100svh/var(--zoom,1))] flex flex-col transition-[--nav-offset] duration-300 motion-reduce:transition-none"
+        className="sticky in-data-[scaling=zoom]:max-h-[calc(100svh/var(--zoom))] flex flex-col transition-[--nav-offset] duration-300 motion-reduce:transition-none"
         style={{ top: NAV_OFFSET }}
       >
         {/* The image has ~76px of empty space above the lettering; pull it up so the word sits 24px below the nav */}
-        <img className="w-[20rem] -rotate-40 -mt-13" src="/experience_text.png" alt="Experience" />
+        <img className="w-48 lg:w-[20rem] -rotate-40 -mt-8 lg:-mt-13" src="/experience_text.png" alt="Experience" />
 
         <div
           ref={windowRef}
@@ -68,7 +69,7 @@ const TimelineExperience = () => {
         >
           <div className="absolute left-4.5 top-4 bottom-0 w-1 rounded-full bg-black" />
 
-          <div ref={listRef} className="pl-12 pt-15 pb-20 flex flex-col gap-y-20 translate-y-[calc(-1*var(--travelled))] will-change-transform">
+          <div ref={listRef} className="pl-12 pt-15 pb-12 lg:pb-20 flex flex-col gap-y-12 lg:gap-y-20 translate-y-[calc(-1*var(--travelled))] will-change-transform">
             <ExperienceCard
               year="2026"
               role="ICT & Media Design"

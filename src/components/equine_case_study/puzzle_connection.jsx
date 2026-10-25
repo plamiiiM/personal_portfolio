@@ -1,5 +1,6 @@
 import React from "react";
 import useInView from "../global/use_in_view";
+import FitToWidth from "../global/fit_to_width";
 import { place, rem } from "../global/layout";
 
 // Sparks burst from where the pieces click, cycling through three looks and three start times.
@@ -45,56 +46,59 @@ const HANDS = [
   },
 ];
 
-// Two hands slide in and click their puzzle pieces together once it scrolls into view (see .puzzle-* in index.css)
+// Two hands slide in and click their puzzle pieces together once it scrolls into view (see .puzzle-* in index.css).
+// On phones it's centred and shrunk to the column
 const PuzzleConnection = ({ className = "" }) => {
   const [ref, isInView] = useInView();
 
   return (
-    <div
-      ref={ref}
-      className={`relative ${isInView ? "in-view" : ""} ${className}`}
-      style={{ width: rem(1000), height: rem(505) }}
-    >
-      {HANDS.map(({ src, alt, box, picture, dir }) => (
-        <div
-          key={src}
-          className="puzzle-hand absolute flex items-center justify-center"
-          style={{ ...place(box), "--hand-dir": dir }}
-        >
-          <img
-            src={src}
-            alt={alt}
-            loading="lazy"
-            decoding="async"
-            className="max-w-none flex-none object-contain"
-            style={{ width: rem(picture.w), height: rem(picture.h), rotate: `${picture.rotate}deg` }}
-          />
-        </div>
-      ))}
-
-      {SPARKS.map(({ x0, y0, x1, y1, ...box }, index) => {
-        const { w, h, color } = SPARK_LOOKS[index % 3];
-        return (
+    <FitToWidth className={`max-lg:mx-auto ${className}`}>
+      <div
+        ref={ref}
+        className={`relative ${isInView ? "in-view" : ""}`}
+        style={{ width: rem(1000), height: rem(505) }}
+      >
+        {HANDS.map(({ src, alt, box, picture, dir }) => (
           <div
-            key={index}
-            className="puzzle-spark absolute flex items-center justify-center"
-            style={{ ...place(box), "--x0": x0, "--y0": y0, "--x1": x1, "--y1": y1, "--spark-delay": SPARK_DELAYS[index % 3] }}
-            aria-hidden="true"
+            key={src}
+            className="puzzle-hand absolute flex items-center justify-center"
+            style={{ ...place(box), "--hand-dir": dir }}
           >
-            <div
-              className="flex-none rounded-[2px]"
-              style={{ width: rem(w), height: rem(h), backgroundColor: color, rotate: `${-90 + (index * 180) / 7}deg` }}
+            <img
+              src={src}
+              alt={alt}
+              loading="lazy"
+              decoding="async"
+              className="max-w-none flex-none object-contain"
+              style={{ width: rem(picture.w), height: rem(picture.h), rotate: `${picture.rotate}deg` }}
             />
           </div>
-        );
-      })}
+        ))}
 
-      <div
-        className="puzzle-halo absolute rounded-full border-2 border-[#f75229]"
-        style={place({ x: 464, y: 235, w: 72, h: 72 })}
-        aria-hidden="true"
-      />
-    </div>
+        {SPARKS.map(({ x0, y0, x1, y1, ...box }, index) => {
+          const { w, h, color } = SPARK_LOOKS[index % 3];
+          return (
+            <div
+              key={index}
+              className="puzzle-spark absolute flex items-center justify-center"
+              style={{ ...place(box), "--x0": x0, "--y0": y0, "--x1": x1, "--y1": y1, "--spark-delay": SPARK_DELAYS[index % 3] }}
+              aria-hidden="true"
+            >
+              <div
+                className="flex-none rounded-[2px]"
+                style={{ width: rem(w), height: rem(h), backgroundColor: color, rotate: `${-90 + (index * 180) / 7}deg` }}
+              />
+            </div>
+          );
+        })}
+
+        <div
+          className="puzzle-halo absolute rounded-full border-2 border-[#f75229]"
+          style={place({ x: 464, y: 235, w: 72, h: 72 })}
+          aria-hidden="true"
+        />
+      </div>
+    </FitToWidth>
   );
 };
 

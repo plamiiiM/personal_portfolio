@@ -5,24 +5,24 @@ import MarkedWord from "../global/marked_word_component";
 
 const SelectedWorkSection = () => {
   return (
-    <section className="mb-40">
+    <section className="lg:mb-40">
       <section className="flex flex-row items-center justify-between">
         <img
           id="work"
           src="/selected_work_text.png"
           alt="Selected Work"
-          className="w-[20rem] max-w-md -rotate-40 mt-40 -scroll-mt-16"
+          className="w-40 lg:w-[20rem] max-w-md -rotate-40 mt-10 lg:mt-40 -scroll-mt-8 lg:-scroll-mt-16"
         />
         {/* The drawing's ear ends in a cut edge on the right (94.6% - 97.8% across), at the far right of the page,
             so it's faded out before the cut when there's paper beside it (--side-room from ScaleToFit), not at the edge of the screen */}
         <img
           src="/elephant.png"
           alt="Elephant"
-          className="relative w-[20rem] max-w-md -right-4"
+          className="relative w-36 lg:w-[20rem] max-w-md lg:-right-4"
           style={{ maskImage: "linear-gradient(to right, black calc(99.5% - 19.5% * var(--side-room, 1)), transparent calc(99.5% - 4.5% * var(--side-room, 1)))" }}
         />
       </section>
-      <main className="flex flex-col justify-start items-start gap-y-70 mt-30 mr-28">
+      <main className="flex flex-col justify-start items-start gap-y-20 lg:gap-y-70 mt-12 lg:mt-30 lg:mr-28">
         <CaseStudyDescriptionComponent
           projectCollage="/smartnet_collage_bigger.png"
           titleOfProject="SmartNet App"
@@ -53,7 +53,7 @@ const SelectedWorkSection = () => {
           projectCollage="/equine_integration_collage_3.png"
           titleOfProject="Equine Integration"
           isReversed
-          collageClassName="h-122"
+          collageClassName="lg:w-auto lg:h-122"
           // description="To solve a drop in user engagement, I designed and developed five new data-driven features for the Equine Integration app in 2.5 months. I researched equestrian habits to introduce interactive training summaries, progress comparisons, and rewards that encourage device usage. The final delivery upgraded the user experience seamlessly with fully implemented Flutter code."
           description={
             <>

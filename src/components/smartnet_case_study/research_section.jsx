@@ -2,18 +2,19 @@ import React from "react";
 import Collage from "../case_study/collage";
 import MarkedWord from "../global/marked_word_component";
 import { Paragraph, SectionLabel, SectionTitle, SubsectionTitle } from "../case_study/typography";
+import SideBySide from "../case_study/side_by_side";
 
 const ResearchSection = () => {
   return (
-    <section className="mt-53">
-      <div className="ml-33">
+    <section className="mt-20 lg:mt-53">
+      <div className="lg:ml-33">
         <SectionLabel>Research</SectionLabel>
         <SectionTitle>Football drills and training</SectionTitle>
       </div>
 
-      <div className="mt-16.25 flex items-start justify-between">
+      <SideBySide isPictureFirst className="mt-6 lg:mt-16.25">
         <Collage
-          className="ml-9.5"
+          className="lg:ml-9.5"
           width={898}
           height={600.5}
           items={[
@@ -35,22 +36,22 @@ const ResearchSection = () => {
             },
           ]}
         />
-        <Paragraph className="mr-17.25 mt-31.25 w-125.25">
+        <Paragraph className="lg:mr-17.25 lg:mt-31.25 lg:w-125.25">
           To get familiar with how a training session goes, and more specifically, how a football player improves their
           accuracy during training, I performed research on how these sessions look like through the eyes of both the
           player and coach.
         </Paragraph>
-      </div>
+      </SideBySide>
 
-      <div className="mt-52.5 flex items-start justify-between">
-        <div className="ml-33 mt-32 w-125.25">
+      <SideBySide className="mt-14 lg:mt-52.5">
+        <div className="lg:ml-33 lg:mt-32 lg:w-125.25">
           <SectionTitle>Gameplay</SectionTitle>
           <Paragraph className="mt-3">
             Turned traditional accuracy drills into their gamified version. Introducing different difficulty levels and
             modes into each game, ensured that the players will stay motivated and will go back and play some more.
           </Paragraph>
           <Collage
-            className="ml-17 mt-18.5"
+            className="mt-8 lg:ml-17 lg:mt-18.5"
             width={416.5}
             height={432}
             items={[
@@ -67,7 +68,7 @@ const ResearchSection = () => {
           />
         </div>
         <Collage
-          className="mr-18.5"
+          className="lg:mr-18.5"
           width={722.8}
           height={787.1}
           items={[
@@ -89,10 +90,10 @@ const ResearchSection = () => {
             },
           ]}
         />
-      </div>
+      </SideBySide>
 
-      <div className="mt-55.5 flex items-start justify-between">
-        <div className="ml-33 mt-17.75 w-125.25">
+      <SideBySide className="mt-14 lg:mt-55.5">
+        <div className="lg:ml-33 lg:mt-17.75 lg:w-125.25">
           <SectionTitle>Data Feedback</SectionTitle>
           <Paragraph className="mt-3">
             By researching coach workflows, I <MarkedWord isHighlighted>identified their needs</MarkedWord> and
@@ -102,7 +103,7 @@ const ResearchSection = () => {
           </Paragraph>
         </div>
         <Collage
-          className="mr-48"
+          className="lg:mr-48"
           width={590}
           height={623}
           items={[
@@ -129,11 +130,11 @@ const ResearchSection = () => {
             },
           ]}
         />
-      </div>
+      </SideBySide>
 
-      <div className="mt-16.25 flex items-start justify-between">
+      <SideBySide isPictureFirst className="mt-14 lg:mt-16.25">
         <Collage
-          className="ml-33.25"
+          className="lg:ml-33.25"
           width={724.2}
           height={798.9}
           items={[
@@ -163,20 +164,20 @@ const ResearchSection = () => {
             },
           ]}
         />
-        <div className="mr-32.25 mt-51.25 w-104.5">
+        <div className="lg:mr-32.25 lg:mt-51.25 lg:w-104.5">
           <Paragraph>
             To maintain player motivation and avoid toxic friction within teams, I designed{" "}
             <MarkedWord isHighlighted>role-based dashboards</MarkedWord>.
           </Paragraph>
-          <SubsectionTitle className="mt-12.5">Player UIs</SubsectionTitle>
+          <SubsectionTitle className="mt-8 lg:mt-12.5">Player UIs</SubsectionTitle>
           <Paragraph className="mt-3">
             Personal milestones and skill metrics are focused exclusively for each player
           </Paragraph>
         </div>
-      </div>
+      </SideBySide>
 
-      <div className="mt-34 flex items-start justify-between">
-        <div className="ml-50 mt-56.25 w-104.5">
+      <SideBySide className="mt-14 lg:mt-34">
+        <div className="lg:ml-50 lg:mt-56.25 lg:w-104.5">
           <SubsectionTitle>Coach UIs</SubsectionTitle>
           <Paragraph className="mt-1">
             Able to see side by side player comparative analytics, providing the coaches with the deep insights needed
@@ -184,7 +185,7 @@ const ResearchSection = () => {
           </Paragraph>
         </div>
         <Collage
-          className="mr-11.25"
+          className="lg:mr-11.25"
           width={810}
           height={607}
           items={[
@@ -194,7 +195,7 @@ const ResearchSection = () => {
             },
           ]}
         />
-      </div>
+      </SideBySide>
     </section>
   );
 };

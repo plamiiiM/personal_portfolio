@@ -3,17 +3,18 @@ import Collage from "../case_study/collage";
 import MarkedWord from "../global/marked_word_component";
 import { Paragraph, SectionTitle, SubsectionTitle } from "../case_study/typography";
 import { noteText } from "./sticky_note";
+import SideBySide from "../case_study/side_by_side";
 
 // A thin marker stroke under the lower half of the large statement's lines
 const STATEMENT_HIGHLIGHT = { className: "-left-[0.2em] w-[calc(100%+0.3em)] top-[calc(50%-0.22em)] h-[0.58em]" };
 
 const FeaturesSection = () => {
   return (
-    <section className="mt-70">
-      <div className="flex items-start justify-between">
-        <div className="ml-30.75 mt-3.25">
+    <section className="mt-20 lg:mt-70">
+      <SideBySide>
+        <div className="lg:ml-30.75 lg:mt-3.25">
           <SectionTitle>Rest Days</SectionTitle>
-          <p className="-ml-0.5 mt-15.75 w-192.75 font-[poppins] text-[2.25rem] font-light italic tracking-[0.03em]">
+          <p className="mt-6 lg:-ml-0.5 lg:mt-15.75 lg:w-192.75 font-[poppins] text-[1.5rem] lg:text-[2.25rem] font-light italic tracking-[0.03em]">
             <MarkedWord isHighlighted highlight={STATEMENT_HIGHLIGHT}>
               A horse’s progress depends on rest as
             </MarkedWord>{" "}
@@ -21,12 +22,12 @@ const FeaturesSection = () => {
               much as on training.
             </MarkedWord>
           </p>
-          <p className="-ml-0.5 mt-2.75 w-109 font-[poppins] text-[1.125rem] italic tracking-[0.03em]">
+          <p className="mt-3 lg:-ml-0.5 lg:mt-2.75 lg:w-109 font-[poppins] text-[1rem] lg:text-[1.125rem] italic tracking-[0.03em]">
             The app only showed what the horse did, never what it didn’t do.
           </p>
         </div>
         <Collage
-          className="mr-29"
+          className="lg:mr-29"
           width={359.95}
           height={407.85}
           items={[
@@ -36,12 +37,12 @@ const FeaturesSection = () => {
             },
           ]}
         />
-      </div>
+      </SideBySide>
 
-      <div className="mt-15.25 flex items-start justify-between">
+      <SideBySide isPictureFirst className="mt-14 lg:mt-15.25">
         {/* The sketch sits in a pencil corner that runs off its left and bottom edges */}
         <Collage
-          className="ml-21.25"
+          className="lg:ml-21.25"
           width={701.89}
           height={524.71}
           items={[
@@ -66,7 +67,7 @@ const FeaturesSection = () => {
             },
           ]}
         />
-        <div className="mr-37.75 mt-30.25 flex w-99.25 flex-col gap-y-3">
+        <div className="lg:mr-37.75 lg:mt-30.25 flex lg:w-99.25 flex-col gap-y-3">
           <Paragraph isPretty>
             With several trainers working with the same horse, nobody could see the full picture, so{" "}
             <MarkedWord
@@ -87,12 +88,12 @@ const FeaturesSection = () => {
             the data accurate when the device fails.
           </Paragraph>
         </div>
-      </div>
+      </SideBySide>
 
-      <div className="mt-37 flex items-start justify-between">
-        <div className="ml-31 mt-36.5">
+      <SideBySide className="mt-14 lg:mt-37">
+        <div className="lg:ml-31 lg:mt-36.5">
           <SectionTitle>Achievements</SectionTitle>
-          <Paragraph isPretty className="mt-3.75 w-102.5">
+          <Paragraph isPretty className="mt-3.75 lg:w-102.5">
             I designed a <MarkedWord isHighlighted>goal-based achievements</MarkedWord> feature that rewards riders for
             recording training and improving fitness, with wording and trainings that{" "}
             <MarkedWord isHighlighted>protect the</MarkedWord>{" "}
@@ -100,7 +101,7 @@ const FeaturesSection = () => {
           </Paragraph>
         </div>
         <Collage
-          className="mr-64.25"
+          className="lg:mr-64.25"
           width={401.41}
           height={588.75}
           items={[
@@ -126,11 +127,11 @@ const FeaturesSection = () => {
             },
           ]}
         />
-      </div>
+      </SideBySide>
 
-      <div className="mt-13 flex items-start justify-between">
+      <SideBySide isPictureFirst className="mt-14 lg:mt-13">
         <Collage
-          className="ml-41.25"
+          className="lg:ml-41.25"
           width={514}
           height={517.98}
           items={[
@@ -152,23 +153,23 @@ const FeaturesSection = () => {
             },
           ]}
         />
-        <Paragraph isPretty className="mr-56.75 mt-41 w-111.5">
+        <Paragraph isPretty className="lg:mr-56.75 lg:mt-41 lg:w-111.5">
           A set of exercises based on the horse’s current workload and metrics are introduced. A horse that is
           deconditioned gets light, controlled exercises, such as a short trot at a steady pace, so{" "}
           <MarkedWord isHighlighted>improvement comes through play</MarkedWord> and feeds back into better training.
         </Paragraph>
-      </div>
+      </SideBySide>
 
-      <blockquote className="mx-auto mt-63.25 w-272.75 text-center font-[poppins]">
-        <p className="text-[2rem] font-semibold italic tracking-[0.03em]">
+      <blockquote className="mx-auto mt-20 lg:mt-63.25 lg:w-272.75 text-center font-[poppins]">
+        <p className="text-[1.375rem] lg:text-[2rem] font-semibold italic tracking-[0.03em]">
           “Riders don’t need a reminder to record. They need a reason.”
         </p>
-        <p className="mx-auto mt-0.75 w-180 text-[1.75rem] font-extralight italic tracking-[0.03em]">
+        <p className="mx-auto mt-2 lg:mt-0.75 lg:w-180 text-[1.125rem] lg:text-[1.75rem] font-extralight italic tracking-[0.03em]">
           Achievements make every recording count toward something
         </p>
       </blockquote>
 
-      <div className="ml-33.25 mt-53 w-148.75">
+      <div className="mt-20 lg:ml-33.25 lg:mt-53 lg:w-148.75">
         <SubsectionTitle>Challenges VS Achievements</SubsectionTitle>
         <Paragraph isPretty className="mt-2">
           The word <MarkedWord isHighlighted>“Challenge”</MarkedWord> carries a{" "}
@@ -184,7 +185,7 @@ const FeaturesSection = () => {
           </MarkedWord>{" "}
           that can push riders to overdo it, especially professional riders training for competitions.
         </Paragraph>
-        <Paragraph isPretty className="mt-7.75">
+        <Paragraph isPretty className="mt-5 lg:mt-7.75">
           <MarkedWord isHighlighted>“Achievement”</MarkedWord> frames the goal as{" "}
           <MarkedWord
             isCircled
@@ -201,15 +202,15 @@ const FeaturesSection = () => {
         </Paragraph>
       </div>
 
-      <div className="mt-64.25 flex items-start justify-between">
-        <div className="ml-33.25 mt-37.25">
+      <SideBySide className="mt-20 lg:mt-64.25">
+        <div className="lg:ml-33.25 lg:mt-37.25">
           <SectionTitle>Virtual Pet</SectionTitle>
-          <Paragraph isPretty className="mt-4.25 w-96">
+          <Paragraph isPretty className="mt-4.25 lg:w-96">
             A small, non-interactive avatar whose mood follows the horse’s workload status - that is the Virtual Pet.
           </Paragraph>
         </div>
         <Collage
-          className="mr-57"
+          className="lg:mr-57"
           width={466.95}
           height={502.97}
           items={[
@@ -228,11 +229,11 @@ const FeaturesSection = () => {
             }),
           ]}
         />
-      </div>
+      </SideBySide>
 
-      <div className="mt-0.25 flex items-start justify-between">
+      <SideBySide isPictureFirst className="mt-8 lg:mt-0.25">
         <Collage
-          className="ml-30.75"
+          className="lg:ml-30.75"
           width={545.09}
           height={531.16}
           items={[
@@ -254,13 +255,13 @@ const FeaturesSection = () => {
             },
           ]}
         />
-        <div className="mr-37.75 mt-34.5 w-116.75">
-          <Paragraph isPretty className="ml-0.75 w-116">
+        <div className="lg:mr-37.75 lg:mt-34.5 lg:w-116.75">
+          <Paragraph isPretty className="lg:ml-0.75 lg:w-116">
             It’s part of the gamification plan, but also makes the{" "}
             <MarkedWord isHighlighted>metrics easier to read</MarkedWord> and supports the achievements, since progress
             can show in how the avatar looks.
           </Paragraph>
-          <Paragraph isPretty className="mt-8.5 w-116">
+          <Paragraph isPretty className="mt-5 lg:mt-8.5 lg:w-116">
             This <MarkedWord isHighlighted>cartoon avatar</MarkedWord> gives the horse{" "}
             <MarkedWord
               isCircled
@@ -276,7 +277,7 @@ const FeaturesSection = () => {
             easier to read.
           </Paragraph>
         </div>
-      </div>
+      </SideBySide>
     </section>
   );
 };
