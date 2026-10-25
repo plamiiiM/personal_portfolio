@@ -64,7 +64,8 @@ const FooterSection = () => {
       {/* The picture has a lot of empty paper around the fish, so on phones it's pulled in closer above and below */}
       <img
         className="w-48 -mt-7 -mb-1 lg:my-0 lg:w-auto"
-        src="/fishy_footer.png"
+        src="/fishy_footer.webp"
+        loading="lazy"
         alt={t({ en: "hand-drawn fish with graphite pencils", bg: "ръчно нарисувана риба с графитни моливи" })}
       />
     </footer>

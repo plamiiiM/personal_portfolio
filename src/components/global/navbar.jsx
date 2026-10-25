@@ -206,7 +206,7 @@ const Navbar = () => {
             its link, as a link fading around it would keep it from blending into the paper until it's done */}
         <a href={`${to("/")}#`} aria-label={t({ en: "Home", bg: "Начало" })} className="shrink-0">
           <img
-            src="/icon_portfolio.svg"
+            src="/icon_portfolio.webp"
             alt={t({ en: "Plamena Mincheva logo", bg: "Лого на Пламена Минчева" })}
             className="nav-enter h-12 sm:h-16 w-auto mix-blend-multiply"
           />

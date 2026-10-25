@@ -8,10 +8,13 @@ export const SITE_URL = "https://plamenamincheva.com";
 // English lives at the bare paths, Bulgarian under /bg
 export const BG_PREFIX = "/bg";
 
+// `image` is the picture for link previews, `heroImage` the biggest one at the top of the page, which is preloaded
+// so it starts coming in alongside the code instead of after it has run
 export const PAGES = [
   {
     path: "/",
     image: "/picture_of_me_graphite.png",
+    heroImage: "/picture_of_me_graphite_color.webp",
     title: { en: "Plamena Mincheva - UX/UI Designer", bg: "Пламена Минчева – UX/UI дизайнер" },
     description: {
       en: "Portfolio of Plamena Mincheva, a UX/UI designer and mobile developer studying ICT & Media Design at Fontys UAS. Case studies in user research, gamification and app design.",
@@ -21,6 +24,7 @@ export const PAGES = [
   {
     path: "/smartnet",
     image: "/smartnet_collage_bigger.png",
+    heroImage: "/smartnet_collage_bigger.webp",
     title: { en: "SmartNet - Plamena Mincheva", bg: "SmartNet – Пламена Минчева" },
     description: {
       en: "SmartNet case study: designing the end-to-end user experience of an app that turns football training data into interactive games and player profiles.",
@@ -30,6 +34,7 @@ export const PAGES = [
   {
     path: "/equine-integration",
     image: "/equine_integration_collage.png",
+    heroImage: "/equine/hero_screens_frame.webp",
     title: { en: "Equine Integration - Plamena Mincheva", bg: "Equine Integration – Пламена Минчева" },
     description: {
       en: "Equine Integration case study: redesigning and building a gamified horse training app, from data analysis and interviews to five approved features.",

@@ -44,7 +44,7 @@ function LandingPage() {
             <section className="relative mt-20 lg:mt-80">
               <InView
                 as="img"
-                src="/scribble_graphite_big_color.png"
+                src="/scribble_graphite_big_color.webp"
                 alt={t({ en: "Scribble with graphite pencil", bg: "Драсканица с графитен молив" })}
                 className="fade-in drift [--drift:4rem] hidden lg:block w-[24rem] absolute -right-20 -top-100 mix-blend-multiply opacity-80 rotate-70"
               />

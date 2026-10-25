@@ -3,7 +3,7 @@ import path from "node:path";
 import { PAGES, SITE_URL, pageFor, pathFor, readPath } from "./src/site.js";
 
 // The app picks its page and language in the browser, but search engines and link previews (LinkedIn, Slack, ...)
-// go by the HTML they're sent. So the build writes every page in both languages out as its own HTML file
+// go by the HTML they're sent, and the browser can only start on the page's big picture once it knows about it. So the build writes every page in both languages out as its own HTML file
 // (smartnet.html, bg/smartnet.html, ...; Vercel serves them without the .html, see vercel.json) with its language,
 // title, description and links to its other language already in the <head>, plus the sitemap pointing at all of them
 
@@ -41,6 +41,7 @@ const headFor = (page, language) => {
     `<link rel="canonical" href="${url}" />`,
     ...LANGUAGE_CODES.map((code) => `<link rel="alternate" hreflang="${code}" href="${urlFor(page.path, code)}" />`),
     `<link rel="alternate" hreflang="x-default" href="${urlFor(page.path, "en")}" />`,
+    `<link rel="preload" as="image" href="${page.heroImage}" fetchpriority="high" />`,
     `<meta property="og:type" content="website" />`,
     `<meta property="og:site_name" content="Plamena Mincheva" />`,
     `<meta property="og:locale" content="${OG_LOCALES[language]}" />`,

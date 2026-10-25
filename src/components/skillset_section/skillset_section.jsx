@@ -50,7 +50,7 @@ const SkillsetSection = () => {
   return (
     <section id="skills" className="flex flex-col items-center lg:mr-28">
       <HandLetteredHeading
-        src="/skillset_text.png"
+        src="/skillset_text.webp"
         alt="Skillset"
         bgText="Умения"
         imageClassName="w-25.75 lg:w-42.75"
