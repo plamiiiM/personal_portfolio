@@ -1,5 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import ExperienceCard from "./experience_card_component";
+import useLanguage from "../global/use_language";
+import HandLetteredHeading from "../global/hand_lettered_heading";
 
 // The page is shrunk to fit the screen (ScaleToFit), which shrinks the nav offset and the window height along with it,
 // so they're divided by var(--zoom) to stay true to the nav and the window
@@ -20,6 +22,7 @@ const TimelineExperience = () => {
   const frameRef = useRef(null);
   const windowRef = useRef(null);
   const listRef = useRef(null);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const track = trackRef.current;
@@ -60,7 +63,13 @@ const TimelineExperience = () => {
         style={{ top: NAV_OFFSET }}
       >
         {/* The word sits 24px below the nav */}
-        <img className="w-43.5 lg:w-72.5 -rotate-4 mt-6 mb-11 lg:mb-18" src="/experience_text.png" alt="Experience" />
+        <HandLetteredHeading
+          src="/experience_text.png"
+          alt="Experience"
+          bgText="Опит"
+          imageClassName="w-43.5 lg:w-72.5"
+          className="-rotate-4 mt-6 mb-11 lg:mb-18"
+        />
 
         <div
           ref={windowRef}
@@ -74,19 +83,24 @@ const TimelineExperience = () => {
               year="2026"
               role="ICT & Media Design"
               company="Fontys University of Applied Sciences"
-              date="Sept 2023 - Jan 2027"
-              sentence="Currently obtaining a Bachelor's degree in"
+              date={t({ en: "Sept 2023 - Jan 2027", bg: "септ. 2023 – ян. 2027" })}
+              sentence={t({ en: "Currently obtaining a Bachelor's degree in", bg: "В момента следвам бакалавърска програма по" })}
+              at={t({ en: "at", bg: "във" })}
             />
             <ExperienceCard
-              date="Sept 25- Jan 26"
+              date={t({ en: "Sept 25- Jan 26", bg: "септ. 2025 – ян. 2026" })}
               year="2025"
-              sentence="Completed an internship as a"
-              role="UX/ UI Designer"
+              sentence={t({ en: "Completed an internship as a", bg: "Завърших стаж като" })}
+              role={t({ en: "UX/ UI Designer", bg: "UX/UI дизайнер" })}
+              at={t({ en: "at", bg: "в" })}
               company="Spinnov"
               nameEmployer="Chris Heger"
               positionEmployer="COO"
               imageOfEmployer="/chris_photo.jpeg"
-              recommendation="Plamena did her internship with us (Spinnov) as an UI/UX designer and front-end software developer. She worked very structured and with great discipline, open to feedback, good tempo in her work and not afraid to take on different design challenges. She worked well in our project team and functioned as a full team member despite being an intern."
+              recommendation={t({
+                en: "Plamena did her internship with us (Spinnov) as an UI/UX designer and front-end software developer. She worked very structured and with great discipline, open to feedback, good tempo in her work and not afraid to take on different design challenges. She worked well in our project team and functioned as a full team member despite being an intern.",
+                bg: "Пламена проведе стажа си при нас (Spinnov) като UI/UX дизайнер и front-end разработчик. Работеше много структурирано и с голяма дисциплина, беше отворена към обратна връзка, поддържаше добро темпо и не се страхуваше да поема различни дизайн предизвикателства. Работеше добре в проектния ни екип и беше пълноценен член на екипа, въпреки че беше стажантка.",
+              })}
               showRecommendation={true}
             />
           </div>

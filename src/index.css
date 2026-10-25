@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Zodiak:ital,wght@0,700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Neucha&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
 
 @font-face {
@@ -23,11 +23,21 @@
   --btnStrokeLight: #b1a598;
   --btnTextOnLight: #2c2b28;
   --btnHoveronLight: #b1a598;
+}
 
-  /*TYPOGRAPHY*/
+/*TYPOGRAPHY - used as font-zodiak, font-poppins and font-plamenas*/
+@theme {
   --font-zodiak: "Zodiak", serif;
   --font-poppins: "Poppins", sans-serif;
-  --font-plamenas: "PlamenasHandwriting";
+  /* The handwriting only has Latin letters, so Cyrillic ones are written in Neucha, an upright print hand */
+  --font-plamenas: "PlamenasHandwriting", "Neucha", cursive;
+}
+
+/* Poppins has no Cyrillic letters, so the Bulgarian version is set in Montserrat, a geometric sans close to it.
+   Montserrat's Bulgarian letter forms (д like g, т like m) are swapped for the standard ones, which read easier in a sans */
+:root:lang(bg) {
+  --font-poppins: "Montserrat", sans-serif;
+  font-feature-settings: "locl" 0;
 }
 
 /*SCROLLBAR - native page scrollbar is hidden, FadingLineScrollbar draws its own*/

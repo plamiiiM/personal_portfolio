@@ -1,6 +1,7 @@
 import React from "react";
 import useInView from "../global/use_in_view";
 import { rem } from "../global/layout";
+import useLanguage from "../global/use_language";
 
 // Timings are from the Figma motion, started as the list scrolls into view instead of 1.3s into the page:
 // each question slides in from its side of the page, then the line on the other side draws in.
@@ -8,7 +9,7 @@ import { rem } from "../global/layout";
 const QUESTIONS = [
   {
     number: 1,
-    text: "What can we compare across past activities?",
+    text: { en: "What can we compare across past activities?", bg: "Какво да сравним между тренировките?" },
     marginTop: 114,
     from: -1009,
     delay: 0.2,
@@ -16,7 +17,7 @@ const QUESTIONS = [
   },
   {
     number: 2,
-    text: "Only the last activity, or further back?",
+    text: { en: "Only the last activity, or further back?", bg: "Само последната или и по-старите?" },
     marginTop: 66,
     from: 899,
     delay: 1.7,
@@ -25,7 +26,7 @@ const QUESTIONS = [
   },
   {
     number: 3,
-    text: "How should riders filter?",
+    text: { en: "How should riders filter?", bg: "Как да филтрират ездачите?" },
     marginTop: 60,
     from: -652,
     delay: 3.2,
@@ -33,7 +34,7 @@ const QUESTIONS = [
   },
   {
     number: 4,
-    text: "Where in the app does it belong?",
+    text: { en: "Where in the app does it belong?", bg: "Къде му е мястото в приложението?" },
     marginTop: 85,
     from: 834,
     delay: 4.7,
@@ -51,16 +52,17 @@ const reveal = ({ from = 0, delay, fade, slide }) => ({
 
 const DesignQuestions = () => {
   const [ref, isInView] = useInView();
+  const { t } = useLanguage();
 
   return (
-    <ol ref={ref} className={`mt-2 lg:mt-0 lg:ml-26 lg:mr-31.75 font-[poppins] tracking-[0.03em] ${isInView ? "in-view" : ""}`}>
+    <ol ref={ref} className={`mt-2 lg:mt-0 lg:ml-26 lg:mr-31.75 font-poppins tracking-[0.03em] ${isInView ? "in-view" : ""}`}>
       {QUESTIONS.map(({ number, text, marginTop, from, delay, isRight, line }) => {
         const question = (
           <p className="reveal flex items-center gap-4" style={reveal({ from, delay, fade: 0.2, slide: 0.65 })}>
             <span className={`text-[2rem] lg:text-[3rem] font-extrabold tracking-[0.03em] text-black ${isRight ? "lg:order-last" : ""}`} aria-hidden="true">
               {number}
             </span>
-            <span className="text-[1.25rem] lg:text-[2rem] tracking-[0.03em]">{text}</span>
+            <span className="text-[1.25rem] lg:text-[2rem] tracking-[0.03em]">{t(text)}</span>
           </p>
         );
         const rule = (

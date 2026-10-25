@@ -4,7 +4,7 @@ import React from "react";
 export const noteText = ({ text, fontSize = "1.875rem", ...box }) => ({
   ...box,
   content: (
-    <p className="text-center font-[PlamenasHandwriting] leading-[1.3] tracking-[0.03em]" style={{ fontSize }}>
+    <p className="text-center font-plamenas leading-[1.3] tracking-[0.03em]" style={{ fontSize }}>
       {text}
     </p>
   ),
