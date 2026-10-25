@@ -3,9 +3,11 @@ import SmartnetCaseStudy from './pages/smartnet_case_study'
 import EquineCaseStudy from './pages/equine_case_study'
 import FadingLineScrollbar from './components/global/fading_line_scrollbar'
 import { Analytics } from "@vercel/analytics/react"
+import { readPath } from './site'
 // import './App.css'
 
-// Every page is opened with a full page load, so picking it by path is all the routing the site needs
+// Every page is opened with a full page load, so picking it by path is all the routing the site needs.
+// The path is read without its language (/bg/smartnet is the SmartNet page too)
 const PAGES = {
   "/smartnet": SmartnetCaseStudy,
   "/equine-integration": EquineCaseStudy,
@@ -15,7 +17,7 @@ const PAGES = {
 const IS_COMPUTER = window.matchMedia("(hover: hover) and (pointer: fine)").matches
 
 function App() {
-  const Page = PAGES[window.location.pathname.replace(/\/+$/, "")] ?? LandingPage
+  const Page = PAGES[readPath(window.location.pathname).path] ?? LandingPage
 
   return (
     <>

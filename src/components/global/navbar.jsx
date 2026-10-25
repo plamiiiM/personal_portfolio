@@ -118,7 +118,7 @@ const Navbar = () => {
   const [hidden, setHidden] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const isPhoneLayout = usePhoneLayout();
-  const { t } = useLanguage();
+  const { t, to } = useLanguage();
   const navRef = useRef(null);
   const menuButtonRef = useRef(null);
 
@@ -204,7 +204,7 @@ const Navbar = () => {
             When the section is on the current page, scrollToSection takes over instead.
             The logo and then the links come down into place as the page opens (.nav-enter): the logo itself rather than
             its link, as a link fading around it would keep it from blending into the paper until it's done */}
-        <a href="/#" aria-label={t({ en: "Home", bg: "Начало" })} className="shrink-0">
+        <a href={`${to("/")}#`} aria-label={t({ en: "Home", bg: "Начало" })} className="shrink-0">
           <img
             src="/icon_portfolio.svg"
             alt={t({ en: "Plamena Mincheva logo", bg: "Лого на Пламена Минчева" })}
@@ -219,7 +219,7 @@ const Navbar = () => {
               {NAV_LINKS.map(({ label, href }) => (
                 <li key={href}>
                   <a
-                    href={`/${href}`}
+                    href={`${to("/")}${href}`}
                     onClick={(e) => scrollToSection(e, href)}
                     className={`${PENCIL_UNDERLINE} after:scale-x-0 hover:after:scale-x-100`}
                   >
@@ -278,7 +278,7 @@ const Navbar = () => {
           <ul className="mx-auto max-w-3xl px-5 sm:px-10 pt-4 font-poppins text-[1.75rem] tracking-wide text-(--brown)">
             {NAV_LINKS.map(({ label, href }) => (
               <li key={href}>
-                <a href={`/${href}`} onClick={(e) => goToSection(e, href)} className="block py-5">
+                <a href={`${to("/")}${href}`} onClick={(e) => goToSection(e, href)} className="block py-5">
                   {t(label)}
                 </a>
                 <svg className="block w-full h-1.5 text-(--pencilLine)" viewBox="0 0 1000 6" preserveAspectRatio="none" aria-hidden="true">

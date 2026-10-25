@@ -51,7 +51,7 @@ const SkillsetSection = () => {
     <section id="skills" className="flex flex-col items-center lg:mr-28">
       <HandLetteredHeading
         src="/skillset_text.png"
-        alt="The heading of the section- Skillset"
+        alt="Skillset"
         bgText="Умения"
         imageClassName="w-25.75 lg:w-42.75"
         className="-rotate-4 self-start"

@@ -24,7 +24,6 @@ function LandingPage() {
 
   return (
     <BackgroundTexture>
-      <title>{t({ en: "Plamena Mincheva - UX Designer", bg: "Пламена Минчева – UX дизайнер" })}</title>
       <Navbar />
       <ScaleToFit width={1530}>
         <header

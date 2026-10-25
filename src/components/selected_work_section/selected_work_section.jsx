@@ -7,7 +7,7 @@ import HandLetteredHeading from "../global/hand_lettered_heading";
 import InView from "../global/in_view";
 
 const SelectedWorkSection = () => {
-  const { t } = useLanguage();
+  const { t, to } = useLanguage();
 
   return (
     <section className="lg:mb-40">
@@ -76,7 +76,7 @@ const SelectedWorkSection = () => {
           //   "Journey Mapping",
           //   "User Personas",
           // ]}
-          caseStudyLink="/smartnet"
+          caseStudyLink={to("/smartnet")}
         />
         <CaseStudyDescriptionComponent
           projectCollage="/equine_integration_collage_3.png"
@@ -122,7 +122,7 @@ const SelectedWorkSection = () => {
           //   "Flutter Development",
           //   "Data-Driven Design",
           // ]}
-          caseStudyLink="/equine-integration"
+          caseStudyLink={to("/equine-integration")}
         />
       </main>
     </section>
