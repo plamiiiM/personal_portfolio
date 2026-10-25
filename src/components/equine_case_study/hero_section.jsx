@@ -56,23 +56,18 @@ const HeroSection = () => {
       <SideBySide isCentered className="mt-10 lg:mt-26.5">
         <ProjectDetails className="lg:ml-33" items={details} />
 
-        {/* The screens' soft shadows spread past the collage */}
         <Collage
           className="lg:mr-33.75"
-          width={693.74}
-          height={486.73}
+          width={548.46}
+          height={565.07}
           loading="eager"
           items={[
             {
               src: "/equine/hero_screens.webp",
               alt: t({
-                en: "Equine Integration app icon next to the activities, horses and horse status screens",
-                bg: "Иконата на приложението Equine Integration до екраните с тренировките, конете и състоянието на коня",
+                en: "Equine Integration app icon above three phones showing the horse status and horses screens",
+                bg: "Иконата на приложението Equine Integration над три телефона с екраните за състоянието на коня и конете",
               }),
-              x: 0,
-              y: -59.67,
-              w: 753.51,
-              h: 595.34,
             },
           ]}
         />
