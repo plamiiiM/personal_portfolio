@@ -301,9 +301,7 @@ html {
     .stick,
     .sketch,
     .drawn-highlight,
-    .drawn-highlight-background,
-    .draw-down,
-    .autocomplete-letter
+    .drawn-highlight-background
   ),
 .instant .sketch-after::after,
 .sketch-after.instant::after {
@@ -365,35 +363,26 @@ html {
   );
 }
 
-/* The hypothesis' red pencil line (Hypothesis), drawn in from the top down as one line: a soft-edged mask slides
-   down over all of its curves once they're .in-view */
-@property --drawn-down {
-  syntax: "<percentage>";
-  inherits: false;
-  initial-value: 0%;
-}
-.draw-down {
-  mask-image: linear-gradient(to bottom, #000 calc(var(--drawn-down) - 12%), transparent var(--drawn-down));
-  transition: --drawn-down 2.6s var(--ease-pencil);
-  .in-view &,
-  &.in-view {
-    --drawn-down: 112%;
-  }
+/* A curve of the hypothesis' red pencil line (Hypothesis), drawn along its path by the scroll while --drawn goes from
+   its --from to its --to (a --direction of -1 draws it from its end). The 1.01 keeps the round cap hidden before it
+   starts. It eases after the scroll a little, so a turn of the mouse wheel draws on rather than jumping */
+.drawn-curve {
+  stroke-dasharray: 1 2;
+  stroke-dashoffset: calc(
+    var(--direction) * 1.01 * (1 - clamp(0, (var(--drawn, 0) - var(--from)) / (var(--to) - var(--from)), 1))
+  );
+  transition: stroke-dashoffset 0.3s ease-out;
   @media (prefers-reduced-motion: reduce) {
-    mask-image: none;
+    stroke-dasharray: none;
     transition: none;
   }
 }
 
-/* The part of a hypothesis offered like an autocomplete suggestion (Autocompleted): half there until the quote has
-   come in, then typed over a letter at a time (--letter is which one) */
+/* The part of a hypothesis offered like an autocomplete suggestion (Autocompleted): half there, then typed over a
+   letter at a time by the scroll, first to last, as --filled goes from 0 to 1 (--letter is which one of --letters) */
 .autocomplete-letter {
-  opacity: 0.5;
+  opacity: calc(0.5 + 0.5 * clamp(0, var(--filled, 0) * var(--letters) - var(--letter), 1));
   transition: opacity 0.15s linear;
-  transition-delay: calc(0.7s + var(--letter) * 30ms);
-  .in-view & {
-    opacity: 1;
-  }
   @media (prefers-reduced-motion: reduce) {
     opacity: 1;
     transition: none;

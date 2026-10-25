@@ -40,10 +40,9 @@ const Arrangement = ({ width, height, items, loading, className = "" }) => {
             className={`absolute ${isNote ? "stick" : "soft-in"}`}
             style={{ ...place(bounds), transitionDelay: `${index * STAGGER}ms` }}
           >
-            {parts.map(({ src, alt = "", content, className: itemClassName = "", ...box }, partIndex) => {
+            {parts.map(({ src, still, alt = "", content, className: itemClassName = "", ...box }, partIndex) => {
               const style = place({ ...box, x: box.x - bounds.x, y: box.y - bounds.y });
-
-              return src ? (
+              const image = src && (
                 <img
                   key={partIndex}
                   src={src}
@@ -53,6 +52,15 @@ const Arrangement = ({ width, height, items, loading, className = "" }) => {
                   className={`absolute max-w-none ${itemClassName}`}
                   style={style}
                 />
+              );
+
+              return still ? (
+                <picture key={partIndex}>
+                  <source media="(prefers-reduced-motion: reduce)" srcSet={still} />
+                  {image}
+                </picture>
+              ) : src ? (
+                image
               ) : (
                 <div key={partIndex} className={`absolute ${itemClassName}`} style={style} aria-hidden={!content}>
                   {content}
@@ -68,6 +76,7 @@ const Arrangement = ({ width, height, items, loading, className = "" }) => {
 
 // Overlapping pictures laid out like the Figma design. Each item is a box in Figma px measured from the
 // collage's top-left corner (it can reach outside it) and fills the whole collage when left out.
+// An animated picture can bring a `still` one to show instead with reduced motion.
 // An item without a src is a plain box: give it `content` to write on the collage, or a className for
 // effects like a frosted panel.
 // In the phone layout it's centred in the column and shrinks as a whole when it's wider than the column.

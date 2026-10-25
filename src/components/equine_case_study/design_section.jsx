@@ -104,10 +104,14 @@ const DesignSection = () => {
         />
       </SideBySide>
 
-      <LargeTitle className="mx-auto mt-16 lg:mt-21.25 w-fit max-lg:text-center">
-        {t({ en: "Four questions guided the design", bg: "Четири въпроса насочиха дизайна" })}
-      </LargeTitle>
-      <DesignQuestions />
+      <DesignQuestions
+        className="mt-16 lg:mt-21.25"
+        title={
+          <LargeTitle className="mx-auto w-fit max-lg:text-center">
+            {t({ en: "Four questions guided the design", bg: "Четири въпроса насочиха дизайна" })}
+          </LargeTitle>
+        }
+      />
 
       <PuzzleConnection className="mt-10 lg:ml-52.5" />
 

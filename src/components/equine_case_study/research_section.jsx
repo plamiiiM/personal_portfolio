@@ -158,40 +158,48 @@ const ResearchSection = () => {
           height={319}
           items={[
             {
-              src: "/equine/pet_device_sketch.webp",
+              src: "/equine/pet_device_sketch_animated.webp",
+              still: "/equine/pet_device_sketch.webp",
               alt: t({
-                en: "Sketch of the tracking device with a smiling cartoon horse on its screen",
-                bg: "Скица на проследяващото устройство с усмихнато анимационно конче на екрана",
+                en: "Sketch of the tracking device with a smiling cartoon horse on its screen, little hearts rising beside it",
+                bg: "Скица на проследяващото устройство с усмихнато анимационно конче на екрана и малки сърчица, които се издигат до него",
               }),
             },
           ]}
         />
       </SideBySide>
 
-      <LargeTitle className="mx-auto mt-16 lg:mt-47.5 lg:w-216.25 text-center">
-        {t({ en: "Research points to three drivers of attachment", bg: "Проучванията сочат три двигателя на привързаността" })}
-      </LargeTitle>
-      <AttachmentDrivers className="mt-8 lg:mt-22.25" />
+      <AttachmentDrivers
+        className="mt-16 lg:mt-47.5"
+        title={
+          <LargeTitle className="mx-auto lg:w-216.25 text-center">
+            {t({
+              en: "Research points to three drivers of attachment",
+              bg: "Проучванията сочат три двигателя на привързаността",
+            })}
+          </LargeTitle>
+        }
+      />
 
       {/* Starts under the chalk board, so its first curve rises out of it */}
       <Hypothesis className="mt-16 lg:-mt-12.25">
         {t({
           en: (
             <>
-              “If riders get a readable session summary and a virtual pet that reflects their horse’s condition,{" "}
+              “If riders get a readable session{" "}
               <Autocompleted>
-                they’ll rely less on the chat and build a tracking habit driven by emotional bond, not reminders.
+                summary and a virtual pet that reflects their horse’s condition, they’ll rely less on the chat and build a
+                tracking habit driven by emotional bond, not reminders.
               </Autocompleted>
               ”
             </>
           ),
           bg: (
             <>
-              „Ако ездачите получат ясно обобщение на тренировката и виртуален любимец, който отразява състоянието на
-              коня им,{" "}
+              „Ако ездачите получат ясно{" "}
               <Autocompleted>
-                ще разчитат по-малко на чата и ще изградят навик за проследяване, воден от емоционална връзка, а не от
-                напомняния.
+                обобщение на тренировката и виртуален любимец, който отразява състоянието на коня им, ще разчитат
+                по-малко на чата и ще изградят навик за проследяване, воден от емоционална връзка, а не от напомняния.
               </Autocompleted>
               “
             </>

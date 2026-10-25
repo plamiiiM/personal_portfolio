@@ -72,8 +72,8 @@ const HeroSection = () => {
                   src="/equine/hero_video.mp4"
                   poster="/equine/hero_video_poster.webp"
                   label={t({
-                    en: "Screen recording of the Equine Integration app, going from the horses to a horse's status",
-                    bg: "Запис на екрана на приложението Equine Integration – от конете до състоянието на един кон",
+                    en: "Screen recording of the Equine Integration app, going from the horses to a horse's status, achievements and compared activities",
+                    bg: "Запис на екрана на приложението Equine Integration – от конете до състоянието, постиженията и сравнените активности на един кон",
                   })}
                 />
               ),
