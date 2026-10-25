@@ -40,7 +40,8 @@ const STOPS = [
 // Where the X sits, like the stops' x
 const DESTINATION_X = 224;
 
-const WANDER = 10; // px the trail strays to the side between stops, so it meanders like a path on a map
+const SWAY = 16; // px the trail bends to either side, so it snakes along like a path on a map
+const BEND_EVERY = 110; // px of trail per bend
 const DRAW_LINE = 0.65; // the trail draws itself down to this far down the window
 const GLIDE = 0.3; // s, how quickly the drawn trail catches up with the scroll (it eases out, so it never stalls)
 const MIN_SPEED = 400; // px/s it keeps up at the end of a glide, so the last bit doesn't crawl in
@@ -60,29 +61,44 @@ const measureStops = (map, stops, zoom) => {
   });
 };
 
+// Points every BEND_EVERY px or so on the way from one waypoint to the next, swaying to alternate sides of the
+// straight line between them. The first bend goes to the side further down the map, which is away from the entries:
+// to the left where it heads straight down beside one, and below the line where it crosses over to the next
+const bendsBetween = (from, to) => {
+  const dx = to.x - from.x;
+  const dy = to.y - from.y;
+  const length = Math.hypot(dx, dy);
+  const flip = dx < 0 ? -1 : 1;
+  const side = { x: (-dy / length) * flip, y: (dx / length) * flip };
+  const count = Math.max(1, Math.floor(length / BEND_EVERY));
+  return Array.from({ length: count }, (_, k) => {
+    const along = (k + 1) / (count + 1);
+    const sway = k % 2 ? -SWAY : SWAY;
+    return { x: from.x + dx * along + side.x * sway, y: from.y + dy * along + side.y * sway };
+  });
+};
+
 // In from the top of the map, then through each marker and down beside its entry, and from the foot of one entry
-// over to the next marker. Wherever it would run straight down, it strays to one side on the way
+// over to the next marker, bending along the way
 const waypoints = (positions) => {
   const points = [{ x: positions[0].marker.x, y: 0 }];
-  const goTo = (point, wander) => {
-    const from = points.at(-1);
-    if (Math.abs(point.x - from.x) < WANDER * 4) points.push({ x: from.x + wander, y: (from.y + point.y) / 2 });
-    points.push(point);
-  };
+  const goTo = (point) => points.push(...bendsBetween(points.at(-1), point), point);
   positions.forEach(({ marker, foot }, i) => {
-    goTo(marker, WANDER);
-    if (i < positions.length - 1) goTo(foot, -WANDER);
+    goTo(marker);
+    if (i < positions.length - 1) goTo(foot);
   });
   return points;
 };
 
-// A smooth curve through the waypoints, leaving and reaching each one heading straight down
+// A smooth curve through the waypoints that flows through each one the way it's going (a Catmull-Rom spline),
+// so it never turns a corner
 const curveThrough = (points) =>
   points.reduce((d, b, i) => {
     if (i === 0) return `M ${b.x} ${b.y}`;
     const a = points[i - 1];
-    const bend = (b.y - a.y) / 2;
-    return `${d} C ${a.x} ${a.y + bend} ${b.x} ${b.y - bend} ${b.x} ${b.y}`;
+    const before = points[i - 2] ?? a;
+    const after = points[i + 1] ?? b;
+    return `${d} C ${a.x + (b.x - before.x) / 6} ${a.y + (b.y - before.y) / 6} ${b.x - (after.x - a.x) / 6} ${b.y - (after.y - a.y) / 6} ${b.x} ${b.y}`;
   }, "");
 
 const sampleTrail = (path) => {
@@ -93,7 +109,8 @@ const sampleTrail = (path) => {
   return samples;
 };
 
-// How much of the trail lies above y. It only ever heads down the map, so that's how far along it first passes y
+// How much of the trail lies above y. It heads down the map (its bends barely turn back up),
+// so that's how far along it first passes y
 const lengthAbove = (samples, y) => {
   const after = samples.findIndex((sample) => sample.y > y);
   if (after === -1) return samples.at(-1).length;
