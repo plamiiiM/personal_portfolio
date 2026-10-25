@@ -7,14 +7,14 @@ import HandLetteredHeading from "../global/hand_lettered_heading";
 import InView from "../global/in_view";
 
 const SelectedWorkSection = () => {
-  const { t } = useLanguage();
+  const { t, to } = useLanguage();
 
   return (
     <section className="lg:mb-40">
       <InView as="section" className="flex flex-row items-center justify-between">
         <HandLetteredHeading
           id="work"
-          src="/selected_work_text.png"
+          src="/selected_work_text.webp"
           alt="Selected Work"
           bgText={
             <>
@@ -29,7 +29,8 @@ const SelectedWorkSection = () => {
         {/* The drawing's ear ends in a cut edge on the right (94.6% - 97.8% across), at the far right of the page,
             so it's faded out before the cut when there's paper beside it (--side-room from ScaleToFit), not at the edge of the screen */}
         <img
-          src="/elephant.png"
+          src="/elephant.webp"
+          loading="lazy"
           alt={t({ en: "Elephant", bg: "Слон" })}
           className="relative w-36 lg:w-[20rem] max-w-md lg:-right-4"
           style={{ maskImage: "linear-gradient(to right, black calc(99.5% - 19.5% * var(--side-room, 1)), transparent calc(99.5% - 4.5% * var(--side-room, 1)))" }}
@@ -37,7 +38,7 @@ const SelectedWorkSection = () => {
       </InView>
       <main className="flex flex-col justify-start items-start gap-y-20 lg:gap-y-70 mt-12 lg:mt-30 lg:mr-28">
         <CaseStudyDescriptionComponent
-          projectCollage="/smartnet_collage_bigger.png"
+          projectCollage="/smartnet_collage_bigger.webp"
           titleOfProject="SmartNet App"
           description={t({
             en: (
@@ -76,10 +77,10 @@ const SelectedWorkSection = () => {
           //   "Journey Mapping",
           //   "User Personas",
           // ]}
-          caseStudyLink="/smartnet"
+          caseStudyLink={to("/smartnet")}
         />
         <CaseStudyDescriptionComponent
-          projectCollage="/equine_integration_collage_3.png"
+          projectCollage="/equine_integration_collage_3.webp"
           titleOfProject="Equine Integration"
           isReversed
           collageClassName="lg:w-auto lg:h-122"
@@ -122,7 +123,7 @@ const SelectedWorkSection = () => {
           //   "Flutter Development",
           //   "Data-Driven Design",
           // ]}
-          caseStudyLink="/equine-integration"
+          caseStudyLink={to("/equine-integration")}
         />
       </main>
     </section>

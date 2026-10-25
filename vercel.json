@@ -1,3 +1,8 @@
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/bg/(.*)", "destination": "/bg" },
+    { "source": "/(.*)", "destination": "/" }
+  ]
 }

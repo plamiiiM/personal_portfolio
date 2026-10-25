@@ -29,7 +29,7 @@ const STOPS = [
     date: { en: "Sept 25- Jan 26", bg: "септ. 2025 – ян. 2026" },
     nameEmployer: "Chris Heger",
     positionEmployer: "COO",
-    imageOfEmployer: "/chris_photo.jpeg",
+    imageOfEmployer: "/chris_photo.webp",
     recommendation: {
       en: "Plamena did her internship with us (Spinnov) as an UI/UX designer and front-end software developer. She worked very structured and with great discipline, open to feedback, good tempo in her work and not afraid to take on different design challenges. She worked well in our project team and functioned as a full team member despite being an intern.",
       bg: "Пламена проведе стажа си при нас (Spinnov) като UI/UX дизайнер и front-end разработчик. Работеше много структурирано и с голяма дисциплина, беше отворена към обратна връзка, поддържаше добро темпо и не се страхуваше да поема различни дизайн предизвикателства. Работеше добре в проектния ни екип и беше пълноценен член на екипа, въпреки че беше стажантка.",
@@ -219,7 +219,7 @@ const TimelineExperience = () => {
   return (
     <>
       <HandLetteredHeading
-        src="/experience_text.png"
+        src="/experience_text.webp"
         alt="Experience"
         bgText="Опит"
         imageClassName="w-43.5 lg:w-72.5"

@@ -23,6 +23,7 @@ const CaseStudyDescriptionComponent = ({
       <img
         className={`rise mx-auto w-full max-w-80 lg:mx-0 lg:max-w-none ${collageClassName} object-contain`}
         src={projectCollage ? projectCollage : "/fallback_thumbnail_cases.png"}
+        loading="lazy"
         alt={t({
           en: `Collection of visual assets and wireframes for ${titleOfProject}`,
           bg: `Колекция от визуални материали и скици на екрани за ${titleOfProject}`,

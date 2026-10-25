@@ -47,7 +47,8 @@ const ProfessionTitleName = () => {
           <RisingLine className="delay-500">{t({ en: "Mobile Developer", bg: "Мобилен разработчик" })}</RisingLine>
         </p>
       </div>
-      <p
+      {/* The name is the page's main heading, for search engines and screen readers */}
+      <h1
         className="relative inline text-center lg:text-right w-full font-normal text-xl lg:text-2xl
     after:content-['']
     after:absolute
@@ -67,7 +68,7 @@ const ProfessionTitleName = () => {
     sketch-after sketch-down after:delay-1300"
       >
         <RisingLine className="delay-700">{t({ en: "Plamena Mincheva", bg: "Пламена Минчева" })}</RisingLine>
-      </p>
+      </h1>
     </div>
   );
 };

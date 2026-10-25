@@ -30,6 +30,7 @@ const Layer = ({ layer, as = "p" }) => {
     <img
       src={`/skillset/${layer.src}`}
       alt=""
+      loading="lazy"
       className="absolute max-w-none object-cover"
       style={style}
     />

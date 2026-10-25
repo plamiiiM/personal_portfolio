@@ -8,7 +8,6 @@ import HypothesisSection from "../components/smartnet_case_study/hypothesis_sect
 import DesignSection from "../components/smartnet_case_study/design_section";
 import StatisticsSection from "../components/smartnet_case_study/statistics_section";
 import ScaleToFit from "../components/case_study/scale_to_fit";
-import useLanguage from "../components/global/use_language";
 import usePageEntrance from "../components/global/use_page_entrance";
 import { InViewHold, inViewClassName } from "../components/global/use_in_view";
 
@@ -16,12 +15,10 @@ import { InViewHold, inViewClassName } from "../components/global/use_in_view";
 // Phones get one column instead, with each picture shrunk to fit it.
 // The header plays its entrance as the page opens (usePageEntrance), the rest as it scrolls into view
 function SmartnetCaseStudy() {
-  const { t } = useLanguage();
   const { headerRef, isInView: isHeaderInView, isInstant: isHeaderInstant, isHolding } = usePageEntrance();
 
   return (
     <BackgroundTexture>
-      <title>{t({ en: "SmartNet - Plamena Mincheva", bg: "SmartNet – Пламена Минчева" })}</title>
       <Navbar />
       <ScaleToFit width={1530}>
         <article className="mx-auto max-w-3xl px-5 text-(--textOnLight) lg:max-w-none lg:px-0">

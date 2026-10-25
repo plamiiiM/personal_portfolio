@@ -24,20 +24,21 @@ const PortfolioLabelWithPicture = () => {
       <div className="relative flex items-center select-none top-13 ">
         <div className="absolute inset-0 flex items-center pointer-events-none">
           <img
-            src="/scribble_graphite_small_color.png"
+            src="/scribble_graphite_small_color.webp"
             alt={t({ en: "Graphite scribble", bg: "Графитна драсканица" })}
             className="sketch delay-200 mix-blend-multiply w-[36rem]"
             style={SCRIBBLE_FADE}
           />
         </div>
         <img
-          src="/portfolio_label.png"
+          src="/portfolio_label.webp"
           alt={t({ en: "Portfolio label", bg: "Надпис „Портфолио“" })}
           className="sketch delay-500 relative w-[22rem] h-auto object-contain mix-blend-multiply left-5"
         />
       </div>
       <img
-        src="/picture_of_me_graphite_color.png"
+        src="/picture_of_me_graphite_color.webp"
+        fetchPriority="high"
         alt={t({ en: "Portfolio picture", bg: "Портретна снимка" })}
         className="fade-in w-[42rem] overflow-hidden object-cover opacity-100 mix-blend-multiply"
         style={PHOTO_FADE}

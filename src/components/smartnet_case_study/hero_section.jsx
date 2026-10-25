@@ -58,7 +58,7 @@ const HeroSection = () => {
           loading="eager"
           items={[
             {
-              src: "/smartnet_collage_bigger.png",
+              src: "/smartnet_collage_bigger.webp",
               alt: t({
                 en: "SmartNet app icon and screens next to the SmartNet tracking device",
                 bg: "Иконата и екрани на приложението SmartNet до проследяващото устройство SmartNet",
