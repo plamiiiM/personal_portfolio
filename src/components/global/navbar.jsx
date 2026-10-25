@@ -132,7 +132,7 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Lets pinned content (like the experience section) sit just below the nav while it's showing
+  // Lets pinned content sit just below the nav while it's showing
   useEffect(() => {
     document.documentElement.style.setProperty("--nav-offset", isHidden ? "0px" : `${NAV_HEIGHT}px`);
   }, [isHidden]);
