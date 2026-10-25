@@ -27,12 +27,11 @@ const SelectedWorkSection = () => {
           className="-rotate-4 mt-10 lg:mt-40"
         />
         {/* The drawing's ear ends in a cut edge on the right (94.6% - 97.8% across), at the far right of the page,
-            so it's faded out before the cut when there's paper beside it (--side-room from ScaleToFit), not at the edge of the screen.
-            It comes up on the paper beside the heading and drifts as the page scrolls by */}
+            so it's faded out before the cut when there's paper beside it (--side-room from ScaleToFit), not at the edge of the screen */}
         <img
           src="/elephant.png"
           alt={t({ en: "Elephant", bg: "Слон" })}
-          className="fade-in delay-300 drift [--drift:3rem] relative w-36 lg:w-[20rem] max-w-md lg:-right-4"
+          className="relative w-36 lg:w-[20rem] max-w-md lg:-right-4"
           style={{ maskImage: "linear-gradient(to right, black calc(99.5% - 19.5% * var(--side-room, 1)), transparent calc(99.5% - 4.5% * var(--side-room, 1)))" }}
         />
       </InView>

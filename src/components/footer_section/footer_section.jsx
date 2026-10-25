@@ -61,11 +61,9 @@ const FooterSection = () => {
           </a>
         </div>
       </div>
-      {/* The picture has a lot of empty paper around the fish, so on phones it's pulled in closer above and below.
-          It comes up on the paper once it scrolls into view, like the elephant */}
-      <InView
-        as="img"
-        className="fade-in delay-300 w-48 -mt-7 -mb-1 lg:my-0 lg:w-auto"
+      {/* The picture has a lot of empty paper around the fish, so on phones it's pulled in closer above and below */}
+      <img
+        className="w-48 -mt-7 -mb-1 lg:my-0 lg:w-auto"
         src="/fishy_footer.png"
         alt={t({ en: "hand-drawn fish with graphite pencils", bg: "ръчно нарисувана риба с графитни моливи" })}
       />
