@@ -120,9 +120,12 @@ const lengthAbove = (samples, y) => {
   return a.length + ((y - a.y) / (b.y - a.y)) * (b.length - a.length);
 };
 
-// The reveal each stop's entry and the X's tag and line play once the trail reaches them (data-reached on the stop)
-const ARRIVE = "transition-[opacity,translate] ease-out motion-reduce:transition-none group-data-reached:opacity-100 group-data-reached:translate-y-0";
-const DRAW_STROKE = "[stroke-dasharray:1_2] [stroke-dashoffset:1.01] transition-[stroke-dashoffset] duration-300 ease-out motion-reduce:transition-none group-data-reached:[stroke-dashoffset:0]";
+// The reveal each stop's entry and the X's tag and line play once the trail reaches them (data-reached on the stop),
+// skipped for a stop that was passed without being seen (data-instant)
+const ARRIVE =
+  "transition-[opacity,translate] ease-out motion-reduce:transition-none group-data-instant:transition-none group-data-reached:opacity-100 group-data-reached:translate-y-0";
+const DRAW_STROKE =
+  "[stroke-dasharray:1_2] [stroke-dashoffset:1.01] transition-[stroke-dashoffset] duration-300 ease-out motion-reduce:transition-none group-data-instant:transition-none group-data-reached:[stroke-dashoffset:0]";
 
 // A treasure map of the experience: a pencil trail that draws itself down the page as you scroll, filling in each stop
 // as it reaches it, and ends at an X, where the reader is: the next role, at their company.
@@ -169,8 +172,19 @@ const TimelineExperience = () => {
     };
 
     const onScroll = () => {
-      furthest = Math.max(furthest, (window.innerHeight * DRAW_LINE - map.getBoundingClientRect().top) / zoomOf());
+      const mapTop = map.getBoundingClientRect().top / zoomOf();
+      furthest = Math.max(furthest, window.innerHeight * DRAW_LINE / zoomOf() - mapTop);
       target = isStill ? total() : lengthAbove(samples, furthest);
+      // What's above the top of the window was passed without being seen (the page opened further down, or a jump),
+      // so it's simply there: drawn at once, with its stops filled in without their reveal (data-instant)
+      const passed = Math.min(target, lengthAbove(samples, -mapTop));
+      if (!isStill && drawn < passed) {
+        drawn = passed;
+        stops.forEach((stop, i) => {
+          if (!stop.hasAttribute("data-reached") && drawn >= stopLengths[i] - 1) stop.setAttribute("data-instant", "");
+        });
+        render();
+      }
       if (isStill) {
         drawn = target;
         render();
@@ -236,7 +250,7 @@ const TimelineExperience = () => {
             <li key={entry.year} data-stop className="group relative pl-12 lg:ml-(--x)" style={{ "--x": rem(x) }}>
               {/* A pencil ring on the trail that fills in red once the trail gets there */}
               <span data-marker className="absolute left-0 top-1 size-6 rounded-full border-2 border-(--pencilLine)" aria-hidden="true">
-                <span className="absolute inset-0 rounded-full bg-(--red) scale-0 transition-transform duration-300 ease-out motion-reduce:transition-none group-data-reached:scale-100" />
+                <span className="absolute inset-0 rounded-full bg-(--red) scale-0 transition-transform duration-300 ease-out motion-reduce:transition-none group-data-instant:transition-none group-data-reached:scale-100" />
               </span>
               <div className={`opacity-0 translate-y-3 duration-700 ${ARRIVE}`}>
                 <ExperienceCard
@@ -277,12 +291,12 @@ const TimelineExperience = () => {
                 {t({
                   en: (
                     <>
-                      My next role, at <MarkedWord isHighlighted>your company</MarkedWord>.
+                      The next step: bringing my experience to <MarkedWord isHighlighted>your idea</MarkedWord>.
                     </>
                   ),
                   bg: (
                     <>
-                      Следващата ми роля – във <MarkedWord isHighlighted>вашата компания</MarkedWord>.
+                      Следващата стъпка: да вложа опита си във <MarkedWord isHighlighted>вашата идея</MarkedWord>.
                     </>
                   ),
                 })}

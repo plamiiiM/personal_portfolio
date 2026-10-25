@@ -1,8 +1,17 @@
 import React from "react";
 import useLanguage from "../global/use_language";
 
+// One line of the title, which slides up into view from behind its own lower edge once the header is .in-view.
+// The padding gives the letters room inside the clip without moving anything
+const RisingLine = ({ className = "", children }) => (
+  <span className="block overflow-clip p-[0.2em] -m-[0.2em]">
+    <span className={`rise-line ${className}`}>{children}</span>
+  </span>
+);
+
 // On desktop the name sits well below the roles, with an arrow pointing down from it. On phones everything is
-// centred and closer together, the underline sits right under "Mobile Developer" and there's no arrow
+// centred and closer together, the underline sits right under "Mobile Developer" and there's no arrow.
+// The lines come up one after another, then the underline and the arrow are drawn in under them
 const ProfessionTitleName = () => {
   const { t } = useLanguage();
 
@@ -13,9 +22,11 @@ const ProfessionTitleName = () => {
     >
       <div className="flex flex-col items-center lg:items-stretch gap-3 align-baseline">
         <div className="flex flex-row gap-5 items-end">
-          <p className="inline text-left font-medium ">{t({ en: "UX/UI Designer", bg: "UX/UI дизайнер" })}</p>
+          <p className="inline text-left font-medium ">
+            <RisingLine className="delay-300">{t({ en: "UX/UI Designer", bg: "UX/UI дизайнер" })}</RisingLine>
+          </p>
           <p className="inline font-zodiak text-5xl lg:text-7xl text-(--brown) font-thin">
-            &
+            <RisingLine className="delay-400">&</RisingLine>
           </p>
         </div>
         <p
@@ -30,9 +41,10 @@ const ProfessionTitleName = () => {
                 after:bg-[url('/scribble_underline.png')]
                 after:bg-contain
                 after:bg-no-repeat
-                max-lg:after:bg-center"
+                max-lg:after:bg-center
+                sketch-after after:delay-1000"
         >
-          {t({ en: "Mobile Developer", bg: "Мобилен разработчик" })}
+          <RisingLine className="delay-500">{t({ en: "Mobile Developer", bg: "Мобилен разработчик" })}</RisingLine>
         </p>
       </div>
       <p
@@ -51,9 +63,10 @@ const ProfessionTitleName = () => {
     after:bg-no-repeat
     after:mix-blend-multiply
     after:rotate-20
-    after:origin-left"
+    after:origin-left
+    sketch-after sketch-down after:delay-1300"
       >
-        {t({ en: "Plamena Mincheva", bg: "Пламена Минчева" })}
+        <RisingLine className="delay-700">{t({ en: "Plamena Mincheva", bg: "Пламена Минчева" })}</RisingLine>
       </p>
     </div>
   );

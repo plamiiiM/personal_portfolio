@@ -15,7 +15,7 @@ export function ExperienceCardComponent({
   showRecommendation = false,
 }) {
   return (
-    <div className="flex flex-col font-poppins text-[1rem] leading-8">
+    <div className="flex flex-col font-poppins text-[1rem] lg:text-[1.125rem] leading-8">
       <h3 className="text-[1.25rem] font-semibold mb-3">{year ? `${year}` : "Year"}</h3>
       <p>
         {sentence ? `${sentence}` : "You did..."}{" "}

@@ -201,17 +201,19 @@ const Navbar = () => {
         <Paper />
 
         {/* The links point at the landing page, so they also work from other pages.
-            When the section is on the current page, scrollToSection takes over instead */}
+            When the section is on the current page, scrollToSection takes over instead.
+            The logo and then the links come down into place as the page opens (.nav-enter): the logo itself rather than
+            its link, as a link fading around it would keep it from blending into the paper until it's done */}
         <a href="/#" aria-label={t({ en: "Home", bg: "Начало" })} className="shrink-0">
           <img
             src="/icon_portfolio.svg"
             alt={t({ en: "Plamena Mincheva logo", bg: "Лого на Пламена Минчева" })}
-            className="h-12 sm:h-16 w-auto mix-blend-multiply"
+            className="nav-enter h-12 sm:h-16 w-auto mix-blend-multiply"
           />
         </a>
 
         {/* The language switch stays in the bar in both layouts: after the CV on wider screens, by the menu button on phones */}
-        <div className="self-stretch flex items-center gap-x-3 lg:gap-x-10">
+        <div className="nav-enter [--enter-delay:0.25s] self-stretch flex items-center gap-x-3 lg:gap-x-10">
           <div className="self-stretch hidden lg:flex items-center gap-x-14">
             <ul className="flex items-center gap-x-10 font-poppins text-[1rem] tracking-wide text-(--brown)">
               {NAV_LINKS.map(({ label, href }) => (
