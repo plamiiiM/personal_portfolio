@@ -47,7 +47,7 @@ const OverviewSection = () => {
             {t({
               en: (
                 <>
-                  SmartNet is an <MarkedWord isHighlighted>advanced football training system</MarkedWord> that turns
+                  SmartNet is an <MarkedWord isHighlighted isDrawn>advanced football training system</MarkedWord> that turns
                   every shot into real, measurable data, providing accurate{" "}
                   <MarkedWord isCircled isDrawn circle={SHOT_PLACEMENT_CIRCLE}>
                     shot-placement analytics
@@ -57,7 +57,7 @@ const OverviewSection = () => {
               ),
               bg: (
                 <>
-                  SmartNet е <MarkedWord isHighlighted>модерна система за футболни тренировки</MarkedWord>, която
+                  SmartNet е <MarkedWord isHighlighted isDrawn>модерна система за футболни тренировки</MarkedWord>, която
                   превръща всеки удар в реални, измерими данни. Тя дава точен{" "}
                   <MarkedWord isCircled isDrawn circle={SHOT_PLACEMENT_CIRCLE}>
                     анализ на попаденията
@@ -83,7 +83,7 @@ const OverviewSection = () => {
               en: (
                 <>
                   Bring{" "}
-                  <MarkedWord isHighlighted isThin>
+                  <MarkedWord isHighlighted isDrawn isThin>
                     real pitch drills
                   </MarkedWord>{" "}
                   into the app and make progress worth coming back for. The app had to help players and coaches{" "}
@@ -91,7 +91,7 @@ const OverviewSection = () => {
                     track accuracy
                   </MarkedWord>{" "}
                   and see{" "}
-                  <MarkedWord isHighlighted isThin>
+                  <MarkedWord isHighlighted isDrawn isThin>
                     improvement over time
                   </MarkedWord>
                   , all gathered in one place.
@@ -100,7 +100,7 @@ const OverviewSection = () => {
               bg: (
                 <>
                   Да пренесем{" "}
-                  <MarkedWord isHighlighted isThin>
+                  <MarkedWord isHighlighted isDrawn isThin>
                     реалните упражнения от терена
                   </MarkedWord>{" "}
                   в приложението и да превърнем напредъка в повод за връщане. Приложението трябваше да помага на
@@ -109,7 +109,7 @@ const OverviewSection = () => {
                     следят точността
                   </MarkedWord>{" "}
                   и да виждат{" "}
-                  <MarkedWord isHighlighted isThin>
+                  <MarkedWord isHighlighted isDrawn isThin>
                     подобрението с времето
                   </MarkedWord>{" "}
                   – всичко събрано на едно място.

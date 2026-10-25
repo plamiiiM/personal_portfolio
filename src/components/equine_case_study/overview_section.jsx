@@ -38,17 +38,17 @@ const OverviewSection = () => {
             {t({
               en: (
                 <>
-                  Equine Integration <MarkedWord isHighlighted>helps riders and trainers track</MarkedWord> their
+                  Equine Integration <MarkedWord isHighlighted isDrawn>helps riders and trainers track</MarkedWord> their
                   horse’s training. A wearable belt records each session and the{" "}
-                  <MarkedWord isHighlighted>app brings the data together in one place</MarkedWord>, so riders can follow
+                  <MarkedWord isHighlighted isDrawn>app brings the data together in one place</MarkedWord>, so riders can follow
                   progress and prepare for competition.
                 </>
               ),
               bg: (
                 <>
-                  Equine Integration <MarkedWord isHighlighted>помага на ездачи и треньори да следят</MarkedWord>{" "}
+                  Equine Integration <MarkedWord isHighlighted isDrawn>помага на ездачи и треньори да следят</MarkedWord>{" "}
                   тренировките на коня си. Колан със сензори записва всяка тренировка, а{" "}
-                  <MarkedWord isHighlighted>приложението събира данните на едно място</MarkedWord>, така че ездачите да
+                  <MarkedWord isHighlighted isDrawn>приложението събира данните на едно място</MarkedWord>, така че ездачите да
                   следят напредъка и да се подготвят за състезания.
                 </>
               ),
@@ -65,7 +65,7 @@ const OverviewSection = () => {
               {t({
                 en: (
                   <>
-                    Riders had <MarkedWord isHighlighted>data but no understanding:</MarkedWord> the analytics page was
+                    Riders had <MarkedWord isHighlighted isDrawn>data but no understanding:</MarkedWord> the analytics page was
                     a wall of numbers they{" "}
                     <MarkedWord
                       isCircled
@@ -78,7 +78,7 @@ const OverviewSection = () => {
                       couldn’t interpret.
                     </MarkedWord>{" "}
                     Worse, tracking depended on riders remembering to measure every training, and each{" "}
-                    <MarkedWord isHighlighted>forgotten session</MarkedWord> meant{" "}
+                    <MarkedWord isHighlighted isDrawn>forgotten session</MarkedWord> meant{" "}
                     <MarkedWord
                       isCircled
                       isDrawn
@@ -94,7 +94,7 @@ const OverviewSection = () => {
                 ),
                 bg: (
                   <>
-                    Ездачите имаха <MarkedWord isHighlighted>данни, но не и разбиране:</MarkedWord> страницата с
+                    Ездачите имаха <MarkedWord isHighlighted isDrawn>данни, но не и разбиране:</MarkedWord> страницата с
                     анализите беше стена от числа, които{" "}
                     <MarkedWord
                       isCircled
@@ -107,7 +107,7 @@ const OverviewSection = () => {
                       не можеха да разчетат.
                     </MarkedWord>{" "}
                     Още по-лошо, проследяването зависеше от това ездачите да не забравят да записват всяка тренировка, а
-                    всяка <MarkedWord isHighlighted>пропусната тренировка</MarkedWord> означаваше{" "}
+                    всяка <MarkedWord isHighlighted isDrawn>пропусната тренировка</MarkedWord> означаваше{" "}
                     <MarkedWord
                       isCircled
                       isDrawn
@@ -155,18 +155,18 @@ const OverviewSection = () => {
               en: (
                 <>
                   My challenge as UX/UI designer was to solve both problems at once:{" "}
-                  <MarkedWord isHighlighted>translate raw metrics</MarkedWord>{" "}
-                  <MarkedWord isHighlighted>into insights</MarkedWord> riders could read at a glance, and{" "}
-                  <MarkedWord isHighlighted>build a habit</MarkedWord> around wearing the device, using gamified
+                  <MarkedWord isHighlighted isDrawn>translate raw metrics</MarkedWord>{" "}
+                  <MarkedWord isHighlighted isDrawn>into insights</MarkedWord> riders could read at a glance, and{" "}
+                  <MarkedWord isHighlighted isDrawn>build a habit</MarkedWord> around wearing the device, using gamified
                   features and a refined user flow.
                 </>
               ),
               bg: (
                 <>
                   Моето предизвикателство като UX/UI дизайнер беше да реша двата проблема наведнъж: да{" "}
-                  <MarkedWord isHighlighted>превърна суровите показатели</MarkedWord>{" "}
-                  <MarkedWord isHighlighted>в изводи,</MarkedWord> които ездачите разбират с един поглед, и да{" "}
-                  <MarkedWord isHighlighted>изградя навик</MarkedWord> за носене на устройството чрез функционалности с
+                  <MarkedWord isHighlighted isDrawn>превърна суровите показатели</MarkedWord>{" "}
+                  <MarkedWord isHighlighted isDrawn>в изводи,</MarkedWord> които ездачите разбират с един поглед, и да{" "}
+                  <MarkedWord isHighlighted isDrawn>изградя навик</MarkedWord> за носене на устройството чрез функционалности с
                   елементи на игра и изчистен потребителски поток.
                 </>
               ),
@@ -180,7 +180,7 @@ const OverviewSection = () => {
           </Paragraph>
         </div>
 
-        {/* "How might we" questions on sticky notes, each over its own soft shadow. On phones they go one under another */}
+        {/* "How might we" questions on sticky notes, each over its own soft shadow, stuck on one by one. On phones they go one under another */}
         <Collage
           className="mt-10 lg:ml-22.5 lg:mt-15.75"
           width={1253.75}
@@ -191,9 +191,10 @@ const OverviewSection = () => {
             shifts: [[10, -54], [10, -54], [10, -54], [-435, 144], [-435, 144], [-435, 144], [-864, 821], [-864, 821], [-864, 821]],
           }}
           items={[
-            { src: "/equine/sticky_blue_shadow.webp", x: 0, y: 95.13, w: 344.68, h: 349.92 },
-            { src: "/equine/sticky_blue.webp", x: 5.79, y: 54.01, w: 374.64, h: 386.77 },
+            { note: "blue", src: "/equine/sticky_blue_shadow.webp", x: 0, y: 95.13, w: 344.68, h: 349.92 },
+            { note: "blue", src: "/equine/sticky_blue.webp", x: 5.79, y: 54.01, w: 374.64, h: 386.77 },
             noteText({
+              note: "blue",
               fontSize: noteSize,
               text: t({
                 en: "How might we translate complex horse data into a simple narrative story about today's ride?",
@@ -205,9 +206,10 @@ const OverviewSection = () => {
               h: 251.95,
               rotate: 7.2,
             }),
-            { src: "/equine/sticky_yellow_shadow.webp", x: 443.32, y: 286.71, w: 347.71, h: 369.61 },
-            { src: "/equine/sticky_yellow.webp", x: 466.96, y: 266.9, w: 360.23, h: 375.37 },
+            { note: "yellow", src: "/equine/sticky_yellow_shadow.webp", x: 443.32, y: 286.71, w: 347.71, h: 369.61 },
+            { note: "yellow", src: "/equine/sticky_yellow.webp", x: 466.96, y: 266.9, w: 360.23, h: 375.37 },
             noteText({
+              note: "yellow",
               fontSize: noteSize,
               text: t({
                 en: "How might we design a training history that instantly shows a rider their progress over time at a single glance?",
@@ -219,9 +221,11 @@ const OverviewSection = () => {
               h: 195,
               rotate: -1.62,
             }),
-            { src: "/equine/sticky_pink_shadow.webp", x: 920.54, y: 91.37, w: 243.44, h: 259.77 },
-            { src: "/equine/sticky_pink.webp", x: 873.74, y: 0, w: 380.01, h: 393.01 },
+            // Sized and set off like the blue and yellow notes' shadows, so it shows under the note's lower left edge
+            { note: "pink", src: "/equine/sticky_pink_shadow.webp", x: 867.8, y: 33, w: 350, h: 373.7 },
+            { note: "pink", src: "/equine/sticky_pink.webp", x: 873.74, y: 0, w: 380.01, h: 393.01 },
             noteText({
+              note: "pink",
               fontSize: noteSize,
               text: t({
                 en: "How might we frame tracking as the horse's way of \"speaking\" so riders never want to miss a session?",

@@ -8,11 +8,15 @@ import DesignSection from "../components/equine_case_study/design_section";
 import FeaturesSection from "../components/equine_case_study/features_section";
 import ScaleToFit from "../components/case_study/scale_to_fit";
 import useLanguage from "../components/global/use_language";
+import usePageEntrance from "../components/global/use_page_entrance";
+import { InViewHold, inViewClassName } from "../components/global/use_in_view";
 
 // Laid out on the 1440px wide Figma frame: scaled down to fit narrower screens, centred on wider ones.
-// Phones get one column instead, with each picture shrunk to fit it
+// Phones get one column instead, with each picture shrunk to fit it.
+// The header plays its entrance as the page opens (usePageEntrance), the rest as it scrolls into view
 function EquineCaseStudy() {
   const { t } = useLanguage();
+  const { headerRef, isInView: isHeaderInView, isInstant: isHeaderInstant, isHolding } = usePageEntrance();
 
   return (
     <BackgroundTexture>
@@ -20,14 +24,18 @@ function EquineCaseStudy() {
       <Navbar />
       <ScaleToFit width={1440}>
         <article className="mx-auto max-w-3xl px-5 text-(--textOnLight) lg:max-w-none lg:px-0">
-          <HeroSection />
-          <OverviewSection />
-          <ResearchSection />
-          <DesignSection />
-          <FeaturesSection />
-          <div className="mt-10 lg:ml-33 lg:mt-17.25">
-            <FooterSection />
-          </div>
+          <InViewHold value={isHolding}>
+            <div ref={headerRef} className={inViewClassName(isHeaderInView, isHeaderInstant)}>
+              <HeroSection />
+            </div>
+            <OverviewSection />
+            <ResearchSection />
+            <DesignSection />
+            <FeaturesSection />
+            <div className="mt-10 lg:ml-33 lg:mt-17.25">
+              <FooterSection />
+            </div>
+          </InViewHold>
         </article>
       </ScaleToFit>
     </BackgroundTexture>

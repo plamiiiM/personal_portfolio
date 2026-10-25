@@ -38,7 +38,7 @@ const DesignSection = () => {
               en: (
                 <>
                   This feature started with a single comment. In one of the client interviews, she mentioned in passing
-                  that riders <MarkedWord isHighlighted>could benefit from comparing</MarkedWord> their{" "}
+                  that riders <MarkedWord isHighlighted isDrawn>could benefit from comparing</MarkedWord> their{" "}
                   <MarkedWord
                     isCircled
                     isDrawn
@@ -54,7 +54,7 @@ const DesignSection = () => {
               bg: (
                 <>
                   Тази функционалност започна с един-единствен коментар. В едно от интервютата клиентката спомена между
-                  другото, че за ездачите <MarkedWord isHighlighted>би било полезно да сравняват</MarkedWord>{" "}
+                  другото, че за ездачите <MarkedWord isHighlighted isDrawn>би било полезно да сравняват</MarkedWord>{" "}
                   <MarkedWord
                     isCircled
                     isDrawn
@@ -118,14 +118,14 @@ const DesignSection = () => {
             {t({
               en: (
                 <>
-                  Riders <MarkedWord isHighlighted>choose a date range</MarkedWord> and a{" "}
-                  <MarkedWord isHighlighted>training type,</MarkedWord> and the app lists every activity that matches.
+                  Riders <MarkedWord isHighlighted isDrawn>choose a date range</MarkedWord> and a{" "}
+                  <MarkedWord isHighlighted isDrawn>training type,</MarkedWord> and the app lists every activity that matches.
                 </>
               ),
               bg: (
                 <>
-                  Ездачите <MarkedWord isHighlighted>избират период</MarkedWord> и{" "}
-                  <MarkedWord isHighlighted>вид тренировка,</MarkedWord> а приложението показва всички тренировки, които
+                  Ездачите <MarkedWord isHighlighted isDrawn>избират период</MarkedWord> и{" "}
+                  <MarkedWord isHighlighted isDrawn>вид тренировка,</MarkedWord> а приложението показва всички тренировки, които
                   отговарят на избора.
                 </>
               ),

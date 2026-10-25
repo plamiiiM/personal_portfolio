@@ -1,9 +1,9 @@
 import React from "react";
-import useInView from "../global/use_in_view";
+import useInView, { inViewClassName } from "../global/use_in_view";
 import { rem } from "../global/layout";
 import useLanguage from "../global/use_language";
 
-// Timings are from the Figma motion, started as the list scrolls into view instead of 1.3s into the page:
+// Timings are from the Figma motion, started once all of the list is on the screen instead of 1.3s into the page:
 // each question slides in from its side of the page, then the line on the other side draws in.
 // Phones show the questions one under another, numbers first, without the lines
 const QUESTIONS = [
@@ -51,11 +51,11 @@ const reveal = ({ from = 0, delay, fade, slide }) => ({
 });
 
 const DesignQuestions = () => {
-  const [ref, isInView] = useInView();
+  const [ref, isInView, isInstant] = useInView({ isWhole: true });
   const { t } = useLanguage();
 
   return (
-    <ol ref={ref} className={`mt-2 lg:mt-0 lg:ml-26 lg:mr-31.75 font-poppins tracking-[0.03em] ${isInView ? "in-view" : ""}`}>
+    <ol ref={ref} className={`mt-2 lg:mt-0 lg:ml-26 lg:mr-31.75 font-poppins tracking-[0.03em] ${inViewClassName(isInView, isInstant)}`}>
       {QUESTIONS.map(({ number, text, marginTop, from, delay, isRight, line }) => {
         const question = (
           <p className="reveal flex items-center gap-4" style={reveal({ from, delay, fade: 0.2, slide: 0.65 })}>

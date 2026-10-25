@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Collage from "../case_study/collage";
 import useLanguage from "../global/use_language";
 
@@ -18,10 +18,49 @@ const BG_CHALK = { fontSize: "1.5rem", h: 40 };
 // The smaller chalk board of the last two drivers is centred where the first one sits
 const SMALL_BOARD = { src: "/equine/chalkboard.webp", x: 10.16, y: 7.05, w: 612.07, h: 424.66 };
 
-// The three drivers of attachment: picking one opens its description and shows its drawing on the chalk board
+const DRIVER_COUNT = 3;
+
+// Which driver the scroll has got to. While the list and the board are pinned, how far they've been carried down
+// their room is how far through the drivers the reader is. Where they can't pin (the page shrunk with a transform,
+// see ScaleToFit), the drivers take turns while all of the board is in the window instead: from it having come in
+// at the bottom to it reaching the top
+const driverAt = (room, stage) => {
+  const roomBox = room.getBoundingClientRect();
+  const stageBox = stage.getBoundingClientRect();
+  const pinnedFor = roomBox.height - stageBox.height;
+  const inWindowFor = Math.max(1, window.innerHeight - stageBox.height);
+  const progress =
+    pinnedFor > 1 ? (stageBox.top - roomBox.top) / pinnedFor : (inWindowFor - stageBox.top) / inWindowFor;
+  return Math.min(DRIVER_COUNT - 1, Math.max(0, Math.floor(progress * DRIVER_COUNT)));
+};
+
+// The three drivers of attachment. The list and the chalk board stay pinned in the window for a stretch of scrolling
+// while the drivers open one after another: the open one's description unfolds under it and its drawing fades in on
+// the board. Picking one opens it too, until the scroll moves on to another
 const AttachmentDrivers = ({ className = "" }) => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const roomRef = useRef(null);
+  const stageRef = useRef(null);
   const { t } = useLanguage();
+
+  useEffect(() => {
+    const room = roomRef.current;
+    const stage = stageRef.current;
+    let scrolledTo;
+    const onScroll = () => {
+      const index = driverAt(room, stage);
+      if (index === scrolledTo) return;
+      scrolledTo = index;
+      setActiveIndex(index);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
 
   const drivers = [
     {
@@ -108,32 +147,72 @@ const AttachmentDrivers = ({ className = "" }) => {
     },
   ];
 
+  // The stage is pinned just under the nav, and on wider screens in the middle of the window where there's room.
+  // Lengths in the shrunk page are divided by --zoom to stay true to the screen (see ScaleToFit).
+  // A description opening changes the stage's height, so the browser isn't to keep the page in place around it
+  // (overflow-anchor): it would nudge the scroll, and the nav takes a nudge up for scrolling up and slides in
   return (
-    <div className={`flex flex-col lg:flex-row lg:items-start ${className}`}>
-      <ul className="lg:ml-57.25 lg:mt-15 flex lg:w-85.75 flex-col gap-y-5 lg:gap-y-8.5 font-poppins tracking-[0.03em]">
-        {drivers.map(({ name, description }, index) => {
-          const isActive = index === activeIndex;
-          return (
-            <li key={name} className="relative">
-              {/* Pencil mark beside the open driver */}
-              {isActive && <span className="absolute -left-4 top-1 h-10 lg:-left-6.75 lg:top-2.25 lg:h-14 w-1 bg-black" aria-hidden="true" />}
-              <button
-                type="button"
-                aria-expanded={isActive}
-                onClick={() => setActiveIndex(index)}
-                className={`cursor-pointer text-left text-[1.5rem] lg:text-[2rem] tracking-[0.03em] transition-colors ${
-                  isActive ? "font-bold" : "text-[#686868] hover:text-(--textOnLight)"
-                }`}
-              >
-                {name}
-              </button>
-              {isActive && <p className="lg:w-61.5 text-[1rem] lg:text-[1.125rem] tracking-[0.03em]">{description}</p>}
-            </li>
-          );
-        })}
-      </ul>
+    <div ref={roomRef} className={`[overflow-anchor:none] ${className}`}>
+      <div
+        ref={stageRef}
+        className="sticky top-[calc((var(--nav-offset)+1rem)/var(--zoom))]
+                   lg:top-[max(calc((var(--nav-offset)+1rem)/var(--zoom)),calc(50vh/var(--zoom)-14rem))]
+                   in-data-[scaling=transform]:static flex flex-col lg:flex-row lg:items-start"
+      >
+        <ul className="lg:ml-57.25 lg:mt-15 flex lg:w-85.75 flex-col gap-y-5 lg:gap-y-8.5 font-poppins tracking-[0.03em]">
+          {drivers.map(({ name, description }, index) => {
+            const isActive = index === activeIndex;
+            return (
+              <li key={name} className="relative">
+                {/* Pencil mark beside the open driver */}
+                <span
+                  className={`absolute -left-4 top-1 h-10 lg:-left-6.75 lg:top-2.25 lg:h-14 w-1 bg-black transition-opacity duration-300
+                              motion-reduce:transition-none ${isActive ? "opacity-100" : "opacity-0"}`}
+                  aria-hidden="true"
+                />
+                <button
+                  type="button"
+                  aria-expanded={isActive}
+                  onClick={() => setActiveIndex(index)}
+                  className={`cursor-pointer text-left text-[1.5rem] lg:text-[2rem] tracking-[0.03em] transition-colors ${
+                    isActive ? "font-bold" : "text-[#686868] hover:text-(--textOnLight)"
+                  }`}
+                >
+                  {name}
+                </button>
+                {/* Unfolds under the open driver */}
+                <div
+                  className={`grid transition-[grid-template-rows,opacity] duration-500 ease-out motion-reduce:transition-none ${
+                    isActive ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                  }`}
+                  aria-hidden={!isActive}
+                >
+                  <p className="overflow-hidden lg:w-61.5 text-[1rem] lg:text-[1.125rem] tracking-[0.03em]">{description}</p>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
 
-      <Collage className="mt-8 lg:mt-0 lg:ml-22.5" width={632.38} height={438.75} items={drivers[activeIndex].visual} />
+        {/* Every driver's drawing is on the board, the open one faded in over the others. The one column takes the room
+            it's given rather than the board's full size, so on phones the board shrinks to fit it */}
+        <div className="grid grid-cols-1 mt-8 lg:mt-0 lg:ml-22.5">
+          {drivers.map(({ name, visual }, index) => (
+            <div
+              key={name}
+              className={`col-start-1 row-start-1 transition-opacity duration-500 motion-reduce:transition-none ${
+                index === activeIndex ? "opacity-100" : "opacity-0"
+              }`}
+              aria-hidden={index !== activeIndex}
+            >
+              <Collage width={632.38} height={438.75} items={visual} />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* The scrolling the drivers take turns over while the stage is pinned */}
+      <div className="h-[calc(105vh/var(--zoom))] in-data-[scaling=transform]:hidden" aria-hidden="true" />
     </div>
   );
 };

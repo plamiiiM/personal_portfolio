@@ -63,8 +63,8 @@ html {
   initial-value: 0px;
 }
 
-/* Hand-drawn circles that draw themselves in once they scroll into view (MarkedWord isDrawn):
-   a conic mask sweeps once around from the right, where the pencil stroke starts */
+/* Hand-drawn circles that draw themselves in once they're in view (MarkedWord isDrawn), a beat after the words
+   themselves come in: a conic mask sweeps once around from the right, where the pencil stroke starts */
 @property --draw-sweep {
   syntax: "<angle>";
   inherits: false;
@@ -81,16 +81,16 @@ html {
 .drawn-circle {
   mask-image: conic-gradient(from 90deg, #000 var(--draw-sweep), transparent 0);
   &.in-view {
-    animation: draw-circle 0.9s linear 0.12s both;
+    animation: draw-circle 0.9s linear 0.5s both;
   }
   @media (prefers-reduced-motion: reduce) {
     mask-image: none;
   }
 }
 
-/* Highlights that sweep across their words once they scroll into view (MarkedWord isDrawn), a beat after the words
-   themselves come in. In the phone layout the marker stroke is the words' background instead, so there the background
-   grows across each line (the stroke stretches to the size it's given) */
+/* Highlights that sweep across their words once they're in view (MarkedWord isDrawn, or a marker stroke laid over a
+   block that's .in-view), a beat after the words themselves come in. In the phone layout the marker stroke is the
+   words' background instead, so there the background grows across each line (the stroke stretches to the size it's given) */
 @property --highlight-sweep {
   syntax: "<percentage>";
   inherits: false;
@@ -99,6 +99,7 @@ html {
 .drawn-highlight {
   clip-path: inset(-10% 100% -10% 0);
   transition: clip-path 0.8s var(--ease-pencil) 0.5s;
+  .in-view &,
   &.in-view {
     clip-path: inset(-10% 0);
   }
@@ -119,10 +120,10 @@ html {
   }
 }
 
-/* HOME PAGE MOTION
-   Things come in once they, or the block they're in, are .in-view: InView puts it on as they scroll into view, the
-   landing page on its header once the drawings in it have loaded. They're transitions, so a delay-* utility staggers
-   them (none of these set transition-delay), and they keep out of the way of .drift, an animation */
+/* PAGE MOTION
+   Things come in once they, or the block they're in, are .in-view: InView puts it on as they scroll into view, a page
+   on its header as it opens (usePageEntrance). They're transitions, so a delay-* utility staggers them (none of these
+   set transition-delay), and they keep out of the way of .drift, an animation */
 :root {
   --ease-settle: cubic-bezier(0.22, 1, 0.36, 1); /* quick to start, long and soft to land */
   --ease-pencil: cubic-bezier(0.65, 0, 0.35, 1); /* picks up speed and slows down again, like a hand drawing a line */
@@ -181,6 +182,25 @@ html {
   @media (prefers-reduced-motion: reduce) {
     opacity: revert-layer;
     scale: revert-layer;
+    transition: none;
+  }
+}
+
+/* Eases in where it is with the least of movement, for what's there to be read: the case studies' text and pictures */
+.soft-in {
+  opacity: 0;
+  translate: 0 0.5rem;
+  transition-property: opacity, translate;
+  transition-duration: 0.8s, 1s;
+  transition-timing-function: ease-out, var(--ease-settle);
+  .in-view &,
+  &.in-view {
+    opacity: revert-layer;
+    translate: revert-layer;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    opacity: revert-layer;
+    translate: revert-layer;
     transition: none;
   }
 }
@@ -273,7 +293,18 @@ html {
 
 /* Things only move the first time they're seen on the way down. What comes back into view from above, or had already
    been passed when the page opened further down, is shown as it is: useInView puts .instant beside .in-view */
-:is(.instant, .instant *):is(.rise, .rise-line, .fade-in, .stick, .sketch, .drawn-highlight, .drawn-highlight-background),
+:is(.instant, .instant *):is(
+    .rise,
+    .rise-line,
+    .fade-in,
+    .soft-in,
+    .stick,
+    .sketch,
+    .drawn-highlight,
+    .drawn-highlight-background,
+    .draw-down,
+    .autocomplete-letter
+  ),
 .instant .sketch-after::after,
 .sketch-after.instant::after {
   transition: none;
@@ -334,6 +365,41 @@ html {
   );
 }
 
+/* The hypothesis' red pencil line (Hypothesis), drawn in from the top down as one line: a soft-edged mask slides
+   down over all of its curves once they're .in-view */
+@property --drawn-down {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 0%;
+}
+.draw-down {
+  mask-image: linear-gradient(to bottom, #000 calc(var(--drawn-down) - 12%), transparent var(--drawn-down));
+  transition: --drawn-down 2.6s var(--ease-pencil);
+  .in-view &,
+  &.in-view {
+    --drawn-down: 112%;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    mask-image: none;
+    transition: none;
+  }
+}
+
+/* The part of a hypothesis offered like an autocomplete suggestion (Autocompleted): half there until the quote has
+   come in, then typed over a letter at a time (--letter is which one) */
+.autocomplete-letter {
+  opacity: 0.5;
+  transition: opacity 0.15s linear;
+  transition-delay: calc(0.7s + var(--letter) * 30ms);
+  .in-view & {
+    opacity: 1;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    opacity: 1;
+    transition: none;
+  }
+}
+
 /* Rows that slide in from the side and fade in once their container is .in-view (the Equine "four questions").
    Each row sets --reveal-from-x (where it slides from), --reveal-fade and --reveal-slide (durations) and --reveal-delay */
 @keyframes reveal-fade {
@@ -354,13 +420,17 @@ html {
       reveal-fade var(--reveal-fade) ease-out var(--reveal-delay) both,
       reveal-slide var(--reveal-slide) ease-out var(--reveal-delay) both;
   }
+  .instant & {
+    animation: none;
+  }
   @media (prefers-reduced-motion: reduce) {
     opacity: 1;
     animation: none !important;
   }
 }
 
-/* Equine puzzle: two hands bring the puzzle pieces together, sparks and a halo burst where they click.
+/* Equine puzzle: two hands bring the puzzle pieces together, sparks and a halo burst where they click (or, .instant,
+   the pieces are simply together).
    Values and timings are from the Figma motion; the hands' x and y tracks have their own keyframes, so they
    animate registered numbers (Figma px) that make up the translate. --hand-dir mirrors the right hand */
 @property --hand-x {
@@ -428,6 +498,11 @@ html {
       hand-x 1.68s 0.18s both,
       hand-y 1.86s both;
   }
+  .instant & {
+    --hand-x: 0;
+    --hand-y: 0;
+    animation: none;
+  }
   @media (prefers-reduced-motion: reduce) {
     --hand-x: 0;
     --hand-y: 0;
@@ -481,6 +556,9 @@ html {
       spark-scale 0.52s var(--spark-delay) both,
       spark-fade 0.52s var(--spark-delay) both;
   }
+  .instant & {
+    animation: none;
+  }
   @media (prefers-reduced-motion: reduce) {
     animation: none !important;
   }
@@ -510,6 +588,9 @@ html {
     animation:
       halo-grow 0.42s ease-out 1.5504s both,
       halo-fade 0.42s 1.5504s both;
+  }
+  .instant & {
+    animation: none;
   }
   @media (prefers-reduced-motion: reduce) {
     animation: none !important;

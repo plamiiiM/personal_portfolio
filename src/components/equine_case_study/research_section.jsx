@@ -1,6 +1,7 @@
 import React from "react";
 import Collage from "../case_study/collage";
-import Hypothesis from "../case_study/hypothesis";
+import Hypothesis, { Autocompleted } from "../case_study/hypothesis";
+import InView from "../global/in_view";
 import MarkedWord from "../global/marked_word_component";
 import { LargeTitle, Paragraph, SectionLabel, SectionTitle } from "../case_study/typography";
 import AttachmentDrivers from "./attachment_drivers";
@@ -15,12 +16,17 @@ const ResearchSection = () => {
       <div className="lg:ml-32.75">
         <SectionLabel>{t({ en: "Research", bg: "Проучване" })}</SectionLabel>
         <SectionTitle>{t({ en: "Shedding light on data", bg: "Светлина върху данните" })}</SectionTitle>
-        {/* The marker stroke runs past the sentence on both sides (where it fits on one line) */}
-        <p className="relative mt-4 lg:w-174.5 font-poppins text-[1rem] lg:text-[1.125rem] italic tracking-[0.03em]">
+        {/* The marker stroke runs past the sentence on both sides (where it fits on one line). It eases in like a
+            paragraph, and the stroke sweeps across after it (.drawn-highlight) */}
+        <InView
+          as="p"
+          isWhole
+          className="soft-in relative mt-4 lg:w-174.5 font-poppins text-[1rem] lg:text-[1.125rem] italic tracking-[0.03em]"
+        >
           <img
             src="/highlight.svg"
             alt=""
-            className={`absolute hidden lg:block -left-5 top-0.75 h-6 max-w-none ${t({ en: "w-147", bg: "w-160" })}`}
+            className={`drawn-highlight absolute hidden lg:block -left-5 top-0.75 h-6 max-w-none ${t({ en: "w-147", bg: "w-160" })}`}
           />
           <span className="relative">
             {t({
@@ -56,7 +62,7 @@ const ResearchSection = () => {
               ),
             })}
           </span>
-        </p>
+        </InView>
       </div>
 
       <SideBySide isPictureFirst className="mt-8 lg:mt-24.25">
@@ -84,16 +90,16 @@ const ResearchSection = () => {
           {t({
             en: (
               <>
-                <MarkedWord isHighlighted>Understanding</MarkedWord> the data became the foundation for the whole
-                redesign. Working through the client’s <MarkedWord isHighlighted>raw dataset</MarkedWord> and learning
+                <MarkedWord isHighlighted isDrawn>Understanding</MarkedWord> the data became the foundation for the whole
+                redesign. Working through the client’s <MarkedWord isHighlighted isDrawn>raw dataset</MarkedWord> and learning
                 the equestrian world gave me a clear picture of how the whole app connects. It became the foundation for
                 every design decision.
               </>
             ),
             bg: (
               <>
-                <MarkedWord isHighlighted>Разбирането</MarkedWord> на данните стана основата на целия редизайн. Работата
-                със <MarkedWord isHighlighted>суровите данни</MarkedWord> на клиента и опознаването на конния спорт ми
+                <MarkedWord isHighlighted isDrawn>Разбирането</MarkedWord> на данните стана основата на целия редизайн. Работата
+                със <MarkedWord isHighlighted isDrawn>суровите данни</MarkedWord> на клиента и опознаването на конния спорт ми
                 дадоха ясна представа как се свързва цялото приложение. Това стана основата на всяко дизайн решение.
               </>
             ),
@@ -108,7 +114,7 @@ const ResearchSection = () => {
             {t({
               en: (
                 <>
-                  Reminders are easy to ignore, so I looked into <MarkedWord isHighlighted>gamification</MarkedWord> to
+                  Reminders are easy to ignore, so I looked into <MarkedWord isHighlighted isDrawn>gamification</MarkedWord> to
                   keep riders tracking. That led to the idea of{" "}
                   <MarkedWord
                     isCircled
@@ -120,14 +126,14 @@ const ResearchSection = () => {
                   >
                     a virtual pet,
                   </MarkedWord>{" "}
-                  and the question of whether it could create an <MarkedWord isHighlighted>emotional bond</MarkedWord>{" "}
+                  and the question of whether it could create an <MarkedWord isHighlighted isDrawn>emotional bond</MarkedWord>{" "}
                   strong enough to build a habit.
                 </>
               ),
               bg: (
                 <>
                   Напомнянията лесно се пренебрегват, затова потърсих решение в{" "}
-                  <MarkedWord isHighlighted>геймификацията</MarkedWord>, за да продължат ездачите да записват
+                  <MarkedWord isHighlighted isDrawn>геймификацията</MarkedWord>, за да продължат ездачите да записват
                   тренировките си. Така се роди идеята за{" "}
                   <MarkedWord
                     isCircled
@@ -139,7 +145,7 @@ const ResearchSection = () => {
                   >
                     виртуален любимец
                   </MarkedWord>{" "}
-                  и въпросът дали той може да създаде <MarkedWord isHighlighted>емоционална връзка</MarkedWord>,
+                  и въпросът дали той може да създаде <MarkedWord isHighlighted isDrawn>емоционална връзка</MarkedWord>,
                   достатъчно силна, за да изгради навик.
                 </>
               ),
@@ -173,9 +179,9 @@ const ResearchSection = () => {
           en: (
             <>
               “If riders get a readable session summary and a virtual pet that reflects their horse’s condition,{" "}
-              <span className="opacity-50">
+              <Autocompleted>
                 they’ll rely less on the chat and build a tracking habit driven by emotional bond, not reminders.
-              </span>
+              </Autocompleted>
               ”
             </>
           ),
@@ -183,10 +189,10 @@ const ResearchSection = () => {
             <>
               „Ако ездачите получат ясно обобщение на тренировката и виртуален любимец, който отразява състоянието на
               коня им,{" "}
-              <span className="opacity-50">
+              <Autocompleted>
                 ще разчитат по-малко на чата и ще изградят навик за проследяване, воден от емоционална връзка, а не от
                 напомняния.
-              </span>
+              </Autocompleted>
               “
             </>
           ),

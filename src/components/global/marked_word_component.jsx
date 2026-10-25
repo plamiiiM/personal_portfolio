@@ -1,5 +1,5 @@
-import React from "react";
-import useInView, { inViewClassName } from "./use_in_view";
+import React, { useContext } from "react";
+import useInView, { InViewAround, inViewClassName } from "./use_in_view";
 
 // In the phone layout a highlighted phrase may be wider than the column, so there it can wrap, with the marker stroke
 // drawn as a background on the words that carries on to the next line
@@ -7,17 +7,21 @@ const WRAPPING_HIGHLIGHT = "max-lg:box-decoration-clone max-lg:bg-[url(/highligh
 
 // `isThin` makes the highlight a narrower marker stroke, `highlight` swaps its placement: { className } that sizes it on the words.
 // `circle` swaps the pencil circle for another hand-drawn one: { src, className } where the className sizes it around the word.
-// `isDrawn` makes its marks draw themselves in once they scroll into view: the highlight sweeps across, the circle goes
-// round (see .drawn-highlight and .drawn-circle in index.css).
+// `isDrawn` makes its marks draw themselves in once they're in view: the highlight sweeps across, the circle goes
+// round (see .drawn-highlight and .drawn-circle in index.css). In a block that comes in as a whole (an InView, like a
+// paragraph) they draw as it comes in, so a paragraph's marks go together; elsewhere each one watches for itself.
 // A circled phrase always stays on one line, inside its circle
 const MarkedWord = ({ isHighlighted, isThin, highlight, isCircled, circle, isDrawn, children }) => {
-  const [ref, isInView, isInstant] = useInView({ isEnabled: isDrawn });
+  const around = useContext(InViewAround);
+  const isWatching = isDrawn && !around;
+  const [ref, isOwnInView, isOwnInstant] = useInView({ isEnabled: isWatching });
+  const { isInView, isInstant } = around ?? { isInView: isOwnInView, isInstant: isOwnInstant };
   const canWrap = isHighlighted && !isCircled;
   const drawn = (className) => (isDrawn ? `${className} ${inViewClassName(isInView, isInstant)}` : "");
 
   return (
     <span
-      ref={isDrawn ? ref : undefined}
+      ref={isWatching ? ref : undefined}
       className={`relative inline-block whitespace-nowrap ${canWrap ? "max-lg:inline max-lg:whitespace-normal" : ""}`}
     >
       {isHighlighted && (
