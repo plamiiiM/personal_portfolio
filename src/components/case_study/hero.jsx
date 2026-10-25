@@ -5,12 +5,9 @@ import React from "react";
 // They come in with the header, once the page has put .in-view on it (usePageEntrance): the name tag is stuck on,
 // then the tagline and the details ease in one after another
 
-// Paper name tag, pinned at an angle like the project titles on the landing page
+// Paper name tag pinned at an angle, the same as the project titles in the landing page's selected work
 export const NameTag = ({ children, className = "" }) => (
-  <h1
-    className={`stick w-fit -rotate-7 bg-[#faf8f8] p-[10px] lg:p-[16.87px] font-plamenas text-[2.75rem] lg:text-[5.0625rem]
-                tracking-[0.03em] shadow-[0_1.69px_1.69px_rgba(0,0,0,0.3),0_3.38px_5.06px_rgba(0,0,0,0.15)] ${className}`}
-  >
+  <h1 className={`stick w-fit -rotate-5 bg-white p-3 font-plamenas text-[2.25rem] lg:text-[3rem] leading-8 ${className}`}>
     {children}
   </h1>
 );

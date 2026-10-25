@@ -39,7 +39,7 @@ const HeroSection = () => {
   return (
     <header className="flex flex-col">
       {/* The design's top edge runs under the 96px nav */}
-      <NameTag className="ml-1 mt-8 lg:ml-34.75 lg:mt-9.25">Equine Integration</NameTag>
+      <NameTag className="ml-1 mt-8 lg:ml-33 lg:mt-9.25">Equine Integration</NameTag>
 
       <Tagline
         className="mt-10 lg:ml-33"

@@ -36,7 +36,7 @@ const HeroSection = () => {
 
   return (
     <header className="flex flex-col">
-      <NameTag className="ml-1 mt-8 lg:ml-35 lg:mt-12">SmartNet</NameTag>
+      <NameTag className="ml-1 mt-8 lg:ml-33 lg:mt-12">SmartNet App</NameTag>
 
       <Tagline
         className="mt-10 lg:ml-33 lg:mt-14.5"
