@@ -32,7 +32,7 @@ const SelectedWorkSection = () => {
           src="/elephant.webp"
           loading="lazy"
           alt={t({ en: "Elephant", bg: "Слон" })}
-          className="relative w-36 lg:w-[20rem] max-w-md lg:-right-4"
+          className="relative w-36 lg:w-[20rem] max-w-md max-md:-right-[1.7rem] max-md:[--side-room:0] lg:-right-4"
           style={{ maskImage: "linear-gradient(to right, black calc(99.5% - 19.5% * var(--side-room, 1)), transparent calc(99.5% - 4.5% * var(--side-room, 1)))" }}
         />
       </InView>
