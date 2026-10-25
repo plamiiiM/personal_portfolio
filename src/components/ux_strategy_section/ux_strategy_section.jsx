@@ -9,7 +9,7 @@ const UXStrategySection = () => {
         className="absolute  -top-20 -right-30 place-self-end mr-50 -rotate-26 w-[20rem]"
       />
       {/* Whole section */}
-      <section className="font-[poppins] flex flex-col items-start gap-y-5 w-2xl">
+      <section className="font-poppins flex flex-col items-start gap-y-5 w-2xl">
         <img
           src="/ux_strategy_text.png"
           alt="UX Strategy"

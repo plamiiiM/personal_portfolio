@@ -11,14 +11,15 @@ export function ExperienceCardComponent({
   positionEmployer,
   imageOfEmployer,
   sentence,
+  at = "at",
   showRecommendation = false,
 }) {
   return (
-    <div className="flex flex-col font-[poppins] text-[1rem] leading-8">
+    <div className="flex flex-col font-poppins text-[1rem] leading-8">
       <h3 className="text-[1.25rem] font-semibold mb-3">{year ? `${year}` : "Year"}</h3>
       <p>
         {sentence ? `${sentence}` : "You did..."}{" "}
-        <span className="text-(--red) font-bold">{role || "Role"}</span> at{" "}
+        <span className="text-(--red) font-bold">{role || "Role"}</span> {at}{" "}
         <span className="font-bold">{company ? `${company}` : "Company"}</span>
       </p>
 

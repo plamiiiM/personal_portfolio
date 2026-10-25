@@ -2,31 +2,38 @@ import React, { useEffect, useRef } from "react";
 import ExperienceCard from "./experience_card_component";
 import MarkedWord from "../global/marked_word_component";
 import { rem } from "../global/layout";
+import useLanguage from "../global/use_language";
+import HandLetteredHeading from "../global/hand_lettered_heading";
 
 // Oldest first, so the trail leads from the start of the journey to what comes next.
 // x is where the stop sits across the section on wider screens (px of the 1530px-wide layout), so the trail winds
-// from one to the next. The phone layout lines them all up on the left
+// from one to the next. The phone layout lines them all up on the left.
+// The text is in both languages ({ en, bg }), picked with t() when rendered
 const STOPS = [
   {
     x: 0,
     year: "2023",
-    sentence: "Currently obtaining a Bachelor's degree in",
-    role: "ICT & Media Design",
+    sentence: { en: "Currently obtaining a Bachelor's degree in", bg: "В момента следвам бакалавърска програма по" },
+    role: { en: "ICT & Media Design", bg: "ICT & Media Design" },
+    at: { en: "at", bg: "във" },
     company: "Fontys University of Applied Sciences",
-    date: "Sept 2023 - July 2027",
+    date: { en: "Sept 2023 - July 2027", bg: "септ. 2023 – юли 2027" },
   },
   {
     x: 480,
     year: "2025",
-    sentence: "Completed an internship as a",
-    role: "UX/ UI Designer",
+    sentence: { en: "Completed an internship as a", bg: "Завърших стаж като" },
+    role: { en: "UX/ UI Designer", bg: "UX/UI дизайнер" },
+    at: { en: "at", bg: "в" },
     company: "Spinnov",
-    date: "Sept 25- Jan 26",
+    date: { en: "Sept 25- Jan 26", bg: "септ. 2025 – ян. 2026" },
     nameEmployer: "Chris Heger",
     positionEmployer: "COO",
     imageOfEmployer: "/chris_photo.jpeg",
-    recommendation:
-      "Plamena did her internship with us (Spinnov) as an UI/UX designer and front-end software developer. She worked very structured and with great discipline, open to feedback, good tempo in her work and not afraid to take on different design challenges. She worked well in our project team and functioned as a full team member despite being an intern.",
+    recommendation: {
+      en: "Plamena did her internship with us (Spinnov) as an UI/UX designer and front-end software developer. She worked very structured and with great discipline, open to feedback, good tempo in her work and not afraid to take on different design challenges. She worked well in our project team and functioned as a full team member despite being an intern.",
+      bg: "Пламена проведе стажа си при нас (Spinnov) като UI/UX дизайнер и front-end разработчик. Работеше много структурирано и с голяма дисциплина, беше отворена към обратна връзка, поддържаше добро темпо и не се страхуваше да поема различни дизайн предизвикателства. Работеше добре в проектния ни екип и беше пълноценен член на екипа, въпреки че беше стажантка.",
+    },
     showRecommendation: true,
   },
 ];
@@ -107,6 +114,7 @@ const TimelineExperience = () => {
   const mapRef = useRef(null);
   const trailRef = useRef(null);
   const revealRef = useRef(null);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const map = mapRef.current;
@@ -179,7 +187,13 @@ const TimelineExperience = () => {
 
   return (
     <>
-      <img className="w-48 lg:w-[20rem] -rotate-40 -mt-8 lg:-mt-13" src="/experience_text.png" alt="Experience" />
+      <HandLetteredHeading
+        src="/experience_text.png"
+        alt="Experience"
+        bgText="Опит"
+        imageClassName="w-43.5 lg:w-72.5"
+        className="-rotate-4"
+      />
 
       <div ref={mapRef} className="relative">
         {/* The dashed pencil trail, shown only as far as the solid stroke in its mask has been drawn */}
@@ -201,14 +215,21 @@ const TimelineExperience = () => {
         </svg>
 
         <ol className="flex flex-col gap-y-16 lg:gap-y-36 pt-12 lg:pt-16">
-          {STOPS.map(({ x, ...entry }) => (
+          {STOPS.map(({ x, sentence, role, at, date, recommendation, ...entry }) => (
             <li key={entry.year} data-stop className="group relative pl-12 lg:ml-(--x)" style={{ "--x": rem(x) }}>
               {/* A pencil ring on the trail that fills in red once the trail gets there */}
               <span data-marker className="absolute left-0 top-1 size-6 rounded-full border-2 border-(--pencilLine)" aria-hidden="true">
                 <span className="absolute inset-0 rounded-full bg-(--red) scale-0 transition-transform duration-300 ease-out motion-reduce:transition-none group-data-reached:scale-100" />
               </span>
               <div className={`opacity-0 translate-y-3 duration-700 ${ARRIVE}`}>
-                <ExperienceCard {...entry} />
+                <ExperienceCard
+                  {...entry}
+                  sentence={t(sentence)}
+                  role={t(role)}
+                  at={t(at)}
+                  date={t(date)}
+                  recommendation={recommendation && t(recommendation)}
+                />
               </div>
             </li>
           ))}
@@ -230,13 +251,24 @@ const TimelineExperience = () => {
             </svg>
             <div className="flex flex-col items-start gap-y-5 lg:gap-y-6">
               <p
-                className={`w-fit -rotate-4 bg-[#faf8f8] px-3 py-2 lg:px-4 lg:py-3 font-[PlamenasHandwriting] text-[2rem] lg:text-[2.75rem] leading-none tracking-[0.03em]
+                className={`w-fit -rotate-4 bg-[#faf8f8] px-3 py-2 lg:px-4 lg:py-3 font-plamenas text-[2rem] lg:text-[2.75rem] leading-none tracking-[0.03em]
                             shadow-[0_1.69px_1.69px_rgba(0,0,0,0.3),0_3.38px_5.06px_rgba(0,0,0,0.15)] opacity-0 -translate-y-2 duration-500 delay-500 ${ARRIVE}`}
               >
-                You are here
+                {t({ en: "You are here", bg: "Вие сте тук" })}
               </p>
-              <p className={`font-[poppins] text-[1.125rem] lg:text-[1.375rem] leading-8 lg:leading-10 opacity-0 translate-y-2 duration-500 delay-800 ${ARRIVE}`}>
-                My next role, at <MarkedWord isHighlighted>your company</MarkedWord>.
+              <p className={`font-poppins text-[1.125rem] lg:text-[1.375rem] leading-8 lg:leading-10 opacity-0 translate-y-2 duration-500 delay-800 ${ARRIVE}`}>
+                {t({
+                  en: (
+                    <>
+                      My next role, at <MarkedWord isHighlighted>your company</MarkedWord>.
+                    </>
+                  ),
+                  bg: (
+                    <>
+                      Следващата ми роля – във <MarkedWord isHighlighted>вашата компания</MarkedWord>.
+                    </>
+                  ),
+                })}
               </p>
             </div>
           </li>

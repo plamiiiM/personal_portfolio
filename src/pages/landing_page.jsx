@@ -9,13 +9,17 @@ import FooterSection from "../components/footer_section/footer_section";
 import Navbar from "../components/global/navbar";
 import ScaleToFit from "../components/case_study/scale_to_fit";
 import FitToWidth from "../components/global/fit_to_width";
+import useLanguage from "../components/global/use_language";
 
 // Laid out on the 1530px wide Figma frame (the skillset clusters span all of it):
 // scaled down to fit narrower screens, centred on wider ones, like the case studies.
 // Phones get one column instead, with the photo and title shrunk to fit it
 function LandingPage() {
+  const { t } = useLanguage();
+
   return (
     <BackgroundTexture>
+      <title>{t({ en: "Plamena Mincheva - UX Designer", bg: "Пламена Минчева – UX дизайнер" })}</title>
       <Navbar />
       <ScaleToFit width={1530}>
         <header className="flex flex-col items-center gap-y-8 px-5 lg:flex-row lg:justify-start lg:items-center lg:gap-x-52 lg:px-0">
@@ -30,7 +34,7 @@ function LandingPage() {
           <section className="relative mt-20 lg:mt-80">
             <img
               src="/scribble_graphite_big_color.png"
-              alt="Scribble with graphite pencil"
+              alt={t({ en: "Scribble with graphite pencil", bg: "Драсканица с графитен молив" })}
               className="hidden lg:block w-[24rem] absolute -right-20 -top-100 mix-blend-multiply opacity-80 rotate-70"
             />
 

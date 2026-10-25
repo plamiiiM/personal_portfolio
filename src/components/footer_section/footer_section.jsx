@@ -3,23 +3,32 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
+import useLanguage from "../global/use_language";
 
 // On phones it's a centred sign-off: the whole pencil line shrunk to the column, then the text, the links and the
 // fish one under another
 const FooterSection = () => {
+  const { t } = useLanguage();
+
   return (
     <footer id="contact" className="relative mt-20 pb-10 lg:mt-[10rem] lg:pb-0 flex flex-col items-center gap-y-8 lg:flex-row lg:justify-between">
       <img src="/footer_line.png" alt="" className="w-full lg:absolute lg:top-0 lg:-left-30 lg:w-auto" />
       <div className="flex flex-col items-center text-center gap-y-6 lg:items-stretch lg:text-left">
-        <div className="font-[poppins] text-[1.375rem] lg:text-[1.75rem]">
-          <p className="font-bold">You think I'm a good fit?</p>
+        <div className="font-poppins text-[1.375rem] lg:text-[1.75rem]">
+          <p className="font-bold">{t({ en: "You think I'm a good fit?", bg: "Смятате, че съм подходяща?" })}</p>
           <p className="font-light italic">
-            Say {""}
-            <span className="bg-(--red) text-(--textOnDark) px-1">
-              {" "}
-              Hi :)
-            </span>{" "}
-            {""}and reach out!
+            {t({
+              en: (
+                <>
+                  Say <span className="bg-(--red) text-(--textOnDark) px-1">Hi :)</span> and reach out!
+                </>
+              ),
+              bg: (
+                <>
+                  Кажете <span className="bg-(--red) text-(--textOnDark) px-1">здрасти :)</span> и ми пишете!
+                </>
+              ),
+            })}
           </p>
         </div>
         <div className="flex flex-row gap-6 text-5xl">
@@ -44,7 +53,7 @@ const FooterSection = () => {
       <img
         className="w-48 -mt-7 -mb-1 lg:my-0 lg:w-auto"
         src="/fishy_footer.png"
-        alt="hand-drawn fish with graphite pencils"
+        alt={t({ en: "hand-drawn fish with graphite pencils", bg: "ръчно нарисувана риба с графитни моливи" })}
       />
     </footer>
   );

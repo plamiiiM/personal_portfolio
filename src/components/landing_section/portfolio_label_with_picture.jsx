@@ -1,4 +1,5 @@
 import React from "react";
+import useLanguage from "../global/use_language";
 
 // Softens just the outer rim of the photo's paper so it blends into the background.
 // The paper starts 3.3% in from each side of the image. The left side is the far left of the page,
@@ -14,26 +15,28 @@ const PHOTO_FADE = {
 const SCRIBBLE_FADE = { maskImage: "linear-gradient(to right, transparent, black calc(9% * var(--side-room, 1)))" };
 
 const PortfolioLabelWithPicture = () => {
+  const { t } = useLanguage();
+
   return (
     <div className="flex flex-col justify-center ">
       <div className="relative flex items-center select-none top-13 ">
         <div className="absolute inset-0 flex items-center pointer-events-none">
           <img
             src="/scribble_graphite_small_color.png"
-            alt="Graphite scribble"
+            alt={t({ en: "Graphite scribble", bg: "Графитна драсканица" })}
             className=" mix-blend-multiply w-[36rem]"
             style={SCRIBBLE_FADE}
           />
         </div>
         <img
           src="/portfolio_label.png"
-          alt="Portfolio label"
+          alt={t({ en: "Portfolio label", bg: "Надпис „Портфолио“" })}
           className="relative w-[22rem] h-auto object-contain mix-blend-multiply left-5"
         />
       </div>
       <img
         src="/picture_of_me_graphite_color.png"
-        alt="Portfolio picture"
+        alt={t({ en: "Portfolio picture", bg: "Портретна снимка" })}
         className="w-[42rem] overflow-hidden object-cover opacity-100 mix-blend-multiply"
         style={PHOTO_FADE}
       />

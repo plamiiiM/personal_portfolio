@@ -1,14 +1,19 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { flushSync } from "react-dom";
 import Button from "./buttons";
 import usePhoneLayout from "./use_phone_layout";
+import useLanguage, { LANGUAGES, setLanguage } from "./use_language";
 
 const NAV_LINKS = [
-  { label: "Work", href: "#work" },
-  { label: "Experience", href: "#experience" },
-  { label: "Skills", href: "#skills" },
-  { label: "Contact", href: "#contact" },
+  { label: { en: "Work", bg: "Проекти" }, href: "#work" },
+  { label: { en: "Experience", bg: "Опит" }, href: "#experience" },
+  { label: { en: "Skills", bg: "Умения" }, href: "#skills" },
+  { label: { en: "Contact", bg: "Контакти" }, href: "#contact" },
 ];
+
+// Pencil line that draws in under a link; add after:scale-x-100 to show it
+const PENCIL_UNDERLINE =
+  "relative py-1 after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-full after:h-px after:bg-(--pencilLine) after:origin-left after:transition-transform after:duration-300";
 
 const NAV_HEIGHT = 96; // h-24
 const LANDING_GAP = 24; // space left above a section after jumping to it
@@ -74,12 +79,47 @@ const Paper = ({ top = "top-0" }) => (
 
 const openCv = () => window.open("/Plamena Mincheva- UI-UX designer and developer.pdf");
 
+// EN / BG, with the links' pencil underline under the language that's showing
+const LanguageSwitch = () => {
+  const { language, t } = useLanguage();
+
+  return (
+    <div
+      role="group"
+      aria-label={t({ en: "Language", bg: "Език" })}
+      className="flex items-center gap-x-2 font-poppins text-[1rem] tracking-wide text-(--brown)"
+    >
+      {LANGUAGES.map(({ code, name }, index) => {
+        const isShowing = code === language;
+        return (
+          <Fragment key={code}>
+            {index > 0 && <span aria-hidden="true">/</span>}
+            <button
+              type="button"
+              lang={code}
+              title={name}
+              aria-pressed={isShowing}
+              onClick={() => setLanguage(code)}
+              className={`${PENCIL_UNDERLINE} uppercase cursor-pointer ${
+                isShowing ? "font-semibold after:scale-x-100" : "opacity-70 hover:opacity-100 after:scale-x-0 hover:after:scale-x-100"
+              }`}
+            >
+              {code}
+            </button>
+          </Fragment>
+        );
+      })}
+    </div>
+  );
+};
+
 // In the phone layout the links don't fit beside the logo, so they move into a menu behind a button
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(() => window.scrollY > 10);
   const [hidden, setHidden] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const isPhoneLayout = usePhoneLayout();
+  const { t } = useLanguage();
   const navRef = useRef(null);
   const menuButtonRef = useRef(null);
 
@@ -161,59 +201,67 @@ const Navbar = () => {
 
         {/* The links point at the landing page, so they also work from other pages.
             When the section is on the current page, scrollToSection takes over instead */}
-        <a href="/#" aria-label="Home" className="shrink-0">
-          <img src="/icon_portfolio.svg" alt="Plamena Mincheva logo" className="h-12 sm:h-16 w-auto mix-blend-multiply" />
+        <a href="/#" aria-label={t({ en: "Home", bg: "Начало" })} className="shrink-0">
+          <img
+            src="/icon_portfolio.svg"
+            alt={t({ en: "Plamena Mincheva logo", bg: "Лого на Пламена Минчева" })}
+            className="h-12 sm:h-16 w-auto mix-blend-multiply"
+          />
         </a>
 
-        <div className="self-stretch hidden lg:flex items-center gap-x-14">
-          <ul className="flex items-center gap-x-10 font-[poppins] text-[1rem] tracking-wide text-(--brown)">
-            {NAV_LINKS.map(({ label, href }) => (
-              <li key={href}>
-                <a
-                  href={`/${href}`}
-                  onClick={(e) => scrollToSection(e, href)}
-                  className="relative py-1 after:content-[''] after:absolute after:left-0 after:bottom-0
-                             after:w-full after:h-px after:bg-(--pencilLine)
-                             after:origin-left after:scale-x-0 after:transition-transform after:duration-300
-                             hover:after:scale-x-100"
-                >
-                  {label}
-                </a>
-              </li>
-            ))}
-          </ul>
+        {/* The language switch stays in the bar in both layouts: after the CV on wider screens, by the menu button on phones */}
+        <div className="self-stretch flex items-center gap-x-3 lg:gap-x-10">
+          <div className="self-stretch hidden lg:flex items-center gap-x-14">
+            <ul className="flex items-center gap-x-10 font-poppins text-[1rem] tracking-wide text-(--brown)">
+              {NAV_LINKS.map(({ label, href }) => (
+                <li key={href}>
+                  <a
+                    href={`/${href}`}
+                    onClick={(e) => scrollToSection(e, href)}
+                    className={`${PENCIL_UNDERLINE} after:scale-x-0 hover:after:scale-x-100`}
+                  >
+                    {t(label)}
+                  </a>
+                </li>
+              ))}
+            </ul>
 
-          <Button.Secondary
-            onClick={openCv}
+            <Button.Secondary
+              onClick={openCv}
+            >
+              CV
+            </Button.Secondary>
+
+            {/* Hangs from the top edge like a bookmark ribbon */}
+            {/* <img src="/nav_bookmark.png" alt="" aria-hidden="true" className="self-start w-9 h-22.5" /> */}
+          </div>
+
+          <LanguageSwitch />
+
+          <button
+            ref={menuButtonRef}
+            type="button"
+            onClick={() => setIsMenuOpen(!isMenuShowing)}
+            aria-expanded={isMenuShowing}
+            aria-controls="nav-menu"
+            aria-label={
+              isMenuShowing ? t({ en: "Close menu", bg: "Затвори менюто" }) : t({ en: "Open menu", bg: "Отвори менюто" })
+            }
+            className="lg:hidden -mr-2.5 p-2.5 cursor-pointer text-(--pencilLine)"
           >
-            CV
-          </Button.Secondary>
-
-          {/* Hangs from the top edge like a bookmark ribbon */}
-          {/* <img src="/nav_bookmark.png" alt="" aria-hidden="true" className="self-start w-9 h-22.5" /> */}
+            <svg width="28" height="20" viewBox="0 0 28 20" fill="none" stroke="currentColor" strokeLinecap="round" aria-hidden="true">
+              {BURGER_STROKES.map(({ d, open }) => (
+                <path
+                  key={d}
+                  d={d}
+                  strokeWidth="2"
+                  className={`origin-center [transform-box:fill-box] transition-[translate,rotate,scale,opacity] duration-300
+                              motion-reduce:transition-none ${isMenuShowing ? open : ""}`}
+                />
+              ))}
+            </svg>
+          </button>
         </div>
-
-        <button
-          ref={menuButtonRef}
-          type="button"
-          onClick={() => setIsMenuOpen(!isMenuShowing)}
-          aria-expanded={isMenuShowing}
-          aria-controls="nav-menu"
-          aria-label={isMenuShowing ? "Close menu" : "Open menu"}
-          className="lg:hidden -mr-2.5 p-2.5 cursor-pointer text-(--pencilLine)"
-        >
-          <svg width="28" height="20" viewBox="0 0 28 20" fill="none" stroke="currentColor" strokeLinecap="round" aria-hidden="true">
-            {BURGER_STROKES.map(({ d, open }) => (
-              <path
-                key={d}
-                d={d}
-                strokeWidth="2"
-                className={`origin-center [transform-box:fill-box] transition-[translate,rotate,scale,opacity] duration-300
-                            motion-reduce:transition-none ${isMenuShowing ? open : ""}`}
-              />
-            ))}
-          </svg>
-        </button>
 
         {/* The menu: a sheet of the same paper under the nav, with the links one under another */}
         <div
@@ -224,11 +272,11 @@ const Navbar = () => {
                       }`}
         >
           <Paper top="-top-24" />
-          <ul className="mx-auto max-w-3xl px-5 sm:px-10 pt-4 font-[poppins] text-[1.75rem] tracking-wide text-(--brown)">
+          <ul className="mx-auto max-w-3xl px-5 sm:px-10 pt-4 font-poppins text-[1.75rem] tracking-wide text-(--brown)">
             {NAV_LINKS.map(({ label, href }) => (
               <li key={href}>
                 <a href={`/${href}`} onClick={(e) => goToSection(e, href)} className="block py-5">
-                  {label}
+                  {t(label)}
                 </a>
                 <svg className="block w-full h-1.5 text-(--pencilLine)" viewBox="0 0 1000 6" preserveAspectRatio="none" aria-hidden="true">
                   <path

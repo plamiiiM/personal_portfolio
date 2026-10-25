@@ -8,13 +8,16 @@ import HypothesisSection from "../components/smartnet_case_study/hypothesis_sect
 import DesignSection from "../components/smartnet_case_study/design_section";
 import StatisticsSection from "../components/smartnet_case_study/statistics_section";
 import ScaleToFit from "../components/case_study/scale_to_fit";
+import useLanguage from "../components/global/use_language";
 
 // Laid out on the 1530px wide Figma frame: scaled down to fit narrower screens, centred on wider ones.
 // Phones get one column instead, with each picture shrunk to fit it
 function SmartnetCaseStudy() {
+  const { t } = useLanguage();
+
   return (
     <BackgroundTexture>
-      <title>SmartNet - Plamena Mincheva</title>
+      <title>{t({ en: "SmartNet - Plamena Mincheva", bg: "SmartNet – Пламена Минчева" })}</title>
       <Navbar />
       <ScaleToFit width={1530}>
         <article className="mx-auto max-w-3xl px-5 text-(--textOnLight) lg:max-w-none lg:px-0">

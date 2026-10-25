@@ -7,13 +7,16 @@ import ResearchSection from "../components/equine_case_study/research_section";
 import DesignSection from "../components/equine_case_study/design_section";
 import FeaturesSection from "../components/equine_case_study/features_section";
 import ScaleToFit from "../components/case_study/scale_to_fit";
+import useLanguage from "../components/global/use_language";
 
 // Laid out on the 1440px wide Figma frame: scaled down to fit narrower screens, centred on wider ones.
 // Phones get one column instead, with each picture shrunk to fit it
 function EquineCaseStudy() {
+  const { t } = useLanguage();
+
   return (
     <BackgroundTexture>
-      <title>Equine Integration - Plamena Mincheva</title>
+      <title>{t({ en: "Equine Integration - Plamena Mincheva", bg: "Equine Integration – Пламена Минчева" })}</title>
       <Navbar />
       <ScaleToFit width={1440}>
         <article className="mx-auto max-w-3xl px-5 text-(--textOnLight) lg:max-w-none lg:px-0">

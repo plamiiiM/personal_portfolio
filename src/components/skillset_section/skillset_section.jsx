@@ -3,6 +3,8 @@ import Layer from "./layer";
 import FitToWidth from "../global/fit_to_width";
 import { rem } from "../global/layout";
 import { SKILL_CLUSTERS } from "./skills_data";
+import HandLetteredHeading from "../global/hand_lettered_heading";
+import useLanguage from "../global/use_language";
 
 // The box around a group of layers (before their rotation), so the group can be shown on its own
 const boundsOf = (layers) => {
@@ -28,15 +30,17 @@ const LayerGroup = ({ layers, as }) => {
 };
 
 const SkillsetSection = () => {
+  const { t } = useLanguage();
+
   return (
     <section id="skills" className="flex flex-col items-center lg:mr-28">
-      <div className="relative w-64 h-30 lg:w-85 lg:h-40 overflow-hidden">
-        <img
-          src="/skillset_text.png"
-          alt="The heading of the section- Skillset"
-          className="absolute left-0 top-[-26.3%] w-[113.5%] max-w-none"
-        />
-      </div>
+      <HandLetteredHeading
+        src="/skillset_text.png"
+        alt="The heading of the section- Skillset"
+        bgText="Умения"
+        imageClassName="w-25.75 lg:w-42.75"
+        className="-rotate-4 self-start"
+      />
 
       {/* Each cluster is laid out on the 1530px-wide Figma frame, centred on the section. */}
       <div className="hidden lg:flex flex-col items-center gap-y-60 mt-24">
@@ -46,7 +50,7 @@ const SkillsetSection = () => {
             className="relative w-[95.625rem] shrink-0"
             style={{ height: rem(cluster.height) }}
           >
-            {cluster.title.map((layer, index) => (
+            {t(cluster.title).map((layer, index) => (
               <Layer key={index} layer={layer} as="h3" />
             ))}
             <ul>
@@ -70,7 +74,7 @@ const SkillsetSection = () => {
       <div className="lg:hidden flex w-full flex-col gap-y-16 mt-8">
         {SKILL_CLUSTERS.map((cluster) => (
           <div key={cluster.id}>
-            <LayerGroup layers={cluster.title} as="h3" />
+            <LayerGroup layers={t(cluster.title)} as="h3" />
             <ul className="mt-4 grid grid-cols-2 sm:grid-cols-3 gap-x-3 gap-y-4">
               {cluster.notes.map((note) => (
                 <li key={note.label}>
