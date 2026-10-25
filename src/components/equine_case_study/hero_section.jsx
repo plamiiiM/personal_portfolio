@@ -1,6 +1,7 @@
 import React from "react";
 import Collage from "../case_study/collage";
 import { ExpertiseList, NameTag, ProjectDetails, Tagline } from "../case_study/hero";
+import ScreenRecording from "../case_study/screen_recording";
 import SideBySide from "../case_study/side_by_side";
 import useLanguage from "../global/use_language";
 
@@ -62,11 +63,31 @@ const HeroSection = () => {
           height={565.07}
           loading="eager"
           items={[
+            // The recording plays on the middle phone's screen, reaching a little under its bezel so no seam shows.
+            // The phones come cut out over it, with the app icon still overlapping the top of its screen
             {
-              src: "/equine/hero_screens.webp",
+              group: "phones",
+              content: (
+                <ScreenRecording
+                  src="/equine/hero_video.mp4"
+                  poster="/equine/hero_video_poster.webp"
+                  label={t({
+                    en: "Screen recording of the Equine Integration app, going from the horses to a horse's status",
+                    bg: "Запис на екрана на приложението Equine Integration – от конете до състоянието на един кон",
+                  })}
+                />
+              ),
+              x: 176.5,
+              y: 108,
+              w: 208,
+              h: 447.5,
+            },
+            {
+              group: "phones",
+              src: "/equine/hero_screens_frame.webp",
               alt: t({
-                en: "Equine Integration app icon above three phones showing the horse status and horses screens",
-                bg: "Иконата на приложението Equine Integration над три телефона с екраните за състоянието на коня и конете",
+                en: "Equine Integration app icon above three phones, the side ones showing the horse status and horses screens",
+                bg: "Иконата на приложението Equine Integration над три телефона, като страничните показват екраните за състоянието на коня и конете",
               }),
             },
           ]}

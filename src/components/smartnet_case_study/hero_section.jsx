@@ -1,6 +1,7 @@
 import React from "react";
 import Collage from "../case_study/collage";
 import { ExpertiseList, NameTag, ProjectDetails, Tagline } from "../case_study/hero";
+import ScreenRecording from "../case_study/screen_recording";
 import SideBySide from "../case_study/side_by_side";
 import useLanguage from "../global/use_language";
 
@@ -63,14 +64,27 @@ const HeroSection = () => {
                 bg: "Иконата и екрани на приложението SmartNet до проследяващото устройство SmartNet",
               }),
             },
+            // The recording plays on the left phone's screen, reaching a little under its bezel so no seam shows.
+            // It's taller than the screen, so it's pinned to the top and the gesture bar is what's cut off
             {
-              src: "/smartnet/hero_phone.webp",
-              alt: t({ en: "Phone home screen with the SmartNet app", bg: "Начален екран на телефон с приложението SmartNet" }),
-              x: 0,
-              y: 152,
-              w: 201.5,
-              h: 407,
+              group: "phone",
+              content: (
+                <ScreenRecording
+                  src="/smartnet/hero_video.mp4"
+                  poster="/smartnet/hero_video_poster.webp"
+                  label={t({
+                    en: "Screen recording of a coach using the SmartNet app",
+                    bg: "Запис на екрана на треньор, който използва приложението SmartNet",
+                  })}
+                  className="object-top"
+                />
+              ),
+              x: 10.5,
+              y: 161,
+              w: 181,
+              h: 389.5,
             },
+            { group: "phone", src: "/smartnet/hero_phone_frame.webp", x: 0, y: 152, w: 201.5, h: 407 },
           ]}
         />
       </SideBySide>
