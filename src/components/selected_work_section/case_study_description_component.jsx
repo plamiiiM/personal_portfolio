@@ -13,7 +13,7 @@ const CaseStudyDescriptionComponent = ({
 }) => {
   return (
     <div
-      className={`flex flex-col ${isReversed ? "lg:flex-row-reverse" : "lg:flex-row"} justify-center gap-y-8 lg:gap-x-32 w-full`}
+      className={`flex flex-col max-lg:items-start ${isReversed ? "lg:flex-row-reverse" : "lg:flex-row"} justify-center gap-y-8 lg:gap-x-32 w-full`}
     >
       <img
         className={`mx-auto w-full max-w-80 lg:mx-0 lg:max-w-none ${collageClassName} object-contain`}
@@ -24,9 +24,9 @@ const CaseStudyDescriptionComponent = ({
           e.target.src = "/fallback_thumbnail_cases.png";
         }}
       />
-      <div className="flex flex-col justify-start items-start gap-y-8 lg:gap-y-18 lg:w-126">
-        <div className="flex flex-col justify-start items-start gap-y-6 lg:gap-y-10">
-          <h3 className="font-[PlamenasHandwriting] text-[2.25rem] lg:text-[3rem] leading-8 bg-white p-3 -rotate-5">
+      <div className="max-lg:contents flex flex-col justify-start items-start gap-y-8 lg:gap-y-18 lg:w-126">
+        <div className="max-lg:contents flex flex-col justify-start items-start gap-y-6 lg:gap-y-10">
+          <h3 className="max-lg:order-first font-[PlamenasHandwriting] text-[2.25rem] lg:text-[3rem] leading-8 bg-white p-3 -rotate-5">
             {titleOfProject ? titleOfProject : "Project Name"}
           </h3>
           <p className="font-[poppins] text-left inline-block text-base leading-7 lg:text-[1.125rem] lg:leading-8.75 w-full">
