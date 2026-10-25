@@ -195,7 +195,7 @@ const TimelineExperience = () => {
         className="-rotate-4"
       />
 
-      <div ref={mapRef} className="relative">
+      <div ref={mapRef} className="relative mt-11 lg:mt-18">
         {/* The dashed pencil trail, shown only as far as the solid stroke in its mask has been drawn */}
         <svg className="absolute inset-0 size-full overflow-visible pointer-events-none text-(--pencilLine)" aria-hidden="true">
           <defs>

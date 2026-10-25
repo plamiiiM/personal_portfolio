@@ -3,6 +3,7 @@ import { flushSync } from "react-dom";
 import Button from "./buttons";
 import usePhoneLayout from "./use_phone_layout";
 import useLanguage, { LANGUAGES, setLanguage } from "./use_language";
+import CV from "./cv";
 
 const NAV_LINKS = [
   { label: { en: "Work", bg: "Проекти" }, href: "#work" },
@@ -77,8 +78,6 @@ const Paper = ({ top = "top-0" }) => (
   </div>
 );
 
-const openCv = () => window.open("/Plamena Mincheva- UI-UX designer and developer.pdf");
-
 // EN / BG, with the links' pencil underline under the language that's showing
 const LanguageSwitch = () => {
   const { language, t } = useLanguage();
@@ -122,6 +121,8 @@ const Navbar = () => {
   const { t } = useLanguage();
   const navRef = useRef(null);
   const menuButtonRef = useRef(null);
+
+  const openCv = () => window.open(t(CV));
 
   // Wider screens have the links in the nav itself, so the menu never shows there
   const isMenuShowing = isMenuOpen && isPhoneLayout;

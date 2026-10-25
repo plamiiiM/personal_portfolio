@@ -2,6 +2,7 @@ import React from "react";
 import Button from "../global/buttons";
 import MarkedWord from "../global/marked_word_component";
 import useLanguage from "../global/use_language";
+import CV from "../global/cv";
 
 const IntroductionSection = () => {
   const { t } = useLanguage();
@@ -78,9 +79,7 @@ const IntroductionSection = () => {
         </Button.Primary>
 
         <Button.Secondary
-          onClick={() =>
-            window.open("/Plamena Mincheva- UI-UX designer and developer.pdf")
-          }
+          onClick={() => window.open(t(CV))}
           target="_blank"
           rel="noopener noreferrer"
         >
