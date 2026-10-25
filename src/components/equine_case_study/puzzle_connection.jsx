@@ -2,6 +2,7 @@ import React from "react";
 import useInView from "../global/use_in_view";
 import FitToWidth from "../global/fit_to_width";
 import { place, rem } from "../global/layout";
+import useLanguage from "../global/use_language";
 
 // Sparks burst from where the pieces click, cycling through three looks and three start times.
 // Each flies from (x0, y0) to (x1, y1) away from its spot, in Figma px
@@ -32,14 +33,14 @@ const SPARKS = [
 const HANDS = [
   {
     src: "/equine/puzzle_left_hand.webp",
-    alt: "A hand bringing in a red puzzle piece",
+    alt: { en: "A hand bringing in a red puzzle piece", bg: "Ръка, която носи червено парче от пъзел" },
     box: { x: 18.84, y: -25.6, w: 613.395, h: 565.201 },
     picture: { w: 521.25, h: 325, rotate: 35 },
     dir: 1,
   },
   {
     src: "/equine/puzzle_right_hand.webp",
-    alt: "Another hand fitting the matching piece into it",
+    alt: { en: "Another hand fitting the matching piece into it", bg: "Друга ръка, която наглася съвпадащото парче към него" },
     box: { x: 425.9, y: 134.9, w: 437.276, h: 370.526 },
     picture: { w: 405, h: 330, rotate: -6 },
     dir: -1,
@@ -50,6 +51,7 @@ const HANDS = [
 // On phones it's centred and shrunk to the column
 const PuzzleConnection = ({ className = "" }) => {
   const [ref, isInView] = useInView();
+  const { t } = useLanguage();
 
   return (
     <FitToWidth className={`max-lg:mx-auto ${className}`}>
@@ -66,7 +68,7 @@ const PuzzleConnection = ({ className = "" }) => {
           >
             <img
               src={src}
-              alt={alt}
+              alt={t(alt)}
               loading="lazy"
               decoding="async"
               className="max-w-none flex-none object-contain"

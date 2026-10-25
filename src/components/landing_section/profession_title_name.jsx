@@ -1,17 +1,20 @@
 import React from "react";
+import useLanguage from "../global/use_language";
 
 // On desktop the name sits well below the roles, with an arrow pointing down from it. On phones everything is
 // centred and closer together, the underline sits right under "Mobile Developer" and there's no arrow
 const ProfessionTitleName = () => {
+  const { t } = useLanguage();
+
   return (
     <div
       className="relative flex flex-col items-center lg:items-start justify-end gap-y-12 lg:gap-y-30 w-fit
-                 font-[zodiak] text-[1.75rem] lg:text-4xl text-(--red) tracking-wide"
+                 font-zodiak text-[1.75rem] lg:text-4xl text-(--red) tracking-wide"
     >
       <div className="flex flex-col items-center lg:items-stretch gap-3 align-baseline">
         <div className="flex flex-row gap-5 items-end">
-          <p className="inline text-left font-medium ">UX/UI Designer</p>
-          <p className="inline font-[zodiak] text-5xl lg:text-7xl text-(--brown) font-thin">
+          <p className="inline text-left font-medium ">{t({ en: "UX/UI Designer", bg: "UX/UI дизайнер" })}</p>
+          <p className="inline font-zodiak text-5xl lg:text-7xl text-(--brown) font-thin">
             &
           </p>
         </div>
@@ -29,7 +32,7 @@ const ProfessionTitleName = () => {
                 after:bg-no-repeat
                 max-lg:after:bg-center"
         >
-          Mobile Developer
+          {t({ en: "Mobile Developer", bg: "Мобилен разработчик" })}
         </p>
       </div>
       <p
@@ -50,7 +53,7 @@ const ProfessionTitleName = () => {
     after:rotate-20
     after:origin-left"
       >
-        Plamena Mincheva
+        {t({ en: "Plamena Mincheva", bg: "Пламена Минчева" })}
       </p>
     </div>
   );

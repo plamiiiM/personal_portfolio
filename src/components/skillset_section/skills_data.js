@@ -4,15 +4,25 @@
 // Every box is { x, y, w, h, rotate }: position and size before rotation, relative to its
 // parent (the cluster for titles and notes, the note for its layers), then rotated in degrees
 // around its centre. Images live in public/skillset/.
+//
+// The cluster titles are in both languages ({ en, bg }); the Bulgarian words are wider, so their pen strokes are
+// drawn longer to match. The sticky notes stay in English in both: they're the industry's names for the skills
+// and tools, and their pen strokes are drawn around those words.
 
 export const SKILL_CLUSTERS = [
   {
     id: "design",
     height: 678.4,
-    title: [
-      { type: "text", text: "DESIGN", font: "poppins", weight: 300, fontSize: 49.1, x: 671, y: 274.9, w: 189, h: 74.3 },
-      { type: "image", src: "title_design_underline.svg", x: 670.9, y: 352.5, w: 189, h: 9.8, rotate: -1.4 },
-    ],
+    title: {
+      en: [
+        { type: "text", text: "DESIGN", font: "poppins", weight: 300, fontSize: 49.1, x: 671, y: 274.9, w: 189, h: 74.3 },
+        { type: "image", src: "title_design_underline.svg", x: 670.9, y: 352.5, w: 189, h: 9.8, rotate: -1.4 },
+      ],
+      bg: [
+        { type: "text", text: "ДИЗАЙН", font: "poppins", weight: 300, fontSize: 49.1, x: 640, y: 274.9, w: 250, h: 74.3 },
+        { type: "image", src: "title_design_underline.svg", x: 642, y: 352.5, w: 245, h: 9.8, rotate: -1.4 },
+      ],
+    },
     notes: [
       {
         label: "Adobe After Effects",
@@ -71,10 +81,16 @@ export const SKILL_CLUSTERS = [
   {
     id: "ux-ui",
     height: 749.7,
-    title: [
-      { type: "text", text: "UX/ UI DESIGN", font: "poppins", weight: 300, fontSize: 45, x: 580.8, y: 250.3, w: 369, h: 204 },
-      { type: "image", src: "title_ux_squiggle.svg", x: 600.4, y: 403.7, w: 329.7, h: 54.6, rotate: -2.8 },
-    ],
+    title: {
+      en: [
+        { type: "text", text: "UX/ UI DESIGN", font: "poppins", weight: 300, fontSize: 45, x: 580.8, y: 250.3, w: 369, h: 204 },
+        { type: "image", src: "title_ux_squiggle.svg", x: 600.4, y: 403.7, w: 329.7, h: 54.6, rotate: -2.8 },
+      ],
+      bg: [
+        { type: "text", text: "UX/UI ДИЗАЙН", font: "poppins", weight: 300, fontSize: 45, x: 560, y: 250.3, w: 410, h: 204 },
+        { type: "image", src: "title_ux_squiggle.svg", x: 579, y: 403.7, w: 371, h: 54.6, rotate: -2.8 },
+      ],
+    },
     notes: [
       {
         label: "Researching",
@@ -150,10 +166,16 @@ export const SKILL_CLUSTERS = [
   {
     id: "development",
     height: 771.8,
-    title: [
-      { type: "text", text: "DEVELOPMENT", font: "poppins", weight: 300, fontSize: 45, x: 561.8, y: 242.2, w: 369, h: 204 },
-      { type: "image", src: "title_development_ellipse.svg", x: 555.2, y: 262.7, w: 333.2, h: 159.7, rotate: -8.7 },
-    ],
+    title: {
+      en: [
+        { type: "text", text: "DEVELOPMENT", font: "poppins", weight: 300, fontSize: 45, x: 561.8, y: 242.2, w: 369, h: 204 },
+        { type: "image", src: "title_development_ellipse.svg", x: 555.2, y: 262.7, w: 333.2, h: 159.7, rotate: -8.7 },
+      ],
+      bg: [
+        { type: "text", text: "РАЗРАБОТКА", font: "poppins", weight: 300, fontSize: 45, x: 561.8, y: 242.2, w: 369, h: 204 },
+        { type: "image", src: "title_development_ellipse.svg", x: 555.2, y: 262.7, w: 333.2, h: 159.7, rotate: -8.7 },
+      ],
+    },
     notes: [
       {
         label: "HTML",

@@ -2,34 +2,53 @@ import React from "react";
 import Collage from "../case_study/collage";
 import { ExpertiseList, NameTag, ProjectDetails, Tagline } from "../case_study/hero";
 import SideBySide from "../case_study/side_by_side";
+import useLanguage from "../global/use_language";
 
-// The pencil underlines are placed by hand in the design, so a couple of them sit slightly off
-const EXPERTISE = [
-  { label: "Gamification" },
-  { label: "App Design", labelClassName: "ml-[7.87px]" },
-  { label: "User Persona" },
-  { label: "Journey Mapping", lineClassName: "ml-[4.4px] mt-[29.88px]" },
-];
-
-const DETAILS = [
-  { term: "Time Period", details: "September 25 - January 26" },
-  { term: "Platform", details: "Mobile App (iOS / Android)" },
-  { term: "Expertise", details: <ExpertiseList items={EXPERTISE} /> },
-];
+// The pencil underlines are placed by hand in the design, so a couple of them sit slightly off.
+// The Bulgarian labels have lengths of their own, so there each line stretches to its label
+const BG_LINE = "mt-[25.84px] w-full h-0.5";
+const EXPERTISE = {
+  en: [
+    { label: "Gamification" },
+    { label: "App Design", labelClassName: "ml-[7.87px]" },
+    { label: "User Persona" },
+    { label: "Journey Mapping", lineClassName: "ml-[4.4px] mt-[29.88px]" },
+  ],
+  bg: [
+    { label: "Геймификация", lineClassName: BG_LINE },
+    { label: "Дизайн на приложения", lineClassName: BG_LINE },
+    { label: "Потребителска персона", lineClassName: BG_LINE },
+    { label: "Карта на пътуването", lineClassName: BG_LINE },
+  ],
+};
 
 const HeroSection = () => {
+  const { t } = useLanguage();
+
+  const details = [
+    {
+      term: t({ en: "Time Period", bg: "Период" }),
+      details: t({ en: "September 25 - January 26", bg: "Септември 2025 – януари 2026" }),
+    },
+    { term: t({ en: "Platform", bg: "Платформа" }), details: t({ en: "Mobile App (iOS / Android)", bg: "Мобилно приложение (iOS / Android)" }) },
+    { term: t({ en: "Expertise", bg: "Експертиза" }), details: <ExpertiseList items={t(EXPERTISE)} /> },
+  ];
+
   return (
     <header className="flex flex-col">
       <NameTag className="ml-1 mt-8 lg:ml-35 lg:mt-12">SmartNet</NameTag>
 
       <Tagline
         className="mt-10 lg:ml-33 lg:mt-14.5"
-        title="Uniting the football world with smart technology"
-        role="SmartNet | Intern UX/ UI Design"
+        title={t({
+          en: "Uniting the football world with smart technology",
+          bg: "Обединяване на футболния свят чрез умни технологии",
+        })}
+        role={t({ en: "SmartNet | Intern UX/ UI Design", bg: "SmartNet | Стаж по UX/UI дизайн" })}
       />
 
       <SideBySide isCentered className="mt-10 lg:mt-26.5">
-        <ProjectDetails className="lg:ml-33" items={DETAILS} />
+        <ProjectDetails className="lg:ml-33" items={details} />
 
         <Collage
           className="lg:mr-76.25"
@@ -37,8 +56,21 @@ const HeroSection = () => {
           height={565}
           loading="eager"
           items={[
-            { src: "/smartnet_collage_bigger.png", alt: "SmartNet app icon and screens next to the SmartNet tracking device" },
-            { src: "/smartnet/hero_phone.webp", alt: "Phone home screen with the SmartNet app", x: 0, y: 152, w: 201.5, h: 407 },
+            {
+              src: "/smartnet_collage_bigger.png",
+              alt: t({
+                en: "SmartNet app icon and screens next to the SmartNet tracking device",
+                bg: "Иконата и екрани на приложението SmartNet до проследяващото устройство SmartNet",
+              }),
+            },
+            {
+              src: "/smartnet/hero_phone.webp",
+              alt: t({ en: "Phone home screen with the SmartNet app", bg: "Начален екран на телефон с приложението SmartNet" }),
+              x: 0,
+              y: 152,
+              w: 201.5,
+              h: 407,
+            },
           ]}
         />
       </SideBySide>
