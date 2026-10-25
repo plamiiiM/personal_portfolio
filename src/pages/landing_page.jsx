@@ -32,7 +32,7 @@ function LandingPage() {
             inViewClassName(isHeaderInView, isHeaderInstant)
           }`}
         >
-          <FitToWidth>
+          <FitToWidth className="max-md:self-start max-md:-ml-5 max-md:max-w-[calc(100%+1.25rem)] max-md:[--side-room:0]">
             <PortfolioWithScribble />
           </FitToWidth>
           <FitToWidth>
