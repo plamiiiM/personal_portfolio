@@ -27,7 +27,7 @@ export function ExperienceCardComponent({
       <p className="italic font-light mb-6">({date ? `${date}` : "Date"})</p>
 
       {showRecommendation && (
-        <div className="border border-black rounded-2xl p-6 w-[50rem] relative">
+        <div className="border border-black rounded-2xl p-4 lg:p-6 lg:w-[50rem] relative">
           <div className="flex items-center gap-4 mb-6">
             <div className="w-16 rounded-full ">
               <img
@@ -37,7 +37,7 @@ export function ExperienceCardComponent({
               />
             </div>
 
-            <div className="flex flex-row items-center gap-2">
+            <div className="flex flex-row flex-wrap items-center gap-x-2">
               <h4 className="font-bold text-black ">
                 {nameEmployer ? `${nameEmployer}` : "Name Name"}
               </h4>

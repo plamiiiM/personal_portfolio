@@ -1,19 +1,25 @@
 import React from "react";
 import useInView from "./use_in_view";
 
+// In the phone layout a highlighted phrase may be wider than the column, so there it can wrap, with the marker stroke
+// drawn as a background on the words that carries on to the next line
+const WRAPPING_HIGHLIGHT = "max-lg:box-decoration-clone max-lg:bg-[url(/highlight.svg)] max-lg:bg-center max-lg:bg-no-repeat";
+
 // `isThin` makes the highlight a narrower marker stroke, `highlight` swaps its placement: { className } that sizes it on the words.
 // `circle` swaps the pencil circle for another hand-drawn one: { src, className } where the className sizes it around the word.
-// `isDrawn` makes the circle draw itself in once it scrolls into view (see .drawn-circle in index.css)
+// `isDrawn` makes the circle draw itself in once it scrolls into view (see .drawn-circle in index.css).
+// A circled phrase always stays on one line, inside its circle
 const MarkedWord = ({ isHighlighted, isThin, highlight, isCircled, circle, isDrawn, children }) => {
   const [circleRef, isInView] = useInView({ isEnabled: isDrawn });
+  const canWrap = isHighlighted && !isCircled;
 
   return (
-    <span className="relative inline-block whitespace-nowrap">
+    <span className={`relative inline-block whitespace-nowrap ${canWrap ? "max-lg:inline max-lg:whitespace-normal" : ""}`}>
       {isHighlighted && (
         <img
           src="/highlight.svg"
           alt=""
-          className={`absolute max-w-none ${
+          className={`absolute max-w-none ${canWrap ? "max-lg:hidden" : ""} ${
             highlight?.className ??
             `-left-[0.1em] w-[calc(100%+0.2em)] ${
               isThin ? "top-[calc(50%-0.3em)] h-[0.72em]" : "top-[calc(50%-0.47em)] h-[1.17em]"
@@ -21,7 +27,15 @@ const MarkedWord = ({ isHighlighted, isThin, highlight, isCircled, circle, isDra
           }`}
         />
       )}
-      <span className="relative">{children}</span>
+      <span
+        className={`relative ${
+          canWrap
+            ? `${WRAPPING_HIGHLIGHT} ${isThin || highlight ? "max-lg:bg-size-[100%_0.72em]" : "max-lg:bg-size-[100%_1.17em]"}`
+            : ""
+        }`}
+      >
+        {children}
+      </span>
       {isCircled && (
         <img
           ref={circleRef}

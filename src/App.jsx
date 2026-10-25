@@ -11,13 +11,16 @@ const PAGES = {
   "/equine-integration": EquineCaseStudy,
 }
 
+// The drawn scrollbar is only for computers: a mouse or trackpad as the main input, not a phone's or tablet's touchscreen
+const IS_COMPUTER = window.matchMedia("(hover: hover) and (pointer: fine)").matches
+
 function App() {
   const Page = PAGES[window.location.pathname.replace(/\/+$/, "")] ?? LandingPage
 
   return (
     <>
       <Page />
-      <FadingLineScrollbar />
+      {IS_COMPUTER && <FadingLineScrollbar />}
     </>
   )
 }

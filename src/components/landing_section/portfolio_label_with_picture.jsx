@@ -13,7 +13,7 @@ const PHOTO_FADE = {
 // when there's paper beside it
 const SCRIBBLE_FADE = { maskImage: "linear-gradient(to right, transparent, black calc(9% * var(--side-room, 1)))" };
 
-const PortfolioLabelWithPicture = ({}) => {
+const PortfolioLabelWithPicture = () => {
   return (
     <div className="flex flex-col justify-center ">
       <div className="relative flex items-center select-none top-13 ">

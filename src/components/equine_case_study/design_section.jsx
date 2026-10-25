@@ -4,18 +4,19 @@ import MarkedWord from "../global/marked_word_component";
 import { LargeTitle, Paragraph, SectionLabel, SectionTitle, SubsectionTitle } from "../case_study/typography";
 import DesignQuestions from "./design_questions";
 import PuzzleConnection from "./puzzle_connection";
+import SideBySide from "../case_study/side_by_side";
 
 const DesignSection = () => {
   return (
-    <section className="mt-14">
-      <div className="ml-30.75">
+    <section className="mt-20 lg:mt-14">
+      <div className="lg:ml-30.75">
         <SectionLabel>Design and approach</SectionLabel>
         <SectionTitle>Comparison Analytics</SectionTitle>
       </div>
 
-      <div className="mt-22 flex items-start justify-between">
+      <SideBySide isPictureFirst className="mt-6 lg:mt-22">
         <Collage
-          className="ml-21"
+          className="lg:ml-21"
           width={657}
           height={471}
           items={[
@@ -25,7 +26,7 @@ const DesignSection = () => {
             },
           ]}
         />
-        <div className="mr-32.25 mt-42 w-130">
+        <div className="lg:mr-32.25 lg:mt-42 lg:w-130">
           <Paragraph isPretty>
             This feature started with a single comment. In one of the client interviews, she mentioned in passing that
             riders <MarkedWord isHighlighted>could benefit from comparing</MarkedWord> their{" "}
@@ -40,22 +41,22 @@ const DesignSection = () => {
               past activities.
             </MarkedWord>
           </Paragraph>
-          <Paragraph isPretty className="mt-9">
+          <Paragraph isPretty className="mt-6 lg:mt-9">
             It wasn’t a request, but it connected with what I was seeing in the data, so I decided to explore it.
           </Paragraph>
         </div>
-      </div>
+      </SideBySide>
 
-      <div className="mt-22 flex items-start justify-between">
-        <div className="ml-30.75 mt-35.75">
+      <SideBySide className="mt-14 lg:mt-22">
+        <div className="lg:ml-30.75 lg:mt-35.75">
           <SubsectionTitle>Finding what connects</SubsectionTitle>
-          <Paragraph isPretty className="mt-3 w-98.5">
+          <Paragraph isPretty className="mt-3 lg:w-98.5">
             The dataset was scattered and complicated, so I went through each metric to understand what it measures
             and how it relates to the others.
           </Paragraph>
         </div>
         <Collage
-          className="mr-84.5"
+          className="lg:mr-84.5"
           width={311}
           height={439}
           items={[
@@ -65,23 +66,23 @@ const DesignSection = () => {
             },
           ]}
         />
-      </div>
+      </SideBySide>
 
-      <LargeTitle className="mx-auto mt-21.25 w-fit">Four questions guided the design</LargeTitle>
+      <LargeTitle className="mx-auto mt-16 lg:mt-21.25 w-fit max-lg:text-center">Four questions guided the design</LargeTitle>
       <DesignQuestions />
 
-      <PuzzleConnection className="ml-52.5 mt-10" />
+      <PuzzleConnection className="mt-10 lg:ml-52.5" />
 
-      <div className="mt-18.75 flex items-start justify-between">
-        <div className="ml-32.5 mt-18">
+      <SideBySide className="mt-14 lg:mt-18.75">
+        <div className="lg:ml-32.5 lg:mt-18">
           <SubsectionTitle>The solution</SubsectionTitle>
-          <Paragraph isPretty className="mt-2 w-98">
+          <Paragraph isPretty className="mt-2 lg:w-98">
             Riders <MarkedWord isHighlighted>choose a date range</MarkedWord> and a{" "}
             <MarkedWord isHighlighted>training type,</MarkedWord> and the app lists every activity that matches.
           </Paragraph>
         </div>
         <Collage
-          className="mr-42.75"
+          className="lg:mr-42.75"
           width={559.37}
           height={526.19}
           items={[
@@ -103,12 +104,12 @@ const DesignSection = () => {
             },
           ]}
         />
-      </div>
+      </SideBySide>
 
       {/* Rises beside the phones above */}
-      <div className="-mt-24 flex items-start justify-between">
+      <SideBySide isPictureFirst className="mt-8 lg:-mt-24">
         <Collage
-          className="ml-21.25"
+          className="lg:ml-21.25"
           width={557.73}
           height={523.51}
           items={[
@@ -130,7 +131,7 @@ const DesignSection = () => {
             },
           ]}
         />
-        <Paragraph isPretty className="mr-52 mt-75 w-98">
+        <Paragraph isPretty className="lg:mr-52 lg:mt-75 lg:w-98">
           They select two sessions,{" "}
           <MarkedWord
             isCircled
@@ -144,7 +145,7 @@ const DesignSection = () => {
           </MarkedWord>{" "}
           and get a page built around what the data could meaningfully show.
         </Paragraph>
-      </div>
+      </SideBySide>
     </section>
   );
 };

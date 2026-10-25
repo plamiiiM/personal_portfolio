@@ -3,19 +3,20 @@ import Collage from "../case_study/collage";
 import MarkedWord from "../global/marked_word_component";
 import { Paragraph, SectionLabel, SectionTitle } from "../case_study/typography";
 import { noteText } from "./sticky_note";
+import SideBySide from "../case_study/side_by_side";
 
 const OverviewSection = () => {
   return (
     <>
-      <section className="mt-68.75">
-        <div className="ml-34">
+      <section className="mt-20 lg:mt-68.75">
+        <div className="lg:ml-34">
           <SectionLabel>Project Overview</SectionLabel>
           <SectionTitle>What is Equine Integration?</SectionTitle>
         </div>
 
-        <div className="mt-17 flex items-start justify-between">
+        <SideBySide isPictureFirst className="mt-6 lg:mt-17">
           <Collage
-            className="ml-27"
+            className="lg:ml-27"
             width={598}
             height={476.61}
             items={[
@@ -25,18 +26,18 @@ const OverviewSection = () => {
               },
             ]}
           />
-          <Paragraph isPretty className="mr-27 mt-46 w-139.5">
+          <Paragraph isPretty className="lg:mr-27 lg:mt-46 lg:w-139.5">
             Equine Integration <MarkedWord isHighlighted>helps riders and trainers track</MarkedWord> their horse’s
             training. A wearable belt records each session and the{" "}
             <MarkedWord isHighlighted>app brings the data together in one place</MarkedWord>, so riders can follow
             progress and prepare for competition.
           </Paragraph>
-        </div>
+        </SideBySide>
       </section>
 
-      <section className="mt-48.5">
-        <div className="flex items-start justify-between">
-          <div className="ml-36.5 mt-15.75 w-119">
+      <section className="mt-20 lg:mt-48.5">
+        <SideBySide>
+          <div className="lg:ml-36.5 lg:mt-15.75 lg:w-119">
             <SectionTitle>The challenge</SectionTitle>
             <Paragraph isPretty className="mt-4.5">
               Riders had <MarkedWord isHighlighted>data but no understanding:</MarkedWord> the analytics page was a
@@ -67,7 +68,7 @@ const OverviewSection = () => {
             </Paragraph>
           </div>
           <Collage
-            className="mr-51.5"
+            className="lg:mr-51.5"
             width={463.63}
             height={336.83}
             items={[
@@ -89,9 +90,9 @@ const OverviewSection = () => {
               },
             ]}
           />
-        </div>
+        </SideBySide>
 
-        <div className="ml-36.5 mt-41 w-223.75">
+        <div className="mt-10 lg:ml-36.5 lg:mt-41 lg:w-223.75">
           <Paragraph isPretty>
             My challenge as UX/UI designer was to solve both problems at once:{" "}
             <MarkedWord isHighlighted>translate raw metrics</MarkedWord>{" "}
@@ -105,11 +106,16 @@ const OverviewSection = () => {
           </Paragraph>
         </div>
 
-        {/* "How might we" questions on sticky notes, each over its own soft shadow */}
+        {/* "How might we" questions on sticky notes, each over its own soft shadow. On phones they go one under another */}
         <Collage
-          className="ml-22.5 mt-15.75"
+          className="mt-10 lg:ml-22.5 lg:mt-15.75"
           width={1253.75}
           height={656.32}
+          phone={{
+            width: 400,
+            height: 1214,
+            shifts: [[10, -54], [10, -54], [10, -54], [-435, 144], [-435, 144], [-435, 144], [-864, 821], [-864, 821], [-864, 821]],
+          }}
           items={[
             { src: "/equine/sticky_blue_shadow.webp", x: 0, y: 95.13, w: 344.68, h: 349.92 },
             { src: "/equine/sticky_blue.webp", x: 5.79, y: 54.01, w: 374.64, h: 386.77 },

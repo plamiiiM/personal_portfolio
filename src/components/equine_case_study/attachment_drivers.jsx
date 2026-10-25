@@ -70,31 +70,31 @@ const AttachmentDrivers = ({ className = "" }) => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <div className={`flex items-start ${className}`}>
-      <ul className="ml-57.25 mt-15 flex w-85.75 flex-col gap-y-8.5 font-[poppins] tracking-[0.03em]">
+    <div className={`flex flex-col lg:flex-row lg:items-start ${className}`}>
+      <ul className="lg:ml-57.25 lg:mt-15 flex lg:w-85.75 flex-col gap-y-5 lg:gap-y-8.5 font-[poppins] tracking-[0.03em]">
         {DRIVERS.map(({ name, description }, index) => {
           const isActive = index === activeIndex;
           return (
             <li key={name} className="relative">
               {/* Pencil mark beside the open driver */}
-              {isActive && <span className="absolute -left-6.75 top-2.25 h-14 w-1 bg-black" aria-hidden="true" />}
+              {isActive && <span className="absolute -left-4 top-1 h-10 lg:-left-6.75 lg:top-2.25 lg:h-14 w-1 bg-black" aria-hidden="true" />}
               <button
                 type="button"
                 aria-expanded={isActive}
                 onClick={() => setActiveIndex(index)}
-                className={`cursor-pointer text-left text-[2rem] tracking-[0.03em] transition-colors ${
+                className={`cursor-pointer text-left text-[1.5rem] lg:text-[2rem] tracking-[0.03em] transition-colors ${
                   isActive ? "font-bold" : "text-[#686868] hover:text-(--textOnLight)"
                 }`}
               >
                 {name}
               </button>
-              {isActive && <p className="w-61.5 text-[1.125rem] tracking-[0.03em]">{description}</p>}
+              {isActive && <p className="lg:w-61.5 text-[1rem] lg:text-[1.125rem] tracking-[0.03em]">{description}</p>}
             </li>
           );
         })}
       </ul>
 
-      <Collage className="ml-22.5" width={632.38} height={438.75} items={DRIVERS[activeIndex].visual} />
+      <Collage className="mt-8 lg:mt-0 lg:ml-22.5" width={632.38} height={438.75} items={DRIVERS[activeIndex].visual} />
     </div>
   );
 };

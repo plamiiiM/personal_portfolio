@@ -1,5 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { flushSync } from "react-dom";
 import Button from "./buttons";
+import usePhoneLayout from "./use_phone_layout";
 
 const NAV_LINKS = [
   { label: "Work", href: "#work" },
@@ -18,8 +20,9 @@ const scrollToSection = (e, href) => {
   if (!target) return;
   e.preventDefault();
   // Honour scroll-margin-top so a target can fine-tune where it lands (e.g. -scroll-mt-16).
-  // It's in page px, so it's zoomed like the page (ScaleToFit) to match getBoundingClientRect's screen px
-  const scrollMargin = parseFloat(getComputedStyle(target).scrollMarginTop) * (target.currentCSSZoom ?? 1);
+  // It's in page px, so it's shrunk like the page (ScaleToFit's --zoom) to match getBoundingClientRect's screen px
+  const style = getComputedStyle(target);
+  const scrollMargin = parseFloat(style.scrollMarginTop) * (parseFloat(style.getPropertyValue("--zoom")) || 1);
   const top = target.getBoundingClientRect().top + window.scrollY - scrollMargin;
   const goingDown = top - LANDING_GAP > window.scrollY;
   window.scrollTo({ top: top - (goingDown ? LANDING_GAP : NAV_HEIGHT + LANDING_GAP) });
@@ -40,9 +43,80 @@ const MAIN_STROKE = pencilLine(0, 1000, 0);
 // A lighter, shorter pass over the same line, like going over it twice with a pencil
 const SECOND_PASS = pencilLine(40, 930, 1.5);
 
+// The menu button's three pencil strokes in a 28x20 box, each a little wobbly. Opening the menu folds the outer two
+// into an X over the middle one, which fades out
+const burgerStroke = (y, phase) => {
+  const points = [];
+  for (let x = 2; x <= 26; x += 2) points.push(`${x} ${(y + Math.sin(x * 0.45 + phase) * 0.35).toFixed(2)}`);
+  return "M " + points.join(" L ");
+};
+const BURGER_STROKES = [
+  { d: burgerStroke(3, 0), open: "translate-y-[7px] rotate-45" },
+  { d: burgerStroke(10, 2), open: "opacity-0 scale-x-0" },
+  { d: burgerStroke(17, 4), open: "-translate-y-[7px] -rotate-45" },
+];
+
+// The page's paper behind the nav and its menu. Like the page's own paper it starts at the top of the screen,
+// so `top` lines it up from wherever the box it fills begins, and the nav, its menu and the page read as one sheet
+const Paper = ({ top = "top-0" }) => (
+  <div className="absolute inset-0 -z-10 overflow-hidden bg-(--bg) pointer-events-none" aria-hidden="true">
+    <div
+      className={`absolute ${top} left-0 w-screen h-screen
+                 bg-[url('/white_texture_paper.webp')] bg-cover bg-center
+                 opacity-75 mix-blend-multiply`}
+    />
+    <div
+      className={`absolute ${top} left-0 w-screen h-screen
+                 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.5)_0%,transparent_30%)]`}
+    />
+  </div>
+);
+
+const openCv = () => window.open("/Plamena Mincheva- UI-UX designer and developer.pdf");
+
+// In the phone layout the links don't fit beside the logo, so they move into a menu behind a button
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(() => window.scrollY > 10);
   const [hidden, setHidden] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const isPhoneLayout = usePhoneLayout();
+  const navRef = useRef(null);
+  const menuButtonRef = useRef(null);
+
+  // Wider screens have the links in the nav itself, so the menu never shows there
+  const isMenuShowing = isMenuOpen && isPhoneLayout;
+  const isHidden = hidden && !isMenuShowing;
+
+  // While the menu shows it's the only thing on the screen: the page behind it can't scroll or take focus.
+  // A layout effect, so closing it (flushSync in goToSection) gives the page back before it scrolls to a section
+  useLayoutEffect(() => {
+    if (!isMenuShowing) return;
+    const nav = navRef.current;
+    const behind = [...nav.parentElement.children].filter((element) => element !== nav);
+    behind.forEach((element) => (element.inert = true));
+    document.documentElement.style.overflow = "hidden";
+    return () => {
+      behind.forEach((element) => (element.inert = false));
+      document.documentElement.style.overflow = "";
+    };
+  }, [isMenuShowing]);
+
+  // Escape closes the menu, back to its button
+  useEffect(() => {
+    if (!isMenuShowing) return;
+    const onKeyDown = (e) => {
+      if (e.key !== "Escape") return;
+      setIsMenuOpen(false);
+      menuButtonRef.current.focus();
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [isMenuShowing]);
+
+  const goToSection = (e, href) => {
+    flushSync(() => setIsMenuOpen(false));
+    scrollToSection(e, href);
+  };
 
   useEffect(() => {
     let lastY = window.scrollY;
@@ -60,8 +134,8 @@ const Navbar = () => {
 
   // Lets pinned content (like the experience section) sit just below the nav while it's showing
   useEffect(() => {
-    document.documentElement.style.setProperty("--nav-offset", hidden ? "0px" : `${NAV_HEIGHT}px`);
-  }, [hidden]);
+    document.documentElement.style.setProperty("--nav-offset", isHidden ? "0px" : `${NAV_HEIGHT}px`);
+  }, [isHidden]);
 
   // Arriving from another page with a #section: the browser can't jump to it on its own because the section
   // only exists once React has rendered it, so jump once the page (and its images) have loaded
@@ -77,22 +151,13 @@ const Navbar = () => {
   return (
     <>
       <nav
-        className={`fixed top-0 inset-x-0 z-40 h-24 px-4 sm:px-10 lg:px-28 flex items-center justify-between isolate
+        ref={navRef}
+        className={`fixed top-0 inset-x-0 z-40 h-24 px-5 sm:px-10 lg:px-28 flex items-center justify-between isolate
                     transition-transform duration-300 motion-reduce:transition-none has-focus-visible:translate-y-0 ${
-                      hidden ? "-translate-y-full" : "translate-y-0"
+                      isHidden ? "-translate-y-full" : "translate-y-0"
                     }`}
       >
-        <div className="absolute inset-0 -z-10 overflow-hidden bg-(--bg) pointer-events-none" aria-hidden="true">
-          <div
-            className="absolute top-0 left-0 w-screen h-screen
-                       bg-[url('/white_texture_paper.webp')] bg-cover bg-center
-                       opacity-75 mix-blend-multiply"
-          />
-          <div
-            className="absolute top-0 left-0 w-screen h-screen
-                       bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.5)_0%,transparent_30%)]"
-          />
-        </div>
+        <Paper />
 
         {/* The links point at the landing page, so they also work from other pages.
             When the section is on the current page, scrollToSection takes over instead */}
@@ -100,8 +165,8 @@ const Navbar = () => {
           <img src="/icon_portfolio.svg" alt="Plamena Mincheva logo" className="h-12 sm:h-16 w-auto mix-blend-multiply" />
         </a>
 
-        <div className="self-stretch flex items-center gap-x-8 lg:gap-x-14">
-          <ul className="flex items-center gap-x-3 sm:gap-x-10 font-[poppins] text-[0.8125rem] sm:text-[1rem] tracking-wide text-(--brown)">
+        <div className="self-stretch hidden lg:flex items-center gap-x-14">
+          <ul className="flex items-center gap-x-10 font-[poppins] text-[1rem] tracking-wide text-(--brown)">
             {NAV_LINKS.map(({ label, href }) => (
               <li key={href}>
                 <a
@@ -118,22 +183,79 @@ const Navbar = () => {
             ))}
           </ul>
 
-          {/* No room for it next to the links on phones */}
-          <div className="hidden sm:block">
-            <Button.Secondary
-              onClick={() => window.open("/Plamena Mincheva- UI-UX designer and developer.pdf")}
-            >
-              CV
-            </Button.Secondary>
-          </div>
+          <Button.Secondary
+            onClick={openCv}
+          >
+            CV
+          </Button.Secondary>
 
           {/* Hangs from the top edge like a bookmark ribbon */}
           {/* <img src="/nav_bookmark.png" alt="" aria-hidden="true" className="self-start w-9 h-22.5" /> */}
         </div>
 
+        <button
+          ref={menuButtonRef}
+          type="button"
+          onClick={() => setIsMenuOpen(!isMenuShowing)}
+          aria-expanded={isMenuShowing}
+          aria-controls="nav-menu"
+          aria-label={isMenuShowing ? "Close menu" : "Open menu"}
+          className="lg:hidden -mr-2.5 p-2.5 cursor-pointer text-(--pencilLine)"
+        >
+          <svg width="28" height="20" viewBox="0 0 28 20" fill="none" stroke="currentColor" strokeLinecap="round" aria-hidden="true">
+            {BURGER_STROKES.map(({ d, open }) => (
+              <path
+                key={d}
+                d={d}
+                strokeWidth="2"
+                className={`origin-center [transform-box:fill-box] transition-[translate,rotate,scale,opacity] duration-300
+                            motion-reduce:transition-none ${isMenuShowing ? open : ""}`}
+              />
+            ))}
+          </svg>
+        </button>
+
+        {/* The menu: a sheet of the same paper under the nav, with the links one under another */}
+        <div
+          id="nav-menu"
+          className={`lg:hidden absolute inset-x-0 top-full h-[calc(100dvh-6rem)] overflow-y-auto isolate
+                      transition-[opacity,translate,visibility] duration-300 motion-reduce:transition-none ${
+                        isMenuShowing ? "visible opacity-100 translate-y-0" : "invisible opacity-0 -translate-y-2"
+                      }`}
+        >
+          <Paper top="-top-24" />
+          <ul className="mx-auto max-w-3xl px-5 sm:px-10 pt-4 font-[poppins] text-[1.75rem] tracking-wide text-(--brown)">
+            {NAV_LINKS.map(({ label, href }) => (
+              <li key={href}>
+                <a href={`/${href}`} onClick={(e) => goToSection(e, href)} className="block py-5">
+                  {label}
+                </a>
+                <svg className="block w-full h-1.5 text-(--pencilLine)" viewBox="0 0 1000 6" preserveAspectRatio="none" aria-hidden="true">
+                  <path
+                    d={MAIN_STROKE}
+                    filter="url(#navbar-pencil-grain)"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.2"
+                    strokeLinecap="round"
+                    vectorEffect="non-scaling-stroke"
+                  />
+                </svg>
+              </li>
+            ))}
+          </ul>
+          <div className="mx-auto max-w-3xl px-5 sm:px-10 pt-10 pb-8">
+            <Button.Secondary
+              onClick={openCv}
+            >
+              CV
+            </Button.Secondary>
+          </div>
+        </div>
+
         <svg
           className={`absolute bottom-0 inset-x-0 w-full h-1.5 text-(--pencilLine) pointer-events-none transition-opacity duration-300 ${
-            scrolled ? "opacity-100" : "opacity-0"
+            scrolled || isMenuShowing ? "opacity-100" : "opacity-0"
           }`}
           viewBox="0 0 1000 6"
           preserveAspectRatio="none"

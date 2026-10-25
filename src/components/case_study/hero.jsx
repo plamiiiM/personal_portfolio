@@ -1,31 +1,32 @@
 import React from "react";
 
-// Building blocks of the case study headers. Each page places them itself, as their designs space them differently
+// Building blocks of the case study headers. Each page places them itself, as their designs space them differently.
+// The phone layout uses smaller sizes; the lg: sizes are the designs'
 
 // Paper name tag, pinned at an angle like the project titles on the landing page
 export const NameTag = ({ children, className = "" }) => (
   <h1
-    className={`w-fit -rotate-7 bg-[#faf8f8] p-[16.87px] font-[PlamenasHandwriting] text-[5.0625rem] tracking-[0.03em]
-                shadow-[0_1.69px_1.69px_rgba(0,0,0,0.3),0_3.38px_5.06px_rgba(0,0,0,0.15)] ${className}`}
+    className={`w-fit -rotate-7 bg-[#faf8f8] p-[10px] lg:p-[16.87px] font-[PlamenasHandwriting] text-[2.75rem] lg:text-[5.0625rem]
+                tracking-[0.03em] shadow-[0_1.69px_1.69px_rgba(0,0,0,0.3),0_3.38px_5.06px_rgba(0,0,0,0.15)] ${className}`}
   >
     {children}
   </h1>
 );
 
 export const Tagline = ({ title, role, className = "" }) => (
-  <div className={`flex max-w-239.5 flex-col gap-y-6 font-[poppins] ${className}`}>
-    <p className="text-[2.5rem] font-semibold tracking-[0.03em]">{title}</p>
-    <p className="text-[1.25rem] tracking-[0.03em] text-(--red)">{role}</p>
+  <div className={`flex max-w-239.5 flex-col gap-y-3 lg:gap-y-6 font-[poppins] ${className}`}>
+    <p className="text-[1.625rem] lg:text-[2.5rem] font-semibold tracking-[0.03em] max-lg:text-balance">{title}</p>
+    <p className="text-[1.0625rem] lg:text-[1.25rem] tracking-[0.03em] text-(--red)">{role}</p>
   </div>
 );
 
 // Time period, platform and so on: [{ term, details }]
 export const ProjectDetails = ({ items, className = "" }) => (
-  <dl className={`flex w-111.25 flex-col gap-y-11.25 font-[poppins] ${className}`}>
+  <dl className={`flex lg:w-111.25 flex-col gap-y-6 lg:gap-y-11.25 font-[poppins] ${className}`}>
     {items.map(({ term, details }) => (
       <div key={term} className="flex flex-col gap-y-2">
-        <dt className="text-[1.25rem] tracking-[0.03em] text-(--red)">{term}</dt>
-        <dd className="text-[1.125rem] tracking-[0.03em]">{details}</dd>
+        <dt className="text-[1.125rem] lg:text-[1.25rem] tracking-[0.03em] text-(--red)">{term}</dt>
+        <dd className="text-[1rem] lg:text-[1.125rem] tracking-[0.03em]">{details}</dd>
       </div>
     ))}
   </dl>

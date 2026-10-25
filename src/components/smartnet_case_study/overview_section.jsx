@@ -2,19 +2,20 @@ import React from "react";
 import Collage from "../case_study/collage";
 import MarkedWord from "../global/marked_word_component";
 import { Paragraph, SectionLabel, SectionTitle } from "../case_study/typography";
+import SideBySide from "../case_study/side_by_side";
 
 const OverviewSection = () => {
   return (
     <>
-      <section className="mt-44.75">
-        <div className="ml-33">
+      <section className="mt-20 lg:mt-44.75">
+        <div className="lg:ml-33">
           <SectionLabel>Project Overview</SectionLabel>
           <SectionTitle>What is SmartNet?</SectionTitle>
         </div>
 
-        <div className="mt-20.5 flex items-start justify-between">
+        <SideBySide isPictureFirst className="mt-6 lg:mt-20.5">
           <Collage
-            className="ml-26.75"
+            className="lg:ml-26.75"
             width={636.3}
             height={385.4}
             items={[
@@ -29,7 +30,7 @@ const OverviewSection = () => {
               },
             ]}
           />
-          <Paragraph className="mr-32.25 mt-19.75 w-125.75">
+          <Paragraph className="lg:mr-32.25 lg:mt-19.75 lg:w-125.75">
             SmartNet is an <MarkedWord isHighlighted>advanced football training system</MarkedWord> that turns every
             shot into real, measurable data, providing accurate{" "}
             <MarkedWord
@@ -41,11 +42,11 @@ const OverviewSection = () => {
             </MarkedWord>{" "}
             that give players and coaches the clarity needed to improve finishing with precision.
           </Paragraph>
-        </div>
+        </SideBySide>
       </section>
 
-      <section className="mt-23.25 flex items-start justify-between">
-        <div className="ml-33 mt-43 w-121.75">
+      <SideBySide as="section" className="mt-20 lg:mt-23.25">
+        <div className="lg:ml-33 lg:mt-43 lg:w-121.75">
           <SectionTitle>The challenge</SectionTitle>
           {/* <Paragraph isPretty className="mt-3 w-119">
             Translate real-world football drills and device tracking metrics into gamified exercises that help players
@@ -76,7 +77,7 @@ const OverviewSection = () => {
         </div>
 
         <Collage
-          className="mr-22"
+          className="lg:mr-22"
           width={755}
           height={616.7}
           items={[
@@ -99,7 +100,7 @@ const OverviewSection = () => {
             },
           ]}
         />
-      </section>
+      </SideBySide>
     </>
   );
 };

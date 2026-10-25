@@ -1,6 +1,7 @@
 import React from "react";
 import Collage from "../case_study/collage";
 import { ExpertiseList, NameTag, ProjectDetails, Tagline } from "../case_study/hero";
+import SideBySide from "../case_study/side_by_side";
 
 // The pencil underlines are placed by hand in the design, so they sit at slightly different depths
 const EXPERTISE = [
@@ -21,20 +22,20 @@ const HeroSection = () => {
   return (
     <header className="flex flex-col">
       {/* The design's top edge runs under the 96px nav */}
-      <NameTag className="ml-34.75 mt-9.25">Equine Integration</NameTag>
+      <NameTag className="ml-1 mt-8 lg:ml-34.75 lg:mt-9.25">Equine Integration</NameTag>
 
       <Tagline
-        className="ml-33 mt-10"
+        className="mt-10 lg:ml-33"
         title="Simplifying equine performance with smart, gamified design"
         role="Equine Integration |  UX/ UI Design and Mobile Development"
       />
 
-      <div className="mt-26.5 flex items-center justify-between">
-        <ProjectDetails className="ml-33" items={DETAILS} />
+      <SideBySide isCentered className="mt-10 lg:mt-26.5">
+        <ProjectDetails className="lg:ml-33" items={DETAILS} />
 
         {/* The screens' soft shadows spread past the collage */}
         <Collage
-          className="mr-33.75"
+          className="lg:mr-33.75"
           width={693.74}
           height={486.73}
           loading="eager"
@@ -49,7 +50,7 @@ const HeroSection = () => {
             },
           ]}
         />
-      </div>
+      </SideBySide>
     </header>
   );
 };

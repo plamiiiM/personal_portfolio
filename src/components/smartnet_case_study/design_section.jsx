@@ -1,12 +1,13 @@
 import React from "react";
 import Collage from "../case_study/collage";
 import { Paragraph, SectionLabel, SectionTitle, SubsectionTitle } from "../case_study/typography";
+import SideBySide from "../case_study/side_by_side";
 
 const DesignSection = () => {
   return (
-    <section className="mt-11">
-      <div className="flex items-start justify-between">
-        <div className="ml-33 mt-13.5 w-126.5">
+    <section className="mt-20 lg:mt-11">
+      <SideBySide>
+        <div className="lg:ml-33 lg:mt-13.5 lg:w-126.5">
           <SectionLabel>Design and approach</SectionLabel>
           <SectionTitle className="mt-3.5">Mood board &amp; aesthetics</SectionTitle>
           <Paragraph className="mt-3">
@@ -15,7 +16,7 @@ const DesignSection = () => {
           </Paragraph>
         </div>
         <Collage
-          className="mr-5"
+          className="lg:mr-5"
           width={804}
           height={536}
           items={[
@@ -25,10 +26,10 @@ const DesignSection = () => {
             },
           ]}
         />
-      </div>
+      </SideBySide>
       {/* Laid over the bottom corner of the mood board */}
       <Collage
-        className="ml-31.5 -mt-44.5"
+        className="mt-6 lg:ml-31.5 lg:-mt-44.5"
         width={637.5}
         height={434.5}
         items={[
@@ -39,8 +40,8 @@ const DesignSection = () => {
         ]}
       />
 
-      <div className="mt-54.5 flex items-start justify-between">
-        <div className="ml-34 mt-24.75 w-126.5">
+      <SideBySide className="mt-14 lg:mt-54.5">
+        <div className="lg:ml-34 lg:mt-24.75 lg:w-126.5">
           <SectionTitle>Gamified drills</SectionTitle>
           <Paragraph className="mt-3">
             I crafted 6 different games targeting the skills needed for a footballer to succeed. Focusing on training
@@ -48,7 +49,7 @@ const DesignSection = () => {
           </Paragraph>
         </div>
         <Collage
-          className="mr-18.5"
+          className="lg:mr-18.5"
           width={708}
           height={531}
           items={[
@@ -58,9 +59,9 @@ const DesignSection = () => {
             },
           ]}
         />
-      </div>
+      </SideBySide>
       <Collage
-        className="ml-34 -mt-43"
+        className="mt-6 lg:ml-34 lg:-mt-43"
         width={741}
         height={556}
         items={[
@@ -71,18 +72,19 @@ const DesignSection = () => {
         ]}
       />
 
-      <div className="relative z-10 ml-205 mt-50.75 w-126.5">
+      <div className="relative z-10 mt-14 lg:ml-205 lg:mt-50.75 lg:w-126.5">
         <SubsectionTitle>Level Mastery</SubsectionTitle>
         <Paragraph>
           Gamification was a crucial key to the drills. By adding difficulty levels, revealing instant scores and
           providing feedback, I keep player motivation and ensure user retention.
         </Paragraph>
       </div>
-      {/* Runs off the left edge of the page */}
+      {/* Runs off the left edge of the page. On phones the second sketch goes under the first */}
       <Collage
-        className="-ml-60.75 -mt-21"
+        className="mt-6 lg:-ml-60.75 lg:-mt-21"
         width={1407}
         height={631}
+        phone={{ width: 828, height: 1083, shifts: [[0, 0], [-701, 452]] }}
         items={[
           {
             src: "/smartnet/level_mastery_stats.webp",
@@ -102,10 +104,12 @@ const DesignSection = () => {
           },
         ]}
       />
+      {/* On phones the two screens close up */}
       <Collage
-        className="ml-82.5 mt-11.75"
+        className="mt-6 lg:ml-82.5 lg:mt-11.75"
         width={809.5}
         height={478}
+        phone={{ width: 513, height: 478, shifts: [[0, 0], [-296.5, 0]] }}
         items={[
           {
             src: "/smartnet/level_mastery_phone_training.webp",
@@ -126,8 +130,8 @@ const DesignSection = () => {
         ]}
       />
 
-      <div className="mt-10.75 flex items-start justify-between">
-        <div className="ml-33 mt-59.75 w-126.5">
+      <SideBySide className="mt-14 lg:mt-10.75">
+        <div className="lg:ml-33 lg:mt-59.75 lg:w-126.5">
           <SubsectionTitle>During the game</SubsectionTitle>
           <Paragraph>
             Inside the game, I provided clear visuals and modern approach to what coaches and players are seeing,
@@ -137,7 +141,7 @@ const DesignSection = () => {
         </div>
         {/* Its transparent left edge overlaps the text column by 20px */}
         <Collage
-          className="-ml-5 mr-8"
+          className="lg:-ml-5 lg:mr-8"
           width={880}
           height={721.5}
           items={[
@@ -147,11 +151,11 @@ const DesignSection = () => {
             },
           ]}
         />
-      </div>
+      </SideBySide>
 
-      <div className="mt-32 flex items-start justify-between">
+      <SideBySide isPictureFirst className="mt-14 lg:mt-32">
         <Collage
-          className="ml-44.25"
+          className="lg:ml-44.25"
           width={559}
           height={582}
           items={[
@@ -161,18 +165,18 @@ const DesignSection = () => {
             },
           ]}
         />
-        <div className="mr-59.5 mt-43 w-113.75">
+        <div className="lg:mr-59.5 lg:mt-43 lg:w-113.75">
           <SubsectionTitle>User Flow</SubsectionTitle>
           <Paragraph className="mt-2">
             The whole game is coordinated in a simple user flow, giving the freedom and ease for both users to start and
             track field progression.
           </Paragraph>
         </div>
-      </div>
+      </SideBySide>
 
-      <SectionTitle className="ml-45 mt-65.5">Illustrations</SectionTitle>
+      <SectionTitle className="mt-14 lg:ml-45 lg:mt-65.5">Illustrations</SectionTitle>
       <Collage
-        className="ml-30.25 mt-10.5"
+        className="mt-6 lg:ml-30.25 lg:mt-10.5"
         width={1220}
         height={815.7}
         items={[

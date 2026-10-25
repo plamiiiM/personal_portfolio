@@ -4,12 +4,12 @@ import MarkedWord from "../global/marked_word_component";
 
 const IntroductionSection = () => {
   return (
-    <section className="flex flex-col justify-start items-start gap-y-14 font-[poppins] w-2xl tracking-wide mb-10">
-      <div className="flex flex-col gap-y-14">
-        <h2 className="text-4xl ">
+    <section className="flex flex-col justify-start items-start gap-y-8 lg:gap-y-14 font-[poppins] lg:w-2xl tracking-wide mb-10">
+      <div className="flex flex-col gap-y-6 lg:gap-y-14">
+        <h2 className="text-[1.75rem] lg:text-4xl">
           Plamena is a <strong>curious designer</strong>
         </h2>
-        <div className="text-lg leading-9 tracking-wide flex flex-col gap-y-5">
+        <div className="text-base leading-8 lg:text-lg lg:leading-9 tracking-wide flex flex-col gap-y-5">
           <p>
             An eager <MarkedWord isHighlighted>junior designer</MarkedWord> with
             lots of <MarkedWord isHighlighted>hands-on practice</MarkedWord> in

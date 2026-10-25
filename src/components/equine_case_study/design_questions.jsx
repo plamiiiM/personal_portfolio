@@ -3,7 +3,8 @@ import useInView from "../global/use_in_view";
 import { rem } from "../global/layout";
 
 // Timings are from the Figma motion, started as the list scrolls into view instead of 1.3s into the page:
-// each question slides in from its side of the page, then the line on the other side draws in
+// each question slides in from its side of the page, then the line on the other side draws in.
+// Phones show the questions one under another, numbers first, without the lines
 const QUESTIONS = [
   {
     number: 1,
@@ -52,26 +53,30 @@ const DesignQuestions = () => {
   const [ref, isInView] = useInView();
 
   return (
-    <ol ref={ref} className={`ml-26 mr-31.75 font-[poppins] tracking-[0.03em] ${isInView ? "in-view" : ""}`}>
+    <ol ref={ref} className={`mt-2 lg:mt-0 lg:ml-26 lg:mr-31.75 font-[poppins] tracking-[0.03em] ${isInView ? "in-view" : ""}`}>
       {QUESTIONS.map(({ number, text, marginTop, from, delay, isRight, line }) => {
         const question = (
           <p className="reveal flex items-center gap-4" style={reveal({ from, delay, fade: 0.2, slide: 0.65 })}>
-            <span className={`text-[3rem] font-extrabold tracking-[0.03em] text-black ${isRight ? "order-last" : ""}`} aria-hidden="true">
+            <span className={`text-[2rem] lg:text-[3rem] font-extrabold tracking-[0.03em] text-black ${isRight ? "lg:order-last" : ""}`} aria-hidden="true">
               {number}
             </span>
-            <span className="text-[2rem] tracking-[0.03em]">{text}</span>
+            <span className="text-[1.25rem] lg:text-[2rem] tracking-[0.03em]">{text}</span>
           </p>
         );
         const rule = (
           <span
-            className={`reveal h-px bg-black ${line.className ?? ""}`}
+            className={`reveal h-px bg-black max-lg:hidden ${line.className ?? ""}`}
             style={{ width: rem(line.width), ...reveal({ from: line.from, delay: line.delay, fade: 0.3, slide: 0.3 }) }}
             aria-hidden="true"
           />
         );
 
         return (
-          <li key={number} className="flex items-center justify-between" style={{ marginTop: rem(marginTop) }}>
+          <li
+            key={number}
+            className="mt-6 lg:mt-(--question-gap) flex items-center justify-between"
+            style={{ "--question-gap": rem(marginTop) }}
+          >
             {isRight ? (
               <>
                 {rule}
