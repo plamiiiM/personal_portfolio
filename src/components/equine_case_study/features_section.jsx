@@ -254,7 +254,7 @@ const FeaturesSection = () => {
             bg: "„На ездачите не им трябва напомняне да записват. Трябва им причина.“",
           })}
         </p>
-        <p className="mx-auto mt-2 lg:mt-0.75 lg:w-180 text-[1.125rem] lg:text-[1.75rem] font-extralight italic tracking-[0.03em]">
+        <p className="mx-auto mt-2 lg:mt-0.75 lg:w-180 text-[1.125rem] lg:text-[1.75rem] font-light italic tracking-[0.03em]">
           {t({
             en: "Achievements make every recording count toward something",
             bg: "Постиженията превръщат всеки запис в крачка към нещо",
@@ -262,83 +262,103 @@ const FeaturesSection = () => {
         </p>
       </blockquote>
 
-      <div className="mt-20 lg:ml-33.25 lg:mt-53 lg:w-148.75">
-        <SubsectionTitle>{t({ en: "Challenges VS Achievements", bg: "Предизвикателства срещу постижения" })}</SubsectionTitle>
-        <Paragraph isPretty className="mt-2">
-          {t({
-            en: (
-              <>
-                The word <MarkedWord isHighlighted>“Challenge”</MarkedWord> carries a{" "}
-                <MarkedWord
-                  isCircled
-                  isDrawn
-                  circle={{
-                    src: "/equine/circle_competitive_pressure.svg",
-                    className: "left-1/2 top-1/2 w-[11.803em] h-[1.954em] -rotate-[0.7deg]",
-                  }}
-                >
-                  competitive pressure
-                </MarkedWord>{" "}
-                that can push riders to overdo it, especially professional riders training for competitions.
-              </>
-            ),
-            bg: (
-              <>
-                Думата <MarkedWord isHighlighted>„Предизвикателство“</MarkedWord> носи{" "}
-                <MarkedWord
-                  isCircled
-                  isDrawn
-                  circle={{
-                    src: "/equine/circle_competitive_pressure.svg",
-                    className: "left-1/2 top-1/2 w-[110%] h-[1.954em] -rotate-[0.7deg]",
-                  }}
-                >
-                  състезателен натиск,
-                </MarkedWord>{" "}
-                който може да подтикне ездачите да прекалят, особено професионалистите, които се готвят за състезания.
-              </>
-            ),
-          })}
-        </Paragraph>
-        <Paragraph isPretty className="mt-5 lg:mt-7.75">
-          {t({
-            en: (
-              <>
-                <MarkedWord isHighlighted>“Achievement”</MarkedWord> frames the goal as{" "}
-                <MarkedWord
-                  isCircled
-                  isDrawn
-                  circle={{
-                    src: "/equine/circle_progress_not_contest.svg",
-                    className: "left-1/2 top-1/2 w-[13.998em] h-[1.954em] -rotate-[0.7deg]",
-                  }}
-                >
-                  progress, not a contest,
-                </MarkedWord>{" "}
-                which nudges riders toward the horse’s actual needs. Gamification in this context calls for care,
-                because the one who pays for overtraining is the horse.
-              </>
-            ),
-            bg: (
-              <>
-                <MarkedWord isHighlighted>„Постижение“</MarkedWord> представя целта като{" "}
-                <MarkedWord
-                  isCircled
-                  isDrawn
-                  circle={{
-                    src: "/equine/circle_progress_not_contest.svg",
-                    className: "left-1/2 top-1/2 w-[110%] h-[1.954em] -rotate-[0.7deg]",
-                  }}
-                >
-                  напредък, а не състезание,
-                </MarkedWord>{" "}
-                което насочва ездачите към реалните нужди на коня. Геймификацията в този контекст изисква внимание,
-                защото цената на претренирането я плаща конят.
-              </>
-            ),
-          })}
-        </Paragraph>
-      </div>
+      <SideBySide className="mt-20 lg:mt-53">
+        <div className="lg:ml-33.25 lg:w-148.75">
+          <SubsectionTitle>{t({ en: "Challenges VS Achievements", bg: "Предизвикателства срещу постижения" })}</SubsectionTitle>
+          <Paragraph isPretty className="mt-2">
+            {t({
+              en: (
+                <>
+                  The word <MarkedWord isHighlighted>“Challenge”</MarkedWord> carries a{" "}
+                  <MarkedWord
+                    isCircled
+                    isDrawn
+                    circle={{
+                      src: "/equine/circle_competitive_pressure.svg",
+                      className: "left-1/2 top-1/2 w-[11.803em] h-[1.954em] -rotate-[0.7deg]",
+                    }}
+                  >
+                    competitive pressure
+                  </MarkedWord>{" "}
+                  that can push riders to overdo it, especially professional riders training for competitions.
+                </>
+              ),
+              bg: (
+                <>
+                  Думата <MarkedWord isHighlighted>„Предизвикателство“</MarkedWord> носи{" "}
+                  <MarkedWord
+                    isCircled
+                    isDrawn
+                    circle={{
+                      src: "/equine/circle_competitive_pressure.svg",
+                      className: "left-1/2 top-1/2 w-[110%] h-[1.954em] -rotate-[0.7deg]",
+                    }}
+                  >
+                    състезателен натиск,
+                  </MarkedWord>{" "}
+                  който може да подтикне ездачите да прекалят, особено професионалистите, които се готвят за състезания.
+                </>
+              ),
+            })}
+          </Paragraph>
+          <Paragraph isPretty className="mt-5 lg:mt-7.75">
+            {t({
+              en: (
+                <>
+                  <MarkedWord isHighlighted>“Achievement”</MarkedWord> frames the goal as{" "}
+                  <MarkedWord
+                    isCircled
+                    isDrawn
+                    circle={{
+                      src: "/equine/circle_progress_not_contest.svg",
+                      className: "left-1/2 top-1/2 w-[13.998em] h-[1.954em] -rotate-[0.7deg]",
+                    }}
+                  >
+                    progress, not a contest,
+                  </MarkedWord>{" "}
+                  which nudges riders toward the horse’s actual needs. Gamification in this context calls for care,
+                  because the one who pays for overtraining is the horse.
+                </>
+              ),
+              bg: (
+                <>
+                  <MarkedWord isHighlighted>„Постижение“</MarkedWord> представя целта като{" "}
+                  <MarkedWord
+                    isCircled
+                    isDrawn
+                    circle={{
+                      src: "/equine/circle_progress_not_contest.svg",
+                      className: "left-1/2 top-1/2 w-[110%] h-[1.954em] -rotate-[0.7deg]",
+                    }}
+                  >
+                    напредък, а не състезание,
+                  </MarkedWord>{" "}
+                  което насочва ездачите към реалните нужди на коня. Геймификацията в този контекст изисква внимание,
+                  защото цената на претренирането я плаща конят.
+                </>
+              ),
+            })}
+          </Paragraph>
+        </div>
+        <Collage
+          className="lg:-mt-10.5 lg:mr-57.75"
+          width={310}
+          height={312}
+          items={[
+            {
+              src: "/equine/injured_horse.webp",
+              alt: t({
+                en: "Cartoon horse sitting down with a bandaged leg",
+                bg: "Анимационно конче с превързан крак, седнало на земята",
+              }),
+              x: 11,
+              y: 3,
+              w: 295,
+              h: 289.79,
+            },
+          ]}
+        />
+      </SideBySide>
 
       <SideBySide className="mt-20 lg:mt-64.25">
         <div className="lg:ml-33.25 lg:mt-37.25">

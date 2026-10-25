@@ -16,7 +16,7 @@ const ResearchSection = () => {
         <SectionLabel>{t({ en: "Research", bg: "Проучване" })}</SectionLabel>
         <SectionTitle>{t({ en: "Shedding light on data", bg: "Светлина върху данните" })}</SectionTitle>
         {/* The marker stroke runs past the sentence on both sides (where it fits on one line) */}
-        <p className="relative mt-4 lg:w-174.5 font-poppins text-[1rem] lg:text-[1.125rem] font-light italic tracking-[0.03em]">
+        <p className="relative mt-4 lg:w-174.5 font-poppins text-[1rem] lg:text-[1.125rem] italic tracking-[0.03em]">
           <img
             src="/highlight.svg"
             alt=""
