@@ -291,12 +291,12 @@ const TimelineExperience = () => {
                 {t({
                   en: (
                     <>
-                      The next step: bringing my experience to <MarkedWord isHighlighted>your idea</MarkedWord>.
+                      My next journey: bringing my experience to <MarkedWord isHighlighted>your idea</MarkedWord>.
                     </>
                   ),
                   bg: (
                     <>
-                      Следващата стъпка: да вложа опита си във <MarkedWord isHighlighted>вашата идея</MarkedWord>.
+                      Следващото приключение: да вложа опита си във <MarkedWord isHighlighted>вашата идея</MarkedWord>.
                     </>
                   ),
                 })}
