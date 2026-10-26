@@ -227,13 +227,13 @@ export const SKILL_CLUSTERS = [
         ],
       },
       {
-        label: "GitHub",
+        label: "Git",
         x: 651, y: 0,
         layers: [
           { type: "shadow", src: "note_shadow.svg", x: 1.5, y: 20.8, w: 218.3, h: 208.8, rotate: -4.7 },
           { type: "image", src: "note_pink.webp", x: -1.7, y: 1, w: 239.2, h: 239.1, rotate: -0.5 },
-          { type: "text", text: "GitHub", x: 76.2, y: 88.5, w: 102, h: 27, rotate: 7.2 },
-          { type: "image", src: "line_github.svg", x: 54.6, y: 117.1, w: 135, h: 3.3, rotate: 7.2 },
+          { type: "text", text: "Git", x: 97.2, y: 88.5, w: 60, h: 27, rotate: 7.2 },
+          { type: "image", src: "line_github.svg", x: 87.1, y: 117.1, w: 70, h: 3.3, rotate: 7.2 },
         ],
       },
     ],

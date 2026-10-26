@@ -12,7 +12,7 @@ const GAP = 200; // ms between erasing one ending and typing the next
 // The start every phrase shares, and the endings that take turns after it (in bold)
 const PHRASES = {
   en: { start: "Plamena is ", endings: ["a curious designer", "growing businesses", "for users and developers"] },
-  bg: { start: "Пламена е ", endings: ["любопитна дизайнерка", "разраства бизнеси", "за потребителите и разработчиците"] },
+  bg: { start: "Пламена е ", endings: ["любопитна дизайнерка", "двигател за растеж на бизнеси", "за потребителите и разработчиците"] },
 };
 
 // When each ending starts being typed and erased, in ms into the loop, and how long the loop is
