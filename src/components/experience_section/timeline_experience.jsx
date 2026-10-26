@@ -221,6 +221,8 @@ const TimelineExperience = () => {
       <HandLetteredHeading
         src="/experience_text.webp"
         alt="Experience"
+        width={590}
+        height={142}
         bgText="Опит"
         imageClassName="w-43.5 lg:w-72.5"
         className="-rotate-4"

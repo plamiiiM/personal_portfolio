@@ -52,6 +52,8 @@ const SkillsetSection = () => {
       <HandLetteredHeading
         src="/skillset_text.webp"
         alt="Skillset"
+        width={513}
+        height={237}
         bgText="Умения"
         imageClassName="w-25.75 lg:w-42.75"
         className="-rotate-4 self-start"

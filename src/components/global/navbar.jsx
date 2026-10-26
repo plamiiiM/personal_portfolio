@@ -35,6 +35,19 @@ const scrollToSection = (e, href) => {
   history.pushState(null, "", href);
 };
 
+// Keeps the URL's #section on the section being read (the last one past a third of the screen, the last of them all
+// at the bottom of the page), so a refresh opens there rather than at the last link clicked
+const syncHashToSection = () => {
+  const sections = NAV_LINKS.map(({ href }) => document.querySelector(href)).filter(Boolean);
+  if (!sections.length) return;
+  const isAtBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+  const section = isAtBottom
+    ? sections.at(-1)
+    : sections.findLast((section) => section.getBoundingClientRect().top <= window.innerHeight / 3);
+  const hash = section ? `#${section.id}` : "";
+  if (hash !== window.location.hash) history.replaceState(history.state, "", location.pathname + location.search + hash);
+};
+
 // Slightly wobbly horizontal line in a 1000x6 viewBox that gets stretched to the nav width
 const pencilLine = (from, to, phase) => {
   const points = [];
@@ -164,6 +177,7 @@ const Navbar = () => {
     const onScroll = () => {
       const y = window.scrollY;
       setScrolled(y > 10);
+      syncHashToSection();
       // Ignore tiny movements so the nav doesn't flicker, and always show it near the top
       if (Math.abs(y - lastY) < 6) return;
       setHidden(y > lastY && y > NAV_HEIGHT);

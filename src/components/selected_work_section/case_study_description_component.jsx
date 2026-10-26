@@ -4,9 +4,11 @@ import Button from "../global/buttons";
 import useLanguage from "../global/use_language";
 import InView from "../global/in_view";
 
-// Comes in once it scrolls into view: the collage rises, the title is stuck on over it, then the text and the button follow
+// Comes in once it scrolls into view: the collage rises, the title is stuck on over it, then the text and the button follow.
+// `collageSize` ([width, height], the collage's own size) keeps its space while it loads, so the page below doesn't move
 const CaseStudyDescriptionComponent = ({
   projectCollage,
+  collageSize = [631, 693],
   titleOfProject,
   description,
   caseStudyLink,
@@ -23,6 +25,8 @@ const CaseStudyDescriptionComponent = ({
       <img
         className={`rise mx-auto w-full max-w-80 lg:mx-0 lg:max-w-none ${collageClassName} object-contain`}
         src={projectCollage ? projectCollage : "/fallback_thumbnail_cases.png"}
+        width={collageSize[0]}
+        height={collageSize[1]}
         loading="lazy"
         alt={t({
           en: `Collection of visual assets and wireframes for ${titleOfProject}`,
