@@ -16,6 +16,8 @@ const SelectedWorkSection = () => {
           id="work"
           src="/selected_work_text.webp"
           alt="Selected Work"
+          width={512}
+          height={233}
           bgText={
             <>
               Избрани
@@ -30,6 +32,8 @@ const SelectedWorkSection = () => {
             so it's faded out before the cut when there's paper beside it (--side-room from ScaleToFit), not at the edge of the screen */}
         <img
           src="/elephant.webp"
+          width={640}
+          height={934}
           loading="lazy"
           alt={t({ en: "Elephant", bg: "Слон" })}
           className="relative w-36 lg:w-[20rem] max-w-md max-md:-right-[1.7rem] max-md:[--side-room:0] lg:-right-4"
@@ -39,6 +43,7 @@ const SelectedWorkSection = () => {
       <main className="flex flex-col justify-start items-start gap-y-20 lg:gap-y-70 mt-12 lg:mt-30 lg:mr-28">
         <CaseStudyDescriptionComponent
           projectCollage="/smartnet_collage_bigger.webp"
+          collageSize={[605, 877]}
           titleOfProject="SmartNet App"
           description={t({
             en: (
@@ -81,6 +86,7 @@ const SelectedWorkSection = () => {
         />
         <CaseStudyDescriptionComponent
           projectCollage="/equine_integration_collage_3.webp"
+          collageSize={[960, 989]}
           titleOfProject="Equine Integration"
           isReversed
           collageClassName="lg:w-auto lg:h-122"

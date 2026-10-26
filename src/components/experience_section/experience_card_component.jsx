@@ -32,6 +32,8 @@ export function ExperienceCardComponent({
               <img
                 src={imageOfEmployer ? `${imageOfEmployer}` : null}
                 alt=""
+                width={256}
+                height={256}
                 loading="lazy"
                 className="w-full h-full object-cover rounded-full"
               />
