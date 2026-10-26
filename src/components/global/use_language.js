@@ -22,9 +22,11 @@ const startingLanguage = () => {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (LANGUAGES.some(({ code }) => code === saved)) return saved;
   } catch {
-    // Storage is blocked (e.g. cookies off), so it goes by location every visit
+    // Storage is blocked (e.g. cookies off), so it falls back to the default every visit
   }
-  return Intl.DateTimeFormat().resolvedOptions().timeZone === "Europe/Sofia" ? "bg" : "en";
+  // Picking the language by location is off for now, everyone starts in English. To be revisited
+  // return Intl.DateTimeFormat().resolvedOptions().timeZone === "Europe/Sofia" ? "bg" : "en";
+  return "en";
 };
 
 // Points the address bar at the page in that language and names the tab in it, without reloading the page.
