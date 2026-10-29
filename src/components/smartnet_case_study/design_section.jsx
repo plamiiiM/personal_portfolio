@@ -1,6 +1,11 @@
 import React from "react";
 import Collage from "../case_study/collage";
-import { Paragraph, SectionLabel, SectionTitle, SubsectionTitle } from "../case_study/typography";
+import {
+  Paragraph,
+  SectionLabel,
+  SectionTitle,
+  SubsectionTitle,
+} from "../case_study/typography";
 import SideBySide from "../case_study/side_by_side";
 import useLanguage from "../global/use_language";
 
@@ -11,8 +16,12 @@ const DesignSection = () => {
     <section className="mt-20 lg:mt-11">
       <SideBySide>
         <div className="lg:ml-33 lg:mt-13.5 lg:w-126.5">
-          <SectionLabel>{t({ en: "Design and approach", bg: "Дизайн и подход" })}</SectionLabel>
-          <SectionTitle className="mt-3.5">{t({ en: "Mood board & aesthetics", bg: "Мууд борд и естетика" })}</SectionTitle>
+          <SectionLabel>
+            {t({ en: "Design and approach", bg: "Дизайн и подход" })}
+          </SectionLabel>
+          <SectionTitle className="mt-3.5">
+            {t({ en: "Mood board & aesthetics", bg: "Мууд борд и естетика" })}
+          </SectionTitle>
           <Paragraph className="mt-3">
             {t({
               en: "For the brand identity of the app, I followed clients wishes of brand representation and adapted them to a new visual system of custom colors, fonts, illustrations and UI.",
@@ -53,7 +62,9 @@ const DesignSection = () => {
 
       <SideBySide className="mt-14 lg:mt-54.5">
         <div className="lg:ml-34 lg:mt-24.75 lg:w-126.5">
-          <SectionTitle>{t({ en: "Gamified drills", bg: "Упражнения като игри" })}</SectionTitle>
+          <SectionTitle>
+            {t({ en: "Gamified drills", bg: "Упражнения като игри" })}
+          </SectionTitle>
           <Paragraph className="mt-3">
             {t({
               en: "I crafted 6 different games targeting the skills needed for a footballer to succeed. Focusing on training accuracy through progressive difficulty, speed and precision.",
@@ -92,7 +103,9 @@ const DesignSection = () => {
       />
 
       <div className="relative z-10 mt-14 lg:ml-205 lg:mt-50.75 lg:w-126.5">
-        <SubsectionTitle>{t({ en: "Level Mastery", bg: "Овладяване на нивата" })}</SubsectionTitle>
+        <SubsectionTitle>
+          {t({ en: "Level Mastery", bg: "Овладяване на нивата" })}
+        </SubsectionTitle>
         <Paragraph>
           {t({
             en: "Gamification was a crucial key to the drills. By adding difficulty levels, revealing instant scores and providing feedback, I keep player motivation and ensure user retention.",
@@ -105,7 +118,14 @@ const DesignSection = () => {
         className="mt-6 lg:-ml-60.75 lg:-mt-21"
         width={1407}
         height={631}
-        phone={{ width: 828, height: 1083, shifts: [[0, 0], [-701, 452]] }}
+        phone={{
+          width: 828,
+          height: 1083,
+          shifts: [
+            [0, 0],
+            [-701, 452],
+          ],
+        }}
         items={[
           {
             src: "/smartnet/level_mastery_stats.webp",
@@ -120,7 +140,10 @@ const DesignSection = () => {
           },
           {
             src: "/smartnet/level_mastery_levels.webp",
-            alt: t({ en: "Notebook sketches of the pre-set and custom level options", bg: "Скици в тетрадка на готовите и персонализираните нива" }),
+            alt: t({
+              en: "Notebook sketches of the pre-set and custom level options",
+              bg: "Скици в тетрадка на готовите и персонализираните нива",
+            }),
             x: 823,
             y: 193,
             w: 584,
@@ -133,11 +156,21 @@ const DesignSection = () => {
         className="mt-6 lg:ml-82.5 lg:mt-11.75"
         width={809.5}
         height={478}
-        phone={{ width: 513, height: 478, shifts: [[0, 0], [-296.5, 0]] }}
+        phone={{
+          width: 513,
+          height: 478,
+          shifts: [
+            [0, 0],
+            [-296.5, 0],
+          ],
+        }}
         items={[
           {
             src: "/smartnet/level_mastery_phone_training.webp",
-            alt: t({ en: "Choose training screen with All areas and Goal corners", bg: "Екранът за избор на тренировка с All areas и Goal corners" }),
+            alt: t({
+              en: "Choose training screen with All areas and Goal corners",
+              bg: "Екранът за избор на тренировка с All areas и Goal corners",
+            }),
             x: 0,
             y: 0,
             w: 236.5,
@@ -145,7 +178,10 @@ const DesignSection = () => {
           },
           {
             src: "/smartnet/level_mastery_phone_levels.webp",
-            alt: t({ en: "Levels screen with easy, medium and hard levels", bg: "Екранът с нивата: лесно, средно и трудно" }),
+            alt: t({
+              en: "Levels screen with easy, medium and hard levels",
+              bg: "Екранът с нивата: лесно, средно и трудно",
+            }),
             x: 573,
             y: 0,
             w: 236.5,
@@ -156,7 +192,9 @@ const DesignSection = () => {
 
       <SideBySide className="mt-14 lg:mt-10.75">
         <div className="lg:ml-33 lg:mt-59.75 lg:w-126.5">
-          <SubsectionTitle>{t({ en: "During the game", bg: "По време на игра" })}</SubsectionTitle>
+          <SubsectionTitle>
+            {t({ en: "During the game", bg: "По време на игра" })}
+          </SubsectionTitle>
           <Paragraph>
             {t({
               en: "Inside the game, I provided clear visuals and modern approach to what coaches and players are seeing, showing user need’s prioritization. The SmartNet design works by allowing the coach to see in real time which sector of the goal is the aim, the score board and time.",
@@ -197,8 +235,10 @@ const DesignSection = () => {
           ]}
         />
         <div className="lg:mr-59.5 lg:mt-43 lg:w-113.75">
-          <SubsectionTitle>{t({ en: "User Flow", bg: "Потребителски поток" })}</SubsectionTitle>
-          <Paragraph className="mt-2">
+          <SubsectionTitle>
+            {t({ en: "User Flow", bg: "Потребителски поток" })}
+          </SubsectionTitle>
+          <Paragraph>
             {t({
               en: "The whole game is coordinated in a simple user flow, giving the freedom and ease for both users to start and track field progression.",
               bg: "Цялата игра е подредена в прост потребителски поток, който дава на играча и треньора свободата и лекотата да започнат и да следят напредъка на терена.",
@@ -207,7 +247,9 @@ const DesignSection = () => {
         </div>
       </SideBySide>
 
-      <SectionTitle className="mt-14 lg:ml-45 lg:mt-65.5">{t({ en: "Illustrations", bg: "Илюстрации" })}</SectionTitle>
+      <SectionTitle className="mt-14 lg:ml-45 lg:mt-65.5">
+        {t({ en: "Illustrations", bg: "Илюстрации" })}
+      </SectionTitle>
       <Collage
         className="mt-6 lg:ml-30.25 lg:mt-10.5"
         width={1220}
@@ -226,7 +268,10 @@ const DesignSection = () => {
           },
           {
             src: "/smartnet/illustrations_sketch_speed.webp",
-            alt: t({ en: "Pencil sketches for the speed drill illustrations", bg: "Скици с молив за илюстрациите на упражнението за бързина" }),
+            alt: t({
+              en: "Pencil sketches for the speed drill illustrations",
+              bg: "Скици с молив за илюстрациите на упражнението за бързина",
+            }),
             x: 0,
             y: 114.7,
             w: 595.5,
@@ -234,7 +279,10 @@ const DesignSection = () => {
           },
           {
             src: "/smartnet/illustrations_sketch_zones.webp",
-            alt: t({ en: "Pencil sketches of the half-space and wide shooting zones", bg: "Скици с молив на зоните за стрелба в полупространствата и по крилата" }),
+            alt: t({
+              en: "Pencil sketches of the half-space and wide shooting zones",
+              bg: "Скици с молив на зоните за стрелба в полупространствата и по крилата",
+            }),
             x: 613.5,
             y: 0,
             w: 571.5,
@@ -253,14 +301,29 @@ const DesignSection = () => {
           },
           {
             src: "/smartnet/illustrations_speed.webp",
-            alt: t({ en: "Illustration of a player sprinting to shoot at the goal", bg: "Илюстрация на играч, който спринтира, за да стреля към вратата" }),
+            alt: t({
+              en: "Illustration of a player sprinting to shoot at the goal",
+              bg: "Илюстрация на играч, който спринтира, за да стреля към вратата",
+            }),
             x: 74,
             y: 584.7,
             w: 373,
             h: 231,
           },
-          { src: "/smartnet/illustrations_arrow_right.webp", x: 687.2, y: 381.6, w: 171.5, h: 167.5 },
-          { src: "/smartnet/illustrations_arrow_left.webp", x: 148, y: 463.7, w: 168.5, h: 172.5 },
+          {
+            src: "/smartnet/illustrations_arrow_right.webp",
+            x: 687.2,
+            y: 381.6,
+            w: 171.5,
+            h: 167.5,
+          },
+          {
+            src: "/smartnet/illustrations_arrow_left.webp",
+            x: 148,
+            y: 463.7,
+            w: 168.5,
+            h: 172.5,
+          },
         ]}
       />
     </section>

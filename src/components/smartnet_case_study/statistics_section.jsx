@@ -1,6 +1,10 @@
 import React from "react";
 import Collage from "../case_study/collage";
-import { Paragraph, SectionTitle, SubsectionTitle } from "../case_study/typography";
+import {
+  Paragraph,
+  SectionTitle,
+  SubsectionTitle,
+} from "../case_study/typography";
 import SideBySide from "../case_study/side_by_side";
 import useLanguage from "../global/use_language";
 
@@ -11,10 +15,17 @@ const StatisticsSection = () => {
     <section className="mt-20 lg:mt-70.75">
       <SideBySide>
         <div className="lg:ml-33 lg:mt-27.25">
-          <SectionTitle>{t({ en: "Player and game statistics", bg: "Статистика за играчите и игрите" })}</SectionTitle>
+          <SectionTitle>
+            {t({
+              en: "Player and game statistics",
+              bg: "Статистика за играчите и игрите",
+            })}
+          </SectionTitle>
           <div className="mt-6 lg:mt-10.5 lg:w-113.75">
-            <SubsectionTitle>{t({ en: "Statistics", bg: "Статистика" })}</SubsectionTitle>
-            <Paragraph className="mt-2">
+            <SubsectionTitle>
+              {t({ en: "Statistics", bg: "Статистика" })}
+            </SubsectionTitle>
+            <Paragraph>
               {t({
                 en: "The most important part of the application is the statistics panel. There all information about the progress is stored and visible for coaches and players.",
                 bg: "Най-важната част от приложението е панелът със статистика. Там се пази цялата информация за напредъка и тя е видима за треньорите и играчите.",
@@ -95,14 +106,16 @@ const StatisticsSection = () => {
           ]}
         />
         <div className="lg:mr-37.25 lg:mt-53.25 lg:w-113.75">
-          <SubsectionTitle>{t({ en: "Past Activities", bg: "Минали активности" })}</SubsectionTitle>
-          <Paragraph className="mt-2">
+          <SubsectionTitle>
+            {t({ en: "Past Activities", bg: "Минали активности" })}
+          </SubsectionTitle>
+          <Paragraph>
             {t({
               en: "In the ‘Past Activities’ section the coaches are most happy. They are able to see all past exercises and filter them through each team and even player.",
               bg: "Секцията „Минали активности“ е любимата на треньорите. В нея виждат всички минали упражнения и могат да ги филтрират по отбор и дори по играч.",
             })}
           </Paragraph>
-          <Paragraph className="mt-4.75">
+          <Paragraph>
             {t({
               en: "Each game consists of information about it’s level, the results and finally the most interactive part - ‘The target map’, which allows the user to see where the ball hit for each sequence.",
               bg: "Всяка игра съдържа информация за нивото си, резултатите и накрая най-интерактивната част – „Картата на попаденията“, която показва къде е попаднала топката при всяка серия.",
@@ -113,7 +126,9 @@ const StatisticsSection = () => {
 
       <SideBySide className="mt-14 lg:mt-43.75">
         <div className="lg:ml-51.5 lg:mt-39 lg:w-113.75">
-          <SubsectionTitle>{t({ en: "Player Statistics", bg: "Статистика на играчите" })}</SubsectionTitle>
+          <SubsectionTitle>
+            {t({ en: "Player Statistics", bg: "Статистика на играчите" })}
+          </SubsectionTitle>
           <Paragraph className="mt-2">
             {t({
               en: "This section is with the purpose of gathering all the information about each registered player. You are able to see their position, team and even which area they are lacking in.",

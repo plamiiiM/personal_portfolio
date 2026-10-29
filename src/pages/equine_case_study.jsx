@@ -30,7 +30,12 @@ function EquineCaseStudy() {
             <DesignSection />
             <FeaturesSection />
             <div className="mt-10 lg:ml-33 lg:mt-17.25">
-              <FooterSection />
+              <FooterSection
+                tagline={{
+                  en: "Want UX research that turns interviews into features?",
+                  bg: "Търсите UX проучване, което превръща интервютата във функционалности?",
+                }}
+              />
             </div>
           </InViewHold>
         </article>

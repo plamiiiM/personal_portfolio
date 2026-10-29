@@ -18,8 +18,8 @@ const HighlightedWords = ({ children }) => (
 );
 
 // On phones it's a centred sign-off: the whole pencil line shrunk to the column, then the text, the links and the
-// fish one under another
-const FooterSection = () => {
+// fish one under another. A case study can open it with a tagline of its own, as { en, bg }
+const FooterSection = ({ tagline = { en: "You think I'm a good fit?", bg: "Смятате, че съм подходяща?" } }) => {
   const { t } = useLanguage();
 
   return (
@@ -27,7 +27,7 @@ const FooterSection = () => {
       <img src="/footer_line.png" alt="" className="w-full lg:absolute lg:top-0 lg:-left-30 lg:w-auto" />
       <div className="flex flex-col items-center text-center gap-y-6 lg:items-stretch lg:text-left">
         <div className="font-poppins text-[1.375rem] lg:text-[1.75rem]">
-          <p className="font-bold">{t({ en: "You think I'm a good fit?", bg: "Смятате, че съм подходяща?" })}</p>
+          <p className="font-bold">{t(tagline)}</p>
           <p className="font-light italic">
             {t({
               en: (

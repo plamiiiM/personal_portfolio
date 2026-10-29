@@ -1,25 +1,32 @@
 import React from "react";
 import Collage from "../case_study/collage";
-import { ExpertiseList, NameTag, ProjectDetails, Tagline } from "../case_study/hero";
+import {
+  ExpertiseList,
+  NameTag,
+  ProjectDetails,
+  Tagline,
+} from "../case_study/hero";
 import ScreenRecording from "../case_study/screen_recording";
 import SideBySide from "../case_study/side_by_side";
 import useLanguage from "../global/use_language";
 
 // The pencil underlines are placed by hand in the design, so a couple of them sit slightly off.
-// The Bulgarian labels have lengths of their own, so there each line stretches to its label
-const BG_LINE = "mt-[25.84px] w-full h-0.5";
 const EXPERTISE = {
   en: [
     { label: "Gamification" },
-    { label: "App Design", labelClassName: "ml-[7.87px]" },
-    { label: "User Persona" },
-    { label: "Journey Mapping", lineClassName: "ml-[4.4px] mt-[29.88px]" },
+    { label: "App Design" },
+    { label: "UX Research" },
+    { label: "Data Visualisation", lineClassName: "mt-[29.88px]" },
+    { label: "User Flow", lineClassName: "mt-[29.88px]" },
+    { label: "IoT Design", lineClassName: "mt-[29.88px]" },
   ],
   bg: [
-    { label: "Геймификация", lineClassName: BG_LINE },
-    { label: "Дизайн на приложения", lineClassName: BG_LINE },
-    { label: "Потребителска персона", lineClassName: BG_LINE },
-    { label: "Карта на пътуването", lineClassName: BG_LINE },
+    { label: "Геймификация" },
+    { label: "Дизайн на приложения" },
+    { label: "UX Проучване" },
+    { label: "Визуализация на данни" },
+    { label: "Потребителски поток" },
+    { label: "Дизайн на IoT" },
   ],
 };
 
@@ -29,10 +36,22 @@ const HeroSection = () => {
   const details = [
     {
       term: t({ en: "Time Period", bg: "Период" }),
-      details: t({ en: "September 25 - January 26", bg: "Септември 2025 – януари 2026" }),
+      details: t({
+        en: "September 25 - January 26",
+        bg: "Септември 2025 – януари 2026",
+      }),
     },
-    { term: t({ en: "Platform", bg: "Платформа" }), details: t({ en: "Mobile App (iOS / Android)", bg: "Мобилно приложение (iOS / Android)" }) },
-    { term: t({ en: "Expertise", bg: "Експертиза" }), details: <ExpertiseList items={t(EXPERTISE)} /> },
+    {
+      term: t({ en: "Platform", bg: "Платформа" }),
+      details: t({
+        en: "Mobile App (iOS / Android)",
+        bg: "Мобилно приложение (iOS / Android)",
+      }),
+    },
+    {
+      term: t({ en: "Expertise", bg: "Експертиза" }),
+      details: <ExpertiseList items={t(EXPERTISE)} />,
+    },
   ];
 
   return (
@@ -45,7 +64,10 @@ const HeroSection = () => {
           en: "Uniting the football world with smart technology",
           bg: "Обединяване на футболния свят чрез умни технологии",
         })}
-        role={t({ en: "SmartNet | Intern UX/ UI Design", bg: "SmartNet | Стаж по UX/UI дизайн" })}
+        role={t({
+          en: "SmartNet | Intern UX/ UI Design",
+          bg: "SmartNet | Стаж по UX/UI дизайн",
+        })}
       />
 
       <SideBySide isCentered className="mt-10 lg:mt-26.5">
@@ -84,7 +106,14 @@ const HeroSection = () => {
               w: 181,
               h: 389.5,
             },
-            { group: "phone", src: "/smartnet/hero_phone_frame.webp", x: 0, y: 152, w: 201.5, h: 407 },
+            {
+              group: "phone",
+              src: "/smartnet/hero_phone_frame.webp",
+              x: 0,
+              y: 152,
+              w: 201.5,
+              h: 407,
+            },
           ]}
         />
       </SideBySide>

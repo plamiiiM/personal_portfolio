@@ -32,7 +32,12 @@ function SmartnetCaseStudy() {
             <DesignSection />
             <StatisticsSection />
             <div className="mt-10 lg:ml-33 lg:mt-17.25">
-              <FooterSection />
+              <FooterSection
+                tagline={{
+                  en: "Want UX research that actually shapes the product?",
+                  bg: "Търсите UX проучване, което наистина оформя продукта?",
+                }}
+              />
             </div>
           </InViewHold>
         </article>

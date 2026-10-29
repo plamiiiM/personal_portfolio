@@ -31,14 +31,15 @@ export const ProjectDetails = ({ items, className = "" }) => (
   </dl>
 );
 
-// Skills underlined in pencil. The underlines are placed by hand in the designs, so an item can nudge its
-// label or line, and a longer label can bring a longer line: { label, labelClassName, lineClassName, lineSrc }
+// Skills underlined in pencil. Each line stretches to the width of its label, so it fits whatever the label's
+// length or language. The underlines are placed by hand in the designs, so an item can set its line a little lower,
+// or bring a line drawn of its own: { label, labelClassName, lineClassName, lineSrc }
 export const ExpertiseList = ({ items }) => (
   <ul className="flex flex-wrap gap-5 text-[1rem] tracking-[0.03em]">
     {items.map(({ label, labelClassName = "", lineClassName = "mt-[25.84px]", lineSrc = "/case_study/filter_underline.svg" }) => (
       <li key={label} className="grid">
         <span className={`col-start-1 row-start-1 whitespace-nowrap ${labelClassName}`}>{label}</span>
-        <img src={lineSrc} alt="" className={`col-start-1 row-start-1 self-start ${lineClassName}`} />
+        <img src={lineSrc} alt="" className={`col-start-1 row-start-1 self-start h-0.5 w-full ${lineClassName}`} />
       </li>
     ))}
   </ul>
