@@ -52,7 +52,7 @@ export const Paragraph = ({ isPretty, children, className = "" }) => (
   <InView
     as="p"
     isWhole
-    className={`soft-in font-poppins text-[1rem] lg:text-[1.125rem] tracking-[0.03em] ${
+    className={`soft-in font-poppins text-[1rem] lg:text-[1.125rem] tracking-[0.03em] mt-3 ${
       isPretty ? "text-pretty" : "text-balance"
     } ${className}`}
   >

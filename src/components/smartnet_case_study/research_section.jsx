@@ -2,7 +2,12 @@ import React from "react";
 import Collage from "../case_study/collage";
 import { noteShadow } from "../case_study/note_shadow";
 import MarkedWord from "../global/marked_word_component";
-import { Paragraph, SectionLabel, SectionTitle, SubsectionTitle } from "../case_study/typography";
+import {
+  Paragraph,
+  SectionLabel,
+  SectionTitle,
+  SubsectionTitle,
+} from "../case_study/typography";
 import SideBySide from "../case_study/side_by_side";
 import useLanguage from "../global/use_language";
 
@@ -13,7 +18,12 @@ const ResearchSection = () => {
     <section className="mt-20 lg:mt-53">
       <div className="lg:ml-33">
         <SectionLabel>{t({ en: "Research", bg: "Проучване" })}</SectionLabel>
-        <SectionTitle>{t({ en: "Football drills and training", bg: "Футболни упражнения и тренировки" })}</SectionTitle>
+        <SectionTitle>
+          {t({
+            en: "Football drills and training",
+            bg: "Футболни упражнения и тренировки",
+          })}
+        </SectionTitle>
       </div>
 
       <SideBySide isPictureFirst className="mt-6 lg:mt-16.25">
@@ -24,7 +34,10 @@ const ResearchSection = () => {
           items={[
             {
               src: "/smartnet/research_goal.webp",
-              alt: t({ en: "Illustrated goal with a question mark", bg: "Илюстрация на врата с въпросителен знак" }),
+              alt: t({
+                en: "Illustrated goal with a question mark",
+                bg: "Илюстрация на врата с въпросителен знак",
+              }),
               x: 467,
               y: 355,
               w: 431,
@@ -46,7 +59,14 @@ const ResearchSection = () => {
             // blank note is laid exactly over it with its shadow, and the question written on in either language.
             // It comes in with the drills, so the note in the picture never shows
             noteShadow({ group: "drills", x: 348, y: 258.6, w: 250.5, h: 259 }),
-            { group: "drills", src: "/smartnet/sticky_note.webp", x: 348, y: 258.6, w: 250.5, h: 259 },
+            {
+              group: "drills",
+              src: "/smartnet/sticky_note.webp",
+              x: 348,
+              y: 258.6,
+              w: 250.5,
+              h: 259,
+            },
             {
               group: "drills",
               x: 378,
@@ -89,7 +109,10 @@ const ResearchSection = () => {
             items={[
               {
                 src: "/smartnet/gameplay_phone.webp",
-                alt: t({ en: "SmartNet exercises screen", bg: "Екранът с упражнения на SmartNet" }),
+                alt: t({
+                  en: "SmartNet exercises screen",
+                  bg: "Екранът с упражнения на SmartNet",
+                }),
                 x: 0,
                 y: 0,
                 w: 241,
@@ -116,7 +139,10 @@ const ResearchSection = () => {
           items={[
             {
               src: "/smartnet/gameplay_accuracy_ladder.webp",
-              alt: t({ en: "User flow of the Accuracy ladder game", bg: "Потребителският поток на играта Accuracy ladder" }),
+              alt: t({
+                en: "User flow of the Accuracy ladder game",
+                bg: "Потребителският поток на играта Accuracy ladder",
+              }),
               x: 0,
               y: 0,
               w: 577.5,
@@ -124,7 +150,10 @@ const ResearchSection = () => {
             },
             {
               src: "/smartnet/gameplay_sprint_shoot.webp",
-              alt: t({ en: "User flow of the Sprint and shoot game", bg: "Потребителският поток на играта Sprint and shoot" }),
+              alt: t({
+                en: "User flow of the Sprint and shoot game",
+                bg: "Потребителският поток на играта Sprint and shoot",
+              }),
               x: 132.3,
               y: 330.6,
               w: 590.5,
@@ -136,23 +165,45 @@ const ResearchSection = () => {
 
       <SideBySide className="mt-14 lg:mt-55.5">
         <div className="lg:ml-33 lg:mt-17.75 lg:w-125.25">
-          <SectionTitle>{t({ en: "Data Feedback", bg: "Обратна връзка от данните" })}</SectionTitle>
+          <SectionTitle>
+            {t({ en: "Data Feedback", bg: "Обратна връзка от данните" })}
+          </SectionTitle>
           <Paragraph className="mt-3">
             {t({
               en: (
                 <>
-                  By researching coach workflows, I <MarkedWord isHighlighted isDrawn>identified their needs</MarkedWord> and
-                  designed a UI that displays only the stats that matter to them. This gives coaches{" "}
-                  <MarkedWord isHighlighted isDrawn>immediate, clear insights</MarkedWord> into{" "}
-                  <MarkedWord isHighlighted isDrawn>player performance</MarkedWord> without unnecessary distraction.
+                  By researching coach workflows, I{" "}
+                  <MarkedWord isHighlighted isDrawn>
+                    identified their needs
+                  </MarkedWord>{" "}
+                  and designed a UI that displays only the stats that matter to
+                  them. This gives coaches{" "}
+                  <MarkedWord isHighlighted isDrawn>
+                    immediate, clear insights
+                  </MarkedWord>{" "}
+                  into{" "}
+                  <MarkedWord isHighlighted isDrawn>
+                    player performance
+                  </MarkedWord>{" "}
+                  without unnecessary distraction.
                 </>
               ),
               bg: (
                 <>
-                  Като проучих как работят треньорите, <MarkedWord isHighlighted isDrawn>открих нуждите им</MarkedWord> и
-                  проектирах интерфейс, който показва само статистиките, важни за тях. Така треньорите получават{" "}
-                  <MarkedWord isHighlighted isDrawn>моментална и ясна представа</MarkedWord> за{" "}
-                  <MarkedWord isHighlighted isDrawn>представянето на играчите</MarkedWord> без излишни разсейвания.
+                  Като проучих как работят треньорите,{" "}
+                  <MarkedWord isHighlighted isDrawn>
+                    открих нуждите им
+                  </MarkedWord>{" "}
+                  и проектирах интерфейс, който показва само статистиките, важни
+                  за тях. Така треньорите получават{" "}
+                  <MarkedWord isHighlighted isDrawn>
+                    моментална и ясна представа
+                  </MarkedWord>{" "}
+                  за{" "}
+                  <MarkedWord isHighlighted isDrawn>
+                    представянето на играчите
+                  </MarkedWord>{" "}
+                  без излишни разсейвания.
                 </>
               ),
             })}
@@ -175,7 +226,14 @@ const ResearchSection = () => {
               h: 453,
             },
             noteShadow({ note: "question", x: 285, y: 366, w: 248.5, h: 257 }),
-            { note: "question", src: "/smartnet/sticky_note.webp", x: 285, y: 366, w: 248.5, h: 257 },
+            {
+              note: "question",
+              src: "/smartnet/sticky_note.webp",
+              x: 285,
+              y: 366,
+              w: 248.5,
+              h: 257,
+            },
             {
               note: "question",
               x: 317.7,
@@ -215,7 +273,10 @@ const ResearchSection = () => {
             },
             {
               src: "/smartnet/player_ui_sketch.webp",
-              alt: t({ en: "Hand-drawn sketch of the statistics screen", bg: "Ръчно нарисувана скица на екрана със статистика" }),
+              alt: t({
+                en: "Hand-drawn sketch of the statistics screen",
+                bg: "Ръчно нарисувана скица на екрана със статистика",
+              }),
               x: 359.2,
               y: 86.4,
               w: 365,
@@ -239,19 +300,29 @@ const ResearchSection = () => {
             {t({
               en: (
                 <>
-                  To maintain player motivation and avoid toxic friction within teams, I designed{" "}
-                  <MarkedWord isHighlighted isDrawn>role-based dashboards</MarkedWord>.
+                  To maintain player motivation and avoid toxic friction within
+                  teams, I designed{" "}
+                  <MarkedWord isHighlighted isDrawn>
+                    role-based dashboards
+                  </MarkedWord>
+                  .
                 </>
               ),
               bg: (
                 <>
-                  За да запазя мотивацията на играчите и да избегна токсичното напрежение в отборите, проектирах{" "}
-                  <MarkedWord isHighlighted isDrawn>табла според ролята</MarkedWord>.
+                  За да запазя мотивацията на играчите и да избегна токсичното
+                  напрежение в отборите, проектирах{" "}
+                  <MarkedWord isHighlighted isDrawn>
+                    табла според ролята
+                  </MarkedWord>
+                  .
                 </>
               ),
             })}
           </Paragraph>
-          <SubsectionTitle className="mt-8 lg:mt-12.5">{t({ en: "Player UIs", bg: "Интерфейс за играчите" })}</SubsectionTitle>
+          <SubsectionTitle className="mt-8 lg:mt-12.5">
+            {t({ en: "Player UIs", bg: "Интерфейс за играчите" })}
+          </SubsectionTitle>
           <Paragraph className="mt-3">
             {t({
               en: "Personal milestones and skill metrics are focused exclusively for each player",
@@ -263,8 +334,10 @@ const ResearchSection = () => {
 
       <SideBySide className="mt-14 lg:mt-34">
         <div className="lg:ml-50 lg:mt-56.25 lg:w-104.5">
-          <SubsectionTitle>{t({ en: "Coach UIs", bg: "Интерфейс за треньорите" })}</SubsectionTitle>
-          <Paragraph className="mt-1">
+          <SubsectionTitle>
+            {t({ en: "Coach UIs", bg: "Интерфейс за треньорите" })}
+          </SubsectionTitle>
+          <Paragraph>
             {t({
               en: "Able to see side by side player comparative analytics, providing the coaches with the deep insights needed to optimize training.",
               bg: "Треньорите могат да сравняват играчите един до друг, което им дава задълбочената представа, нужна за по-добри тренировки.",

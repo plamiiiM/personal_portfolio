@@ -6,22 +6,20 @@ import SideBySide from "../case_study/side_by_side";
 import useLanguage from "../global/use_language";
 
 // The pencil underlines are placed by hand in the design, so they sit at slightly different depths.
-// The Bulgarian labels have lengths of their own, so there each line stretches to its label
-const BG_LINE = "mt-[25.84px] w-full h-0.5";
 const EXPERTISE = {
   en: [
     { label: "Gamification" },
-    { label: "UX Research", labelClassName: "ml-[4.87px]", lineClassName: "mt-[25.24px]" },
+    { label: "UX Research", lineClassName: "mt-[25.24px]" },
     { label: "Data Analysis", lineClassName: "mt-[25.76px]" },
     { label: "Information Architecture", lineClassName: "mt-[29.36px]", lineSrc: "/equine/filter_underline_wide.svg" },
-    { label: "IoT App Design", lineClassName: "-ml-[2px] mt-[29.4px]", lineSrc: "/equine/filter_underline_short.svg" },
+    { label: "IoT App Design", lineClassName: "mt-[29.4px]", lineSrc: "/equine/filter_underline_short.svg" },
   ],
   bg: [
-    { label: "Геймификация", lineClassName: BG_LINE },
-    { label: "UX проучване", lineClassName: BG_LINE },
-    { label: "Анализ на данни", lineClassName: BG_LINE },
-    { label: "Информационна архитектура", lineClassName: BG_LINE },
-    { label: "Дизайн на IoT приложения", lineClassName: BG_LINE },
+    { label: "Геймификация" },
+    { label: "UX проучване" },
+    { label: "Анализ на данни" },
+    { label: "Информационна архитектура" },
+    { label: "Дизайн на IoT приложения" },
   ],
 };
 
