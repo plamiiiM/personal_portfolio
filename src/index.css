@@ -388,7 +388,15 @@ html {
   }
 }
 
-/* Rows that slide in from the side and fade in once their container is .in-view (the Equine "four questions").
+/* A pinned stage carried down its room by the scroll where it can't be sticky (usePinnedSteps), by --carried */
+@keyframes pin-carry {
+  to {
+    translate: 0 var(--carried);
+  }
+}
+
+/* Rows that slide in from the side and fade in once their container is .in-view (the Equine "four questions", each
+   question with its line).
    Each row sets --reveal-from-x (where it slides from), --reveal-fade and --reveal-slide (durations) and --reveal-delay */
 @keyframes reveal-fade {
   from {

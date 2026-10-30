@@ -1,6 +1,9 @@
 // Figma px -> rem, so the layout follows the root font size like the rest of the site.
 export const rem = (px) => `${px / 16}rem`;
 
+// The nav's height while it's showing (px), for what's pinned under it
+export const NAV_HEIGHT = 96; // h-24
+
 // Inline style for a box placed as in Figma: x, y, w, h in Figma px and rotate in degrees.
 // CSS rotates it around its centre, as Figma does.
 export const place = ({ x, y, w, h, rotate }) => ({

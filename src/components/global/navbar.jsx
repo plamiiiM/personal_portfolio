@@ -4,6 +4,7 @@ import Button from "./buttons";
 import usePhoneLayout from "./use_phone_layout";
 import useLanguage, { LANGUAGES, setLanguage } from "./use_language";
 import CV from "./cv";
+import { NAV_HEIGHT } from "./layout";
 
 const NAV_LINKS = [
   { label: { en: "Work", bg: "Проекти" }, href: "#work" },
@@ -16,7 +17,6 @@ const NAV_LINKS = [
 const PENCIL_UNDERLINE =
   "relative py-1 after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-full after:h-px after:bg-(--pencilLine) after:origin-left after:transition-transform after:duration-300";
 
-const NAV_HEIGHT = 96; // h-24
 const LANDING_GAP = 24; // space left above a section after jumping to it
 
 // The nav hides while scrolling down and comes back when scrolling up,
