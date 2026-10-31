@@ -378,13 +378,13 @@ html {
 }
 
 /* The part of a hypothesis offered like an autocomplete suggestion (Autocompleted): half there, then typed over a
-   letter at a time by the scroll, first to last, as --filled goes from 0 to 1 (--letter is which one of --letters) */
+   letter at a time by the scroll, first to last, as --filled goes from 0 to 1 (--letter is which one of --letters).
+   It follows the scroll frame by frame with no transition of its own: the scroll restarts one every frame, and each
+   letter fading would be taken onto a layer of its own and off again, which flashes on iPhones */
 .autocomplete-letter {
   opacity: calc(0.5 + 0.5 * clamp(0, var(--filled, 0) * var(--letters) - var(--letter), 1));
-  transition: opacity 0.15s linear;
   @media (prefers-reduced-motion: reduce) {
     opacity: 1;
-    transition: none;
   }
 }
 
@@ -397,7 +397,9 @@ html {
 
 /* Rows that slide in from the side and fade in once their container is .in-view (the Equine "four questions", each
    question with its line).
-   Each row sets --reveal-from-x (where it slides from), --reveal-fade and --reveal-slide (durations) and --reveal-delay */
+   Each row sets --reveal-from-x (where it slides from), --reveal-fade and --reveal-slide (durations) and --reveal-delay.
+   A row has a layer of its own from the start (will-change), so one isn't made for it inside the pinned list just as it
+   comes in, which flashes the list on iPhones */
 @keyframes reveal-fade {
   from {
     opacity: 0;
@@ -410,6 +412,7 @@ html {
 }
 .reveal {
   opacity: 0;
+  will-change: opacity, translate;
   .in-view & {
     opacity: 1;
     animation:

@@ -22,12 +22,15 @@ const SMALL_BOARD = { src: "/equine/chalkboard.webp", x: 10.16, y: 7.05, w: 612.
 // The three drivers of attachment. The title, the list and the chalk board stay pinned in the window, all of them fitted
 // into it, until the reader has scrolled through every driver, on every screen and by touch too: the drivers open one
 // after another as the page scrolls, one per scroll gesture however big, the open one's description unfolding under it
-// and its drawing fading in on the board. Picking one scrolls to it. Once the reader has scrolled on past the last
-// driver they let go of the pin, so scrolling back up goes past them as usual, with the last driver left open
+// and its drawing fading in on the board. Picking one scrolls to it. The gesture on from the last driver glides the
+// page on to what comes next (the hypothesis), so a strong one can't carry it past unseen. Once the reader has moved on
+// past the last driver they let go of the pin, so scrolling back up goes past them as usual, with the last driver left
+// open
 const AttachmentDrivers = ({ title, className = "" }) => {
   const { roomRef, stageRef, spacerRef, contentRef, step: activeIndex, goTo } = usePinnedSteps(3, {
     fitsWindow: true,
     stepsByGesture: true,
+    glidesToNext: true,
     letsGoPastEnd: true,
   });
   const { t } = useLanguage();
@@ -122,7 +125,9 @@ const AttachmentDrivers = ({ title, className = "" }) => {
   // its room by hand instead, so it's static there.
   // Lengths in the shrunk page are divided by --zoom to stay true to the screen (see ScaleToFit).
   // A description opening changes the stage's height, so the browser isn't to keep the page in place around it
-  // (overflow-anchor): it would nudge the scroll, and the nav takes a nudge up for scrolling up and slides in
+  // (overflow-anchor): it would nudge the scroll, and the nav takes a nudge up for scrolling up and slides in.
+  // What fades from one driver to the next keeps a layer of its own (will-change), rather than being taken onto one
+  // as it starts fading and off it again as it ends, every time, which flashes on iPhones
   return (
     <div ref={roomRef} className={`[overflow-anchor:none] ${className}`}>
       <div
@@ -143,7 +148,7 @@ const AttachmentDrivers = ({ title, className = "" }) => {
                     {/* Pencil mark beside the open driver */}
                     <span
                       className={`absolute -left-4 top-1 h-11 lg:-left-6.75 lg:top-2.25 lg:h-14 w-1 bg-black transition-opacity duration-300
-                                  motion-reduce:transition-none ${isActive ? "opacity-100" : "opacity-0"}`}
+                                  will-change-[opacity] motion-reduce:transition-none ${isActive ? "opacity-100" : "opacity-0"}`}
                       aria-hidden="true"
                     />
                     <button
@@ -159,7 +164,7 @@ const AttachmentDrivers = ({ title, className = "" }) => {
                     {/* Unfolds under the open driver. On phones it takes the room of the longest description, so the list
                         (and with it the fitted stage) is the same height whichever driver is open */}
                     <div
-                      className={`grid transition-[grid-template-rows,opacity] duration-500 ease-out motion-reduce:transition-none ${
+                      className={`grid transition-[grid-template-rows,opacity] duration-500 ease-out will-change-[opacity] motion-reduce:transition-none ${
                         isActive ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
                       }`}
                       aria-hidden={!isActive}
@@ -188,7 +193,7 @@ const AttachmentDrivers = ({ title, className = "" }) => {
               {drivers.map(({ name, visual }, index) => (
                 <div
                   key={name}
-                  className={`col-start-1 row-start-1 transition-opacity duration-500 motion-reduce:transition-none ${
+                  className={`col-start-1 row-start-1 transition-opacity duration-500 will-change-[opacity] motion-reduce:transition-none ${
                     index === activeIndex ? "opacity-100" : "opacity-0"
                   }`}
                   aria-hidden={index !== activeIndex}

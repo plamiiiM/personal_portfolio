@@ -44,19 +44,18 @@ const STAGGER = 0.3;
 
 // The four questions. Like the attachment drivers, the title and the list stay pinned in the window for a stretch of
 // scrolling, and the questions come in one after another as it goes on, one per scroll gesture however strong (the one
-// that brings the list in brings in the first). Once in, a question stays, scrolling back up too.
+// that brings the list in brings in the first). Once in, a question stays, so scrolling back up goes straight on up.
 // The first step is the title on its own, so the first question comes in once the list has pinned.
 // Once all of them have been seen there's nothing left to pin for, so the list lets go of the scrolling it took, as soon
-// as it can without the page jumping (usePinnedSteps), and the page scrolls past it as usual, both ways. A strong
-// scroll moving on from it still stops at the puzzle that comes next, rather than carrying the page on past it
+// as it can without the page jumping (usePinnedSteps), and the page scrolls past it as usual, both ways, on to the
+// puzzle that comes next
 const DesignQuestions = ({ title, className = "" }) => {
   // Up to which question is in, and up to which one was in before the latest ones came
   const [{ shownUpTo, shownBefore }, setShown] = useState({ shownUpTo: 0, shownBefore: 0 });
   const { roomRef, stageRef, spacerRef, step } = usePinnedSteps(QUESTIONS.length + 1, {
     stepsByGesture: true,
     firstStepOnEntry: true,
-    stopsAtNext: true,
-    isDone: shownUpTo === QUESTIONS.length,
+    onlyForward: true,
   });
   if (step > shownUpTo) setShown({ shownUpTo: step, shownBefore: shownUpTo });
   const { t } = useLanguage();

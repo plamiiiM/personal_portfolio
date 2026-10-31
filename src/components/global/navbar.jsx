@@ -18,6 +18,7 @@ const PENCIL_UNDERLINE =
   "relative py-1 after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-full after:h-px after:bg-(--pencilLine) after:origin-left after:transition-transform after:duration-300";
 
 const LANDING_GAP = 24; // space left above a section after jumping to it
+const SHIFT_FOR = 1000; // ms the page's own scrolling (see usePinnedSteps) is left out for at most
 
 // The nav hides while scrolling down and comes back when scrolling up,
 // so only leave room for it when the jump goes up the page
@@ -174,17 +175,30 @@ const Navbar = () => {
 
   useEffect(() => {
     let lastY = window.scrollY;
+    // The page taken somewhere by the page itself, with nothing moving on the screen but a pinned section's step (see
+    // usePinnedSteps), isn't the reader scrolling, so it's left out until the page gets there: { to, until }
+    let shift = null;
     const onScroll = () => {
       const y = window.scrollY;
       setScrolled(y > 10);
       syncHashToSection();
+      if (shift) {
+        lastY = y;
+        if (Math.abs(y - shift.to) < 1 || performance.now() > shift.until) shift = null;
+        return;
+      }
       // Ignore tiny movements so the nav doesn't flicker, and always show it near the top
       if (Math.abs(y - lastY) < 6) return;
       setHidden(y > lastY && y > NAV_HEIGHT);
       lastY = y;
     };
+    const onShift = (e) => (shift = { to: e.detail, until: performance.now() + SHIFT_FOR });
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("scrollshift", onShift);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("scrollshift", onShift);
+    };
   }, []);
 
   // Lets pinned content sit just below the nav while it's showing
