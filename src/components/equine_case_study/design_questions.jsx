@@ -1,77 +1,67 @@
-import React, { useLayoutEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { rem } from "../global/layout";
 import useLanguage from "../global/use_language";
 import usePinnedSteps from "./use_pinned_steps";
 
-// Timings are from the Figma motion, each question's started by the scroll reaching it instead of one after another:
-// the question slides in from its side of the page, then the line on the other side draws in.
-// Phones show the questions one under another, numbers first, without the lines
+// Each question comes in with its line as one row, started by the scroll reaching it: a question on the left slides in
+// left to right, one on the right right to left. Phones show the questions one under another, numbers first, without
+// the lines, so there they all slide in from the left
 const QUESTIONS = [
   {
     number: 1,
     text: { en: "What can we compare across past activities?", bg: "Какво да сравним между тренировките?" },
     marginTop: 114,
-    from: -1009,
     line: { width: 326, className: "relative top-0.5" },
   },
   {
     number: 2,
     text: { en: "Only the last activity, or further back?", bg: "Само последната или и по-старите?" },
     marginTop: 66,
-    from: 899,
     isRight: true,
-    line: { width: 326, from: -530 },
+    line: { width: 326 },
   },
   {
     number: 3,
     text: { en: "How should riders filter?", bg: "Как да филтрират ездачите?" },
     marginTop: 60,
-    from: -652,
     line: { width: 326 },
   },
   {
     number: 4,
     text: { en: "Where in the app does it belong?", bg: "Къде му е мястото в приложението?" },
     marginTop: 85,
-    from: 834,
     isRight: true,
-    line: { width: 336, from: -540 },
+    line: { width: 336 },
   },
 ];
 
-// The line starts drawing this long after its question starts sliding in
-const LINE_DELAY = 0.65;
-
-const reveal = ({ from = 0, delay = 0, fade, slide }) => ({
-  "--reveal-from-x": rem(from),
-  "--reveal-delay": `${delay}s`,
-  "--reveal-fade": `${fade}s`,
-  "--reveal-slide": `${slide}s`,
-});
+// How far a row slides in from (Figma px), and how long it takes
+const SLIDE_FROM = 180;
+const FADE = 0.45;
+const SLIDE = 0.7;
+// Questions the scroll gets to at once, with a quick turn of the wheel, still come in one after another, this far apart
+const STAGGER = 0.3;
 
 // The four questions. Like the attachment drivers, the title and the list stay pinned in the window for a stretch of
-// scrolling, and the questions come in one after another as it goes on. Once in, a question stays, scrolling back up too.
+// scrolling, and the questions come in one after another as it goes on, one per scroll gesture however strong (the one
+// that brings the list in brings in the first). Once in, a question stays, so scrolling back up goes straight on up.
 // The first step is the title on its own, so the first question comes in once the list has pinned.
-// With all of them in, the list unpins and the scrolling it took is let go of, so the page scrolls on (and back up past
-// it) as usual: the room shrinks back to the list, and the page is scrolled up as much, so nothing moves on the screen
+// Once all of them have been seen there's nothing left to pin for, so the list lets go of the scrolling it took, as soon
+// as it can without the page jumping (usePinnedSteps), and the page scrolls past it as usual, both ways, on to the
+// puzzle that comes next
 const DesignQuestions = ({ title, className = "" }) => {
-  const { roomRef, stageRef, step } = usePinnedSteps(QUESTIONS.length + 1);
-  const [shownUpTo, setShownUpTo] = useState(0);
-  if (step > shownUpTo) setShownUpTo(step);
-  const spacerRef = useRef(null);
+  // Up to which question is in, and up to which one was in before the latest ones came
+  const [{ shownUpTo, shownBefore }, setShown] = useState({ shownUpTo: 0, shownBefore: 0 });
+  const { roomRef, stageRef, spacerRef, step } = usePinnedSteps(QUESTIONS.length + 1, {
+    stepsByGesture: true,
+    firstStepOnEntry: true,
+    onlyForward: true,
+  });
+  if (step > shownUpTo) setShown({ shownUpTo: step, shownBefore: shownUpTo });
   const { t } = useLanguage();
 
-  // How far down its room the list has been carried is measured while it's still pinned, then taken off the scroll
-  // as the room shrinks (instantly, as the page otherwise scrolls smoothly)
-  useLayoutEffect(() => {
-    const spacer = spacerRef.current;
-    if (shownUpTo < QUESTIONS.length || spacer.hidden) return;
-    const carriedDown = stageRef.current.getBoundingClientRect().top - roomRef.current.getBoundingClientRect().top;
-    spacer.hidden = true;
-    window.scrollBy({ top: -carriedDown, behavior: "instant" });
-  }, [shownUpTo, roomRef, stageRef]);
-
-  // The stage is pinned just under the nav, and on wider screens in the middle of the window where there's room.
+  // The stage is pinned just under the nav, and on wider screens in the middle of the window where there's room. In the
+  // page shrunk with a transform it's carried down its room by hand instead (see usePinnedSteps), so it's static there.
   // Lengths in the shrunk page are divided by --zoom to stay true to the screen (see ScaleToFit)
   return (
     <div ref={roomRef} className={className}>
@@ -83,9 +73,9 @@ const DesignQuestions = ({ title, className = "" }) => {
       >
         {title}
         <ol className="mt-2 lg:mt-0 lg:ml-26 lg:mr-31.75 font-poppins tracking-[0.03em]">
-          {QUESTIONS.map(({ number, text, marginTop, from, isRight, line }) => {
+          {QUESTIONS.map(({ number, text, marginTop, isRight, line }) => {
             const question = (
-              <p className="reveal flex items-center gap-4" style={reveal({ from, fade: 0.2, slide: 0.65 })}>
+              <p className="flex items-center gap-4">
                 <span className={`text-[2rem] lg:text-[3rem] font-extrabold tracking-[0.03em] text-black ${isRight ? "lg:order-last" : ""}`} aria-hidden="true">
                   {number}
                 </span>
@@ -94,8 +84,8 @@ const DesignQuestions = ({ title, className = "" }) => {
             );
             const rule = (
               <span
-                className={`reveal h-px bg-black max-lg:hidden ${line.className ?? ""}`}
-                style={{ width: rem(line.width), ...reveal({ from: line.from, delay: LINE_DELAY, fade: 0.3, slide: 0.3 }) }}
+                className={`h-px bg-black max-lg:hidden ${line.className ?? ""}`}
+                style={{ width: rem(line.width) }}
                 aria-hidden="true"
               />
             );
@@ -103,20 +93,31 @@ const DesignQuestions = ({ title, className = "" }) => {
             return (
               <li
                 key={number}
-                className={`mt-6 lg:mt-(--question-gap) flex items-center justify-between ${number <= shownUpTo ? "in-view" : ""}`}
+                className={`mt-6 lg:mt-(--question-gap) ${number <= shownUpTo ? "in-view" : ""}`}
                 style={{ "--question-gap": rem(marginTop) }}
               >
-                {isRight ? (
-                  <>
-                    {rule}
-                    {question}
-                  </>
-                ) : (
-                  <>
-                    {question}
-                    {rule}
-                  </>
-                )}
+                <div
+                  className={`reveal flex items-center justify-between [--reveal-from-x:var(--from-left)] ${isRight ? "lg:[--reveal-from-x:var(--from-right)]" : ""}`}
+                  style={{
+                    "--from-left": rem(-SLIDE_FROM),
+                    "--from-right": rem(SLIDE_FROM),
+                    "--reveal-delay": `${number > shownBefore ? (number - shownBefore - 1) * STAGGER : 0}s`,
+                    "--reveal-fade": `${FADE}s`,
+                    "--reveal-slide": `${SLIDE}s`,
+                  }}
+                >
+                  {isRight ? (
+                    <>
+                      {rule}
+                      {question}
+                    </>
+                  ) : (
+                    <>
+                      {question}
+                      {rule}
+                    </>
+                  )}
+                </div>
               </li>
             );
           })}
@@ -125,7 +126,7 @@ const DesignQuestions = ({ title, className = "" }) => {
 
       {/* The scrolling the questions come in over while the stage is pinned. Without it the stage has nowhere to
           move, so it scrolls along with the page */}
-      <div ref={spacerRef} className="h-[calc(140vh/var(--zoom))] in-data-[scaling=transform]:hidden" aria-hidden="true" />
+      <div ref={spacerRef} className="h-[calc(140svh/var(--zoom))]" aria-hidden="true" />
     </div>
   );
 };

@@ -57,6 +57,9 @@ export const Autocompleted = ({ children }) => {
 // The curves are drawn around the design's line breaks, so the phone layout shows the quote on its own.
 // The scroll draws the curves (.drawn-curve) and types over the autocompleted words: --drawn and --filled go from 0 to
 // 1 with it. Like the rest of the page, they only go forward: scrolling back up leaves them as far as they got.
+// Once the page glides on to it (a "glide" event, see usePinnedSteps), all of it plays in on the way: drawn and typed
+// over as it rises from the bottom of the window (or from where it was, if it's already peeking in) to where the glide
+// leaves it.
 // The caption and the quote each ease in once all of them is on the screen
 const Hypothesis = ({ className = "", children }) => {
   const figureRef = useRef(null);
@@ -67,6 +70,8 @@ const Hypothesis = ({ className = "", children }) => {
     const quote = figure.querySelector("blockquote");
     let drawn = 0;
     let filled = 0;
+    // Once the page glides on to it, where its top sets off from and comes to rest (screen px down the window)
+    let glide = null;
     let frame;
 
     const update = () => {
@@ -74,22 +79,30 @@ const Hypothesis = ({ className = "", children }) => {
       const height = window.innerHeight;
       const figureBox = figure.getBoundingClientRect();
       const quoteBox = quote.getBoundingClientRect();
-      drawn = Math.max(drawn, clamp((height * PEN - figureBox.top) / figureBox.height));
-      filled = Math.max(filled, clamp((height * FILL_FROM - quoteBox.bottom) / (height * FILL_OVER)));
+      // How far its top has risen through the glide
+      const played = glide ? clamp((glide.from - figureBox.top) / Math.max(1, glide.from - glide.restsAt)) : 0;
+      drawn = Math.max(drawn, played, clamp((height * PEN - figureBox.top) / figureBox.height));
+      filled = Math.max(filled, played, clamp((height * FILL_FROM - quoteBox.bottom) / (height * FILL_OVER)));
       figure.style.setProperty("--drawn", drawn);
       figure.style.setProperty("--filled", filled);
     };
     const onScroll = () => {
       frame ??= requestAnimationFrame(update);
     };
+    const onGlide = (e) => {
+      glide = { from: Math.min(window.innerHeight, figure.getBoundingClientRect().top), restsAt: e.detail.top };
+      onScroll();
+    };
 
     update();
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
+    figure.addEventListener("glide", onGlide);
     return () => {
       cancelAnimationFrame(frame);
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
+      figure.removeEventListener("glide", onGlide);
     };
   }, []);
 
