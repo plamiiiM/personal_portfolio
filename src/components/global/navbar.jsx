@@ -93,14 +93,14 @@ const Paper = ({ top = "top-0", className = "" }) => (
 );
 
 // EN / BG, with the links' pencil underline under the language that's showing
-const LanguageSwitch = () => {
+const LanguageSwitch = ({ className = "" }) => {
   const { language, t } = useLanguage();
 
   return (
     <div
       role="group"
       aria-label={t({ en: "Language", bg: "Език" })}
-      className="flex items-center gap-x-2 font-poppins text-[1rem] tracking-wide text-(--brown)"
+      className={`items-center gap-x-2 font-poppins text-[1rem] tracking-wide text-(--brown) ${className}`}
     >
       {LANGUAGES.map(({ code, name }, index) => {
         const isShowing = code === language;
@@ -283,7 +283,8 @@ const Navbar = ({ overHeader = false }) => {
           />
         </a>
 
-        {/* The language switch stays in the bar in both layouts: after the CV on wider screens, by the menu button on phones */}
+        {/* The language switch is in the bar after the CV on wider screens. On phones it's beside the menu button, and
+            fades in only while the menu is open (it keeps its room, so the button doesn't move) */}
         <div className="nav-enter [--enter-delay:0.25s] self-stretch flex items-center gap-x-3 lg:gap-x-10">
           <div className="self-stretch hidden lg:flex items-center gap-x-14">
             <ul className="flex items-center gap-x-10 font-poppins text-[1rem] tracking-wide text-(--brown)">
@@ -310,7 +311,11 @@ const Navbar = ({ overHeader = false }) => {
             {/* <img src="/nav_bookmark.png" alt="" aria-hidden="true" className="self-start w-9 h-22.5" /> */}
           </div>
 
-          <LanguageSwitch />
+          <LanguageSwitch
+            className={`flex transition-[opacity,visibility] duration-300 motion-reduce:transition-none lg:visible lg:opacity-100 ${
+              isMenuShowing ? "visible opacity-100" : "invisible opacity-0"
+            }`}
+          />
 
           <button
             ref={menuButtonRef}
