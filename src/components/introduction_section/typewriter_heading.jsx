@@ -15,16 +15,16 @@ const PHRASES = {
     start: "I am ",
     endings: [
       "a curious designer",
-      "growing businesses",
-      "for users and developers",
+      "here to help shape your ideas",
+      "driven to grow",
     ],
   },
   bg: {
     start: "Аз съм ",
     endings: [
       "любопитна дизайнерка",
-      "двигател за растеж на бизнеси",
-      "за потребителите и разработчиците",
+      "тук, за да изградим идеите ви",
+      "мотивирана да се развивам",
     ],
   },
 };
