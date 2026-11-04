@@ -11,74 +11,6 @@
 
 export const SKILL_CLUSTERS = [
   {
-    id: "design",
-    height: 678.4,
-    title: {
-      en: [
-        { type: "text", text: "DESIGN", font: "poppins", weight: 300, fontSize: 49.1, x: 671, y: 274.9, w: 189, h: 74.3 },
-        { type: "image", src: "title_design_underline.svg", x: 670.9, y: 352.5, w: 189, h: 9.8, rotate: -1.4 },
-      ],
-      bg: [
-        { type: "text", text: "ДИЗАЙН", font: "poppins", weight: 300, fontSize: 49.1, x: 640, y: 274.9, w: 250, h: 74.3 },
-        { type: "image", src: "title_design_underline.svg", x: 642, y: 352.5, w: 245, h: 9.8, rotate: -1.4 },
-      ],
-    },
-    notes: [
-      {
-        label: "Adobe After Effects",
-        x: 967.4, y: 326.4,
-        layers: [
-          { type: "shadow", src: "note_shadow.svg", x: 14.7, y: 36.7, w: 204.8, h: 195.9, rotate: -15 },
-          { type: "image", src: "note_yellow.webp", x: 26.8, y: 16.6, w: 195.5, h: 203.9, rotate: -10.8 },
-          { type: "text", text: "Adobe After\nEffects", x: 34.8, y: 98, w: 189.8, h: 53.9, rotate: -9.7 },
-        ],
-      },
-      {
-        label: "Adobe InDesign",
-        x: 900.1, y: 37.8,
-        layers: [
-          { type: "shadow", src: "note_shadow.svg", x: -0.7, y: 28.7, w: 204.4, h: 195.6, rotate: 3.3 },
-          { type: "image", src: "note_pink.webp", x: -3.1, y: 11.2, w: 224, h: 224, rotate: 7.4 },
-          { type: "text", text: "Adobe\nInDesign", x: 20.6, y: 87.4, w: 188.5, h: 53.9, rotate: 19.8 },
-          { type: "image", src: "line_indesign.svg", x: 28.3, y: 136.6, w: 139.4, h: 2.6, rotate: 16.4 },
-          { type: "image", src: "line_indesign_2.svg", x: 46.8, y: 147.2, w: 139.4, h: 0.9, rotate: 16.4 },
-        ],
-      },
-      {
-        label: "Adobe Illustrator",
-        x: 374.7, y: 0,
-        layers: [
-          { type: "shadow", src: "note_shadow.svg", x: 24.6, y: 52, w: 229.6, h: 219.6, rotate: -22.3 },
-          { type: "image", src: "note_blue.webp", x: 35.7, y: 28.5, w: 219.1, h: 228.5, rotate: -18.2 },
-          { type: "text", text: "Adobe\nIllustrator", x: 46.1, y: 113.5, w: 213.1, h: 53.9, rotate: -13.1 },
-          { type: "image", src: "line_illustrator.svg", x: 71.6, y: 168.9, w: 157.7, h: 3, rotate: -16.4 },
-          { type: "image", src: "line_illustrator_2.svg", x: 95.1, y: 167.8, w: 157.7, h: 1, rotate: -16.4 },
-        ],
-      },
-      {
-        label: "Adobe Photoshop",
-        x: 608.3, y: 432.4,
-        layers: [
-          { type: "shadow", src: "note_shadow.svg", x: 19.3, y: 41.8, w: 191.5, h: 183.2, rotate: -20.9 },
-          { type: "image", src: "note_blue.webp", x: 29, y: 22.3, w: 182.8, h: 190.7, rotate: -16.7 },
-          { type: "text", text: "Adobe\nPhotoshop", x: 33, y: 81.5, w: 177.8, h: 53.9, rotate: -15.7 },
-          { type: "image", src: "line_photoshop.svg", x: 58.5, y: 144.2, w: 131.6, h: 2.5, rotate: -15 },
-          { type: "image", src: "line_photoshop_2.svg", x: 78.2, y: 143.8, w: 131.6, h: 0.8, rotate: -15 },
-        ],
-      },
-      {
-        label: "Figma",
-        x: 228, y: 324.9,
-        layers: [
-          { type: "shadow", src: "note_shadow.svg", x: 10.3, y: 40.2, w: 223.3, h: 213.6, rotate: 10.6 },
-          { type: "image", src: "note_pink.webp", x: 8, y: 22.1, w: 244.7, h: 244.7, rotate: 14.7 },
-          { type: "image", src: "ellipse_figma.svg", x: 54.3, y: 98.5, w: 158.9, h: 70.6, rotate: 17.7 },
-          { type: "text", text: "Figma", x: 93.8, y: 122.4, w: 92, h: 27, rotate: 8.1 },
-        ],
-      },
-    ],
-  },
-  {
     id: "ux-ui",
     height: 749.7,
     title: {
@@ -159,6 +91,74 @@ export const SKILL_CLUSTERS = [
           { type: "shadow", src: "note_shadow.svg", x: 7.9, y: 28.7, w: 214.8, h: 205.4, rotate: -9.1 },
           { type: "image", src: "note_yellow.webp", x: 22.3, y: 8.5, w: 205, h: 213.8, rotate: -5 },
           { type: "text", text: "Interaction\nDesign", x: 28.2, y: 82.8, w: 192.1, h: 53.9, rotate: -8.1 },
+        ],
+      },
+    ],
+  },
+  {
+    id: "design",
+    height: 678.4,
+    title: {
+      en: [
+        { type: "text", text: "DESIGN", font: "poppins", weight: 300, fontSize: 49.1, x: 671, y: 274.9, w: 189, h: 74.3 },
+        { type: "image", src: "title_design_underline.svg", x: 670.9, y: 352.5, w: 189, h: 9.8, rotate: -1.4 },
+      ],
+      bg: [
+        { type: "text", text: "ДИЗАЙН", font: "poppins", weight: 300, fontSize: 49.1, x: 640, y: 274.9, w: 250, h: 74.3 },
+        { type: "image", src: "title_design_underline.svg", x: 642, y: 352.5, w: 245, h: 9.8, rotate: -1.4 },
+      ],
+    },
+    notes: [
+      {
+        label: "Figma",
+        x: 374.7, y: 0,
+        layers: [
+          { type: "shadow", src: "note_shadow.svg", x: 10.3, y: 40.2, w: 223.3, h: 213.6, rotate: 10.6 },
+          { type: "image", src: "note_pink.webp", x: 8, y: 22.1, w: 244.7, h: 244.7, rotate: 14.7 },
+          { type: "image", src: "ellipse_figma.svg", x: 54.3, y: 98.5, w: 158.9, h: 70.6, rotate: 17.7 },
+          { type: "text", text: "Figma", x: 93.8, y: 122.4, w: 92, h: 27, rotate: 8.1 },
+        ],
+      },
+      {
+        label: "Adobe Illustrator",
+        x: 900.1, y: 37.8,
+        layers: [
+          { type: "shadow", src: "note_shadow.svg", x: 24.6, y: 52, w: 229.6, h: 219.6, rotate: -22.3 },
+          { type: "image", src: "note_blue.webp", x: 35.7, y: 28.5, w: 219.1, h: 228.5, rotate: -18.2 },
+          { type: "text", text: "Adobe\nIllustrator", x: 46.1, y: 113.5, w: 213.1, h: 53.9, rotate: -13.1 },
+          { type: "image", src: "line_illustrator.svg", x: 71.6, y: 168.9, w: 157.7, h: 3, rotate: -16.4 },
+          { type: "image", src: "line_illustrator_2.svg", x: 95.1, y: 167.8, w: 157.7, h: 1, rotate: -16.4 },
+        ],
+      },
+      {
+        label: "Adobe After Effects",
+        x: 967.4, y: 326.4,
+        layers: [
+          { type: "shadow", src: "note_shadow.svg", x: 14.7, y: 36.7, w: 204.8, h: 195.9, rotate: -15 },
+          { type: "image", src: "note_yellow.webp", x: 26.8, y: 16.6, w: 195.5, h: 203.9, rotate: -10.8 },
+          { type: "text", text: "Adobe After\nEffects", x: 34.8, y: 98, w: 189.8, h: 53.9, rotate: -9.7 },
+        ],
+      },
+      {
+        label: "Adobe InDesign",
+        x: 228, y: 324.9,
+        layers: [
+          { type: "shadow", src: "note_shadow.svg", x: -0.7, y: 28.7, w: 204.4, h: 195.6, rotate: 3.3 },
+          { type: "image", src: "note_pink.webp", x: -3.1, y: 11.2, w: 224, h: 224, rotate: 7.4 },
+          { type: "text", text: "Adobe\nInDesign", x: 20.6, y: 87.4, w: 188.5, h: 53.9, rotate: 19.8 },
+          { type: "image", src: "line_indesign.svg", x: 28.3, y: 136.6, w: 139.4, h: 2.6, rotate: 16.4 },
+          { type: "image", src: "line_indesign_2.svg", x: 46.8, y: 147.2, w: 139.4, h: 0.9, rotate: 16.4 },
+        ],
+      },
+      {
+        label: "Adobe Photoshop",
+        x: 608.3, y: 432.4,
+        layers: [
+          { type: "shadow", src: "note_shadow.svg", x: 19.3, y: 41.8, w: 191.5, h: 183.2, rotate: -20.9 },
+          { type: "image", src: "note_blue.webp", x: 29, y: 22.3, w: 182.8, h: 190.7, rotate: -16.7 },
+          { type: "text", text: "Adobe\nPhotoshop", x: 33, y: 81.5, w: 177.8, h: 53.9, rotate: -15.7 },
+          { type: "image", src: "line_photoshop.svg", x: 58.5, y: 144.2, w: 131.6, h: 2.5, rotate: -15 },
+          { type: "image", src: "line_photoshop_2.svg", x: 78.2, y: 143.8, w: 131.6, h: 0.8, rotate: -15 },
         ],
       },
     ],

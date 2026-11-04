@@ -11,8 +11,22 @@ const GAP = 200; // ms between erasing one ending and typing the next
 
 // The start every phrase shares, and the endings that take turns after it (in bold)
 const PHRASES = {
-  en: { start: "Plamena is ", endings: ["a curious designer", "growing businesses", "for users and developers"] },
-  bg: { start: "Пламена е ", endings: ["любопитна дизайнерка", "двигател за растеж на бизнеси", "за потребителите и разработчиците"] },
+  en: {
+    start: "I am ",
+    endings: [
+      "a curious designer",
+      "growing businesses",
+      "for users and developers",
+    ],
+  },
+  bg: {
+    start: "Аз съм ",
+    endings: [
+      "любопитна дизайнерка",
+      "двигател за растеж на бизнеси",
+      "за потребителите и разработчиците",
+    ],
+  },
 };
 
 // When each ending starts being typed and erased, in ms into the loop, and how long the loop is
@@ -31,7 +45,11 @@ const timeline = (endings) => {
 // The shared start, typed once as the heading comes in (--type-in is when each letter does)
 const StartLetters = ({ text }) =>
   [...text].map((letter, index) => (
-    <span key={index} className="typewriter-start-letter" style={{ "--type-in": index * TYPE_STEP }}>
+    <span
+      key={index}
+      className="typewriter-start-letter"
+      style={{ "--type-in": index * TYPE_STEP }}
+    >
       {letter}
     </span>
   ));
@@ -77,7 +95,11 @@ const TypewriterHeading = ({ className = "" }) => {
         <strong>{first.text}</strong>
       </span>
       {endings.map((ending, index) => (
-        <span key={ending.start} className="col-start-1 row-start-1" aria-hidden="true">
+        <span
+          key={ending.start}
+          className="col-start-1 row-start-1"
+          aria-hidden="true"
+        >
           {index === 0 ? (
             <StartLetters text={start} />
           ) : (

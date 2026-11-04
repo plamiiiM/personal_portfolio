@@ -1,14 +1,8 @@
 import React from "react";
 import useLanguage from "../global/use_language";
 
-// Softens just the outer rim of the photo's paper so it blends into the background.
-// The paper starts 3.3% in from each side of the image. The left side is the far left of the page,
-// so it only fades when there's paper beside it (--side-room from ScaleToFit), not at the edge of the screen
-const PHOTO_FADE = {
-  maskImage:
-    "linear-gradient(to right, transparent 3.3%, black calc(3.3% + 4.2% * var(--side-room, 1)), black 92.5%, transparent 96.7%), linear-gradient(to bottom, transparent, black 5%, black 94%, transparent)",
-  maskComposite: "intersect",
-};
+// The portrait is cropped straight across the bottom, so that edge fades into the paper
+const PHOTO_FADE = { maskImage: "linear-gradient(to bottom, black 88%, transparent)" };
 
 // The graphite band is cut off straight on the left, at the far left of the page, so that end fades out
 // when there's paper beside it
@@ -20,7 +14,7 @@ const PortfolioLabelWithPicture = () => {
   const { t } = useLanguage();
 
   return (
-    <div className="flex flex-col justify-center ">
+    <div className="flex w-[42rem] flex-col justify-center">
       <div className="relative flex items-center select-none top-13 ">
         <div className="absolute inset-0 flex items-center pointer-events-none">
           <img
@@ -37,10 +31,10 @@ const PortfolioLabelWithPicture = () => {
         />
       </div>
       <img
-        src="/picture_of_me_graphite_color.webp"
+        src="/portrait_pencil_new.webp"
         fetchPriority="high"
         alt={t({ en: "Portfolio picture", bg: "Портретна снимка" })}
-        className="fade-in w-[42rem] overflow-hidden object-cover opacity-100 mix-blend-multiply"
+        className="fade-in ml-30 w-[25rem] overflow-hidden object-cover opacity-100 mix-blend-multiply"
         style={PHOTO_FADE}
       />
     </div>

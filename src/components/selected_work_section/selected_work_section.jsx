@@ -18,13 +18,13 @@ const SelectedWorkSection = () => {
           alt="Selected Work"
           width={512}
           height={233}
-          bgText={
-            <>
-              Избрани
-              <br />
-              <span className="ml-[0.8em]">проекти</span>
-            </>
-          }
+          bg={{
+            src: "/izbrani_proekti_text_BG.webp",
+            alt: "Избрани проекти",
+            width: 512,
+            height: 321,
+            imageClassName: "w-37 lg:w-62",
+          }}
           imageClassName="w-37 lg:w-62"
           className="-rotate-4 mt-10 lg:mt-40"
         />

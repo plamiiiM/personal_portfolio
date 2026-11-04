@@ -126,8 +126,10 @@ const LanguageSwitch = () => {
   );
 };
 
-// In the phone layout the links don't fit beside the logo, so they move into a menu behind a button
-const Navbar = () => {
+// In the phone layout the links don't fit beside the logo, so they move into a menu behind a button.
+// With `revealOnScroll` the page opens on its header alone: the nav stays out of sight at the very top of the page,
+// comes in as soon as the reader scrolls and stays for a screen's worth of scrolling, then goes on as usual
+const Navbar = ({ revealOnScroll = false }) => {
   const [scrolled, setScrolled] = useState(() => window.scrollY > 10);
   const [hidden, setHidden] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -140,7 +142,7 @@ const Navbar = () => {
 
   // Wider screens have the links in the nav itself, so the menu never shows there
   const isMenuShowing = isMenuOpen && isPhoneLayout;
-  const isHidden = hidden && !isMenuShowing;
+  const isHidden = (hidden || (revealOnScroll && !scrolled)) && !isMenuShowing;
 
   // While the menu shows it's the only thing on the screen: the page behind it can't scroll or take focus.
   // A layout effect, so closing it (flushSync in goToSection) gives the page back before it scrolls to a section
@@ -189,7 +191,7 @@ const Navbar = () => {
       }
       // Ignore tiny movements so the nav doesn't flicker, and always show it near the top
       if (Math.abs(y - lastY) < 6) return;
-      setHidden(y > lastY && y > NAV_HEIGHT);
+      setHidden(y > lastY && y > (revealOnScroll ? window.innerHeight : NAV_HEIGHT));
       lastY = y;
     };
     const onShift = (e) => (shift = { to: e.detail, until: performance.now() + SHIFT_FOR });
@@ -199,7 +201,7 @@ const Navbar = () => {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("scrollshift", onShift);
     };
-  }, []);
+  }, [revealOnScroll]);
 
   // Lets pinned content sit just below the nav while it's showing
   useEffect(() => {
@@ -354,7 +356,7 @@ const Navbar = () => {
           </g>
         </svg>
       </nav>
-      <div className="h-24" aria-hidden="true" />
+      {!revealOnScroll && <div className="h-24" aria-hidden="true" />}
     </>
   );
 };

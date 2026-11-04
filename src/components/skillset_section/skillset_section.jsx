@@ -54,7 +54,13 @@ const SkillsetSection = () => {
         alt="Skillset"
         width={513}
         height={237}
-        bgText="Умения"
+        bg={{
+          src: "/umeniq_text_BG.webp",
+          alt: "Умения",
+          width: 410,
+          height: 142,
+          imageClassName: "w-30 lg:w-50",
+        }}
         imageClassName="w-25.75 lg:w-42.75"
         className="-rotate-4 self-start"
       />

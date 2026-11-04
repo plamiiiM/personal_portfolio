@@ -223,7 +223,13 @@ const TimelineExperience = () => {
         alt="Experience"
         width={590}
         height={142}
-        bgText="Опит"
+        bg={{
+          src: "/opit_text_BG.webp",
+          alt: "Опит",
+          width: 350,
+          height: 135,
+          imageClassName: "w-25.5 lg:w-42.5",
+        }}
         imageClassName="w-43.5 lg:w-72.5"
         className="-rotate-4"
       />

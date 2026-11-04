@@ -13,8 +13,8 @@ export const BG_PREFIX = "/bg";
 export const PAGES = [
   {
     path: "/",
-    image: "/picture_of_me_graphite.png",
-    heroImage: "/picture_of_me_graphite_color.webp",
+    image: "/portrait_pencil_preview.jpg",
+    heroImage: "/portrait_pencil_new.webp",
     title: { en: "Plamena Mincheva - UX/UI Designer", bg: "Пламена Минчева – UX/UI дизайнер" },
     description: {
       en: "Portfolio of Plamena Mincheva, a UX/UI designer and mobile developer studying ICT & Media Design at Fontys UAS. Case studies in user research, gamification and app design.",

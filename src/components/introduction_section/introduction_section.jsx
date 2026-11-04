@@ -11,7 +11,10 @@ const IntroductionSection = () => {
   const { t } = useLanguage();
 
   return (
-    <InView as="section" className="flex flex-col justify-start items-start gap-y-8 lg:gap-y-14 font-poppins lg:w-2xl tracking-wide mb-10">
+    <InView
+      as="section"
+      className="flex flex-col justify-start items-start gap-y-8 lg:gap-y-14 font-poppins lg:w-2xl tracking-wide mb-10"
+    >
       <div className="flex flex-col gap-y-6 lg:gap-y-14">
         {/* On desktop each phrase stays on one line, as in the design, running past the paragraphs' width if it has to */}
         <TypewriterHeading className="text-[1.75rem] lg:text-4xl lg:whitespace-nowrap" />
@@ -20,12 +23,13 @@ const IntroductionSection = () => {
             en: (
               <>
                 <p className="rise delay-150">
-                  An eager <MarkedWord isHighlighted isDrawn>junior designer</MarkedWord>{" "}
-                  with lots of{" "}
-                  <MarkedWord isHighlighted isDrawn>hands-on practice</MarkedWord> in
-                  different real-life projects. Working with real businesses,
-                  during my studies I've helped several companies in the
-                  Eindhoven region better their designs and improve quality.
+                  In the world of{" "}
+                  <MarkedWord isHighlighted isDrawn>
+                    UX design for 3+ years
+                  </MarkedWord>
+                  , I have passionately worked in various real-life projects. I
+                  have helped several companies in the Eindhoven region improve
+                  their designs and quality.
                 </p>
                 <p className="rise delay-250">
                   Currently obtaining a Bachelor in{" "}
@@ -38,12 +42,13 @@ const IntroductionSection = () => {
             bg: (
               <>
                 <p className="rise delay-150">
-                  Амбициозна{" "}
-                  <MarkedWord isHighlighted isDrawn>junior дизайнерка</MarkedWord> с
-                  много <MarkedWord isHighlighted isDrawn>практически опит</MarkedWord>{" "}
-                  в различни реални проекти. По време на следването си работих
-                  с истински бизнеси и помогнах на няколко компании в региона на
-                  Айндховен да подобрят дизайна и качеството на продуктите си.
+                  В областта на
+                  <MarkedWord isHighlighted isDrawn>
+                    UX дизайна от 3+ години
+                  </MarkedWord>{" "}
+                  амбициозно съм работила по различни проекти в реални условия.
+                  Помогнала съм на няколко компании в региона на Айндховен да
+                  подобрят своите дизайни и качество.
                 </p>
                 <p className="rise delay-250">
                   В момента следвам бакалавърска програма по{" "}
@@ -66,7 +71,7 @@ const IntroductionSection = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          LINKEDIN
+          LinkedIn
         </Button.Primary>
 
         <Button.Secondary

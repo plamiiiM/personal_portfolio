@@ -18,19 +18,21 @@ const ProfessionTitleName = () => {
   return (
     <div
       className="relative flex flex-col items-center lg:items-start justify-end gap-y-12 lg:gap-y-30 w-fit
-                 font-zodiak text-[1.75rem] lg:text-4xl text-(--red) tracking-wide"
+                 font-poppins text-[1.75rem] lg:text-[2rem] text-(--red) tracking-wide"
     >
       <div className="flex flex-col items-center lg:items-stretch gap-3 align-baseline">
         <div className="flex flex-row gap-5 items-end">
-          <p className="inline text-left font-medium ">
-            <RisingLine className="delay-300">{t({ en: "UX/UI Designer", bg: "UX/UI дизайнер" })}</RisingLine>
+          <p className="inline text-left font-regular tracking-[3%] ">
+            <RisingLine className="delay-300">
+              {t({ en: "UX/UI Designer", bg: "UX/UI дизайнер" })}
+            </RisingLine>
           </p>
-          <p className="inline font-zodiak text-5xl lg:text-7xl text-(--brown) font-thin">
+          <p className="inline text-5xl lg:text-6xl text-(--brown) font-light">
             <RisingLine className="delay-400">&</RisingLine>
           </p>
         </div>
         <p
-          className="inline text-left font-normal tracking-widest max-lg:relative
+          className="inline text-left font-normal tracking-[3%] max-lg:relative
                 after:content-['']
                 after:absolute
                 after:left-0
@@ -44,12 +46,14 @@ const ProfessionTitleName = () => {
                 max-lg:after:bg-center
                 sketch-after after:delay-1000"
         >
-          <RisingLine className="delay-500">{t({ en: "Mobile Developer", bg: "Мобилен разработчик" })}</RisingLine>
+          <RisingLine className="delay-500">
+            {t({ en: "Mobile Developer", bg: "Мобилен разработчик" })}
+          </RisingLine>
         </p>
       </div>
       {/* The name is the page's main heading, for search engines and screen readers */}
       <h1
-        className="relative inline text-center lg:text-right w-full font-normal text-xl lg:text-2xl
+        className="relative inline text-center lg:text-right w-full font-light tracking-[0.03em] text-xl lg:text-2xl
     after:content-['']
     after:absolute
     max-lg:after:hidden
@@ -67,7 +71,9 @@ const ProfessionTitleName = () => {
     after:origin-left
     sketch-after sketch-down after:delay-1300"
       >
-        <RisingLine className="delay-700">{t({ en: "Plamena Mincheva", bg: "Пламена Минчева" })}</RisingLine>
+        <RisingLine className="delay-700">
+          {t({ en: "Plamena Mincheva", bg: "Пламена Минчева" })}
+        </RisingLine>
       </h1>
     </div>
   );
