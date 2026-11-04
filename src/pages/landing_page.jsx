@@ -24,7 +24,7 @@ function LandingPage() {
 
   return (
     <BackgroundTexture>
-      <Navbar revealOnScroll />
+      <Navbar overHeader />
       <ScaleToFit width={1530}>
         <header
           ref={headerRef}

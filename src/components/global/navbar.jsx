@@ -78,8 +78,8 @@ const BURGER_STROKES = [
 
 // The page's paper behind the nav and its menu. Like the page's own paper it starts at the top of the screen,
 // so `top` lines it up from wherever the box it fills begins, and the nav, its menu and the page read as one sheet
-const Paper = ({ top = "top-0" }) => (
-  <div className="absolute inset-0 -z-10 overflow-hidden bg-(--bg) pointer-events-none" aria-hidden="true">
+const Paper = ({ top = "top-0", className = "" }) => (
+  <div className={`absolute inset-0 -z-10 overflow-hidden bg-(--bg) pointer-events-none ${className}`} aria-hidden="true">
     <div
       className={`absolute ${top} left-0 w-screen h-screen
                  bg-[url('/white_texture_paper.webp')] bg-cover bg-center
@@ -93,14 +93,14 @@ const Paper = ({ top = "top-0" }) => (
 );
 
 // EN / BG, with the links' pencil underline under the language that's showing
-const LanguageSwitch = () => {
+const LanguageSwitch = ({ className = "" }) => {
   const { language, t } = useLanguage();
 
   return (
     <div
       role="group"
       aria-label={t({ en: "Language", bg: "Език" })}
-      className="flex items-center gap-x-2 font-poppins text-[1rem] tracking-wide text-(--brown)"
+      className={`items-center gap-x-2 font-poppins text-[1rem] tracking-wide text-(--brown) ${className}`}
     >
       {LANGUAGES.map(({ code, name }, index) => {
         const isShowing = code === language;
@@ -127,9 +127,10 @@ const LanguageSwitch = () => {
 };
 
 // In the phone layout the links don't fit beside the logo, so they move into a menu behind a button.
-// With `revealOnScroll` the page opens on its header alone: the nav stays out of sight at the very top of the page,
-// comes in as soon as the reader scrolls and stays for a screen's worth of scrolling, then goes on as usual
-const Navbar = ({ revealOnScroll = false }) => {
+// With `overHeader` there's no room kept for the nav above the page, so the header gets the whole screen: at the very
+// top of the page the nav floats over it with no paper and no logo, just the links in the header's empty top-right
+// corner. Scrolling down it goes away as it is, and it only comes back with its logo and paper
+const Navbar = ({ overHeader = false }) => {
   const [scrolled, setScrolled] = useState(() => window.scrollY > 10);
   const [hidden, setHidden] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -142,7 +143,17 @@ const Navbar = ({ revealOnScroll = false }) => {
 
   // Wider screens have the links in the nav itself, so the menu never shows there
   const isMenuShowing = isMenuOpen && isPhoneLayout;
-  const isHidden = (hidden || (revealOnScroll && !scrolled)) && !isMenuShowing;
+  const isHidden = hidden && !isMenuShowing;
+  // Floating over the header: no paper and no logo (the menu, once open, brings them back).
+  // Kept in a ref too, for the scroll handler
+  const [startsBare] = useState(() => overHeader && window.scrollY <= 10);
+  const [bare, setBareState] = useState(startsBare);
+  const bareRef = useRef(startsBare);
+  const setBare = (value) => {
+    bareRef.current = value;
+    setBareState(value);
+  };
+  const isBare = bare && !isMenuShowing;
 
   // While the menu shows it's the only thing on the screen: the page behind it can't scroll or take focus.
   // A layout effect, so closing it (flushSync in goToSection) gives the page back before it scrolls to a section
@@ -189,10 +200,25 @@ const Navbar = ({ revealOnScroll = false }) => {
         if (Math.abs(y - shift.to) < 1 || performance.now() > shift.until) shift = null;
         return;
       }
+      // Back at the top of a page it floats over, the nav is bare again
+      if (overHeader && y <= 10) {
+        setBare(true);
+        setHidden(false);
+        lastY = y;
+        return;
+      }
       // Ignore tiny movements so the nav doesn't flicker, and always show it near the top
       if (Math.abs(y - lastY) < 6) return;
-      setHidden(y > lastY && y > (revealOnScroll ? window.innerHeight : NAV_HEIGHT));
+      const goingDown = y > lastY;
       lastY = y;
+      // While bare it leaves straight away and as it is, its paper going on only once it's out of sight
+      // (onTransitionEnd), and coming back up it has its paper
+      if (bareRef.current) {
+        if (!goingDown) setBare(false);
+        setHidden(goingDown);
+        return;
+      }
+      setHidden(goingDown && y > NAV_HEIGHT);
     };
     const onShift = (e) => (shift = { to: e.detail, until: performance.now() + SHIFT_FOR });
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -201,7 +227,12 @@ const Navbar = ({ revealOnScroll = false }) => {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("scrollshift", onShift);
     };
-  }, [revealOnScroll]);
+  }, [overHeader]);
+
+  // Gone up out of sight while bare: the logo and paper go on now, so it comes back with them
+  const onNavTransitionEnd = (e) => {
+    if (e.target === e.currentTarget && isHidden && bareRef.current) setBare(false);
+  };
 
   // Lets pinned content sit just below the nav while it's showing
   useEffect(() => {
@@ -223,26 +254,37 @@ const Navbar = ({ revealOnScroll = false }) => {
     <>
       <nav
         ref={navRef}
+        onTransitionEnd={onNavTransitionEnd}
         className={`fixed top-0 inset-x-0 z-40 h-24 px-5 sm:px-10 lg:px-28 flex items-center justify-between isolate
                     transition-transform duration-300 motion-reduce:transition-none has-focus-visible:translate-y-0 ${
                       isHidden ? "-translate-y-full" : "translate-y-0"
                     }`}
       >
-        <Paper />
+        <Paper className={`transition-opacity duration-500 motion-reduce:transition-none ${isBare ? "opacity-0" : "opacity-100"}`} />
 
         {/* The links point at the landing page, so they also work from other pages.
             When the section is on the current page, scrollToSection takes over instead.
-            The logo and then the links come down into place as the page opens (.nav-enter): the logo itself rather than
-            its link, as a link fading around it would keep it from blending into the paper until it's done */}
-        <a href={`${to("/")}#`} aria-label={t({ en: "Home", bg: "Начало" })} className="shrink-0">
+            The logo and then the links come down into place as the page opens (.nav-enter), and the logo goes up and
+            out the same way while the nav is bare: the logo itself rather than its link, as a link fading around it
+            would keep it from blending into the paper until it's done. The link only turns invisible, which keeps it
+            out of reach without fading it */}
+        <a
+          href={`${to("/")}#`}
+          aria-label={t({ en: "Home", bg: "Начало" })}
+          className={`shrink-0 transition-[visibility] duration-500 ${isBare ? "invisible" : "visible"}`}
+        >
           <img
             src="/icon_portfolio.webp"
             alt={t({ en: "Plamena Mincheva logo", bg: "Лого на Пламена Минчева" })}
-            className="nav-enter h-12 sm:h-16 w-auto mix-blend-multiply"
+            className={`h-12 sm:h-16 w-auto mix-blend-multiply transition-[opacity,translate] duration-500 ease-(--ease-settle)
+                        motion-reduce:transition-none ${startsBare ? "" : "nav-enter"} ${
+                          isBare ? "opacity-0 -translate-y-3" : "opacity-100 translate-y-0"
+                        }`}
           />
         </a>
 
-        {/* The language switch stays in the bar in both layouts: after the CV on wider screens, by the menu button on phones */}
+        {/* The language switch is in the bar after the CV on wider screens. On phones it's beside the menu button, and
+            fades in only while the menu is open (it keeps its room, so the button doesn't move) */}
         <div className="nav-enter [--enter-delay:0.25s] self-stretch flex items-center gap-x-3 lg:gap-x-10">
           <div className="self-stretch hidden lg:flex items-center gap-x-14">
             <ul className="flex items-center gap-x-10 font-poppins text-[1rem] tracking-wide text-(--brown)">
@@ -269,7 +311,11 @@ const Navbar = ({ revealOnScroll = false }) => {
             {/* <img src="/nav_bookmark.png" alt="" aria-hidden="true" className="self-start w-9 h-22.5" /> */}
           </div>
 
-          <LanguageSwitch />
+          <LanguageSwitch
+            className={`flex transition-[opacity,visibility] duration-300 motion-reduce:transition-none lg:visible lg:opacity-100 ${
+              isMenuShowing ? "visible opacity-100" : "invisible opacity-0"
+            }`}
+          />
 
           <button
             ref={menuButtonRef}
@@ -336,7 +382,7 @@ const Navbar = ({ revealOnScroll = false }) => {
 
         <svg
           className={`absolute bottom-0 inset-x-0 w-full h-1.5 text-(--pencilLine) pointer-events-none transition-opacity duration-300 ${
-            scrolled || isMenuShowing ? "opacity-100" : "opacity-0"
+            (scrolled && !isBare) || isMenuShowing ? "opacity-100" : "opacity-0"
           }`}
           viewBox="0 0 1000 6"
           preserveAspectRatio="none"
@@ -356,7 +402,7 @@ const Navbar = ({ revealOnScroll = false }) => {
           </g>
         </svg>
       </nav>
-      {!revealOnScroll && <div className="h-24" aria-hidden="true" />}
+      {!overHeader && <div className="h-24" aria-hidden="true" />}
     </>
   );
 };
